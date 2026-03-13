@@ -498,6 +498,7 @@ tr:hover td { background: var(--gray-50); }
           <div class="card-title">Anmelden</div>
         </div>
         <div class="card-body">
+          <div id="dealer-invite-hint" style="display:none;background:#fff3;border:1px solid rgba(255,255,255,0.2);padding:10px 12px;font-size:12px;font-weight:600;margin-bottom:16px;color:var(--white);"></div>
           <div class="form-toggle">
             <button class="toggle-btn active" onclick="switchMode('ambassador','register')">Registrieren</button>
             <button class="toggle-btn" onclick="switchMode('ambassador','login')">Einloggen</button>
@@ -568,6 +569,7 @@ tr:hover td { background: var(--gray-50); }
 
     <div class="be-tabs">
       <button class="be-tab active" onclick="switchBeTab('registrations', this)">Registrierungen</button>
+      <button class="be-tab" onclick="switchBeTab('invite', this)" id="be-tab-invite" style="display:none">BA Einladen</button>
       <button class="be-tab" onclick="switchBeTab('receipts', this)">Rechnung hochladen</button>
     </div>
 
@@ -581,6 +583,40 @@ tr:hover td { background: var(--gray-50); }
             </thead>
             <tbody id="tbl-body"></tbody>
           </table>
+        </div>
+      </div>
+
+      <div class="be-panel" id="be-panel-invite">
+        <div style="max-width:480px;">
+          <div style="background:var(--black);padding:16px 20px;border:2px solid var(--black);border-bottom:none;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gray-500);margin-bottom:2px;">Händler-Funktion</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;text-transform:uppercase;color:var(--white);">BA einladen</div>
+          </div>
+          <div style="border:2px solid var(--black);border-top:none;padding:20px;background:var(--white);">
+            <div style="background:var(--gray-100);border:1px solid var(--gray-200);padding:12px 14px;margin-bottom:20px;font-size:13px;">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray-500);">Deine Händler-ID</span><br>
+              <span style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;letter-spacing:0.06em;color:var(--black);" id="dealer-id-display">—</span>
+            </div>
+            <div class="field">
+              <label>E-Mail des zukünftigen Brand Ambassadors</label>
+              <input type="email" id="invite-email" placeholder="name@email.de">
+            </div>
+            <div class="field">
+              <label>Name (optional)</label>
+              <input type="text" id="invite-name" placeholder="Max Mustermann">
+            </div>
+            <button class="btn-submit" style="margin-top:4px;" onclick="doInvite()">Einladung senden</button>
+            <div class="msg" id="invite-msg" style="text-align:left;"></div>
+          </div>
+          <div style="margin-top:24px;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray-500);margin-bottom:10px;">Gesendete Einladungen</div>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>#</th><th>E-Mail</th><th>Name</th><th>Gesendet</th></tr></thead>
+                <tbody id="invites-body"></tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -666,6 +702,16 @@ tr:hover td { background: var(--gray-50); }
     document.getElementById('consumer-ba-id').value = ba;
     document.getElementById('ba-hint').style.display = '';
   }
+  // Händler-Einladung für Ambassador
+  var dealerId = p.get('dealer_id');
+  var dealerName = p.get('dealer_name');
+  if (dealerId && p.get('tab') === 'ambassador') {
+    var hint = document.getElementById('dealer-invite-hint');
+    if (hint) {
+      hint.textContent = 'Du wurdest von Händler ' + (dealerName ? decodeURIComponent(dealerName) : dealerId) + ' eingeladen.';
+      hint.style.display = '';
+    }
+  }
 })();
 
 var records  = JSON.parse(localStorage.getItem('portal_v2') || '[]');
@@ -676,11 +722,15 @@ var LABELS = { dealer: 'Händler', ambassador: 'Brand Ambassador', consumer: 'Fo
 var HOOKS  = {
   ambassador: 'https://hook.eu1.make.com/y1kkru9y3dafldhs7j42hmejxa2a0ie7',
   consumer:   'https://hook.eu1.make.com/mq256zpjlz5pu9r1tv9l42ssfw0ds2vp',
-  receipt:    'https://hook.eu1.make.com/tj33y0ug3kjlcgc38gk7b493jwfie7ns'
+  receipt:    'https://hook.eu1.make.com/tj33y0ug3kjlcgc38gk7b493jwfie7ns',
+  invite:     'https://hook.eu1.make.com/gp6741htb42abcggv11qhpi2lfbu1cxm'
 };
+var PORTAL_URL = window.location.origin + window.location.pathname;
 
 function persist() { localStorage.setItem('portal_v2', JSON.stringify(records)); }
 function persistReceipts() { localStorage.setItem('portal_receipts', JSON.stringify(receipts)); }
+var invites = JSON.parse(localStorage.getItem('portal_invites') || '[]');
+function persistInvites() { localStorage.setItem('portal_invites', JSON.stringify(invites)); }
 
 function genId() {
   var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', id;
@@ -688,6 +738,15 @@ function genId() {
     id = 'R-';
     for (var i = 0; i < 8; i++) id += chars[Math.floor(Math.random() * chars.length)];
   } while (records.some(function(r){ return r.recId === id; }));
+  return id;
+}
+
+function genDealerId() {
+  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', id;
+  do {
+    id = 'H-';
+    for (var i = 0; i < 6; i++) id += chars[Math.floor(Math.random() * chars.length)];
+  } while (records.some(function(r){ return r.dealerId === id; }));
   return id;
 }
 
@@ -741,7 +800,8 @@ function doRegister(type) {
     msg(type, 'E-Mail bereits registriert.', 'error'); return;
   }
   var rec = { recId: genId(), type: type, name: name, email: email, baId: baId || '–',
-    date: new Date().toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' }) };
+    date: new Date().toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' }),
+    dealerId: type === 'dealer' ? genDealerId() : undefined };
   records.push(rec); persist();
   webhook(HOOKS[type], Object.assign({}, rec, { event: 'register' }));
   msg(type, 'Erfolgreich registriert — wird weitergeleitet…', 'success');
@@ -764,9 +824,26 @@ function showBackend(user) {
   document.getElementById('topbar').style.display = 'none';
   document.getElementById('site-header').style.display = 'none';
   document.getElementById('main-area').style.display = 'none';
-  document.getElementById('be-meta').textContent = user.name + ' · ' + LABELS[user.type];
+  var metaText = user.name + ' · ' + LABELS[user.type];
+  if (user.type === 'dealer' && user.dealerId) metaText += ' · ' + user.dealerId;
+  document.getElementById('be-meta').textContent = metaText;
   document.getElementById('upload-user-label').textContent = user.name + ' (' + user.email + ')';
-  renderTable(); renderReceipts();
+  // Show/hide dealer-specific features
+  var inviteTab = document.getElementById('be-tab-invite');
+  if (user.type === 'dealer') {
+    // Migration: alte Accounts ohne dealerId nachträglich ID zuweisen
+    if (!user.dealerId) {
+      user.dealerId = genDealerId();
+      var storedRec = records.find(function(r){ return r.recId === user.recId; });
+      if (storedRec) { storedRec.dealerId = user.dealerId; persist(); }
+    }
+    inviteTab.style.display = '';
+    var dId = document.getElementById('dealer-id-display');
+    if (dId) dId.textContent = user.dealerId;
+  } else {
+    inviteTab.style.display = 'none';
+  }
+  renderTable(); renderReceipts(); renderInvites();
   document.getElementById('backend').classList.add('active');
 }
 
@@ -924,6 +1001,63 @@ function renderReceipts() {
 function deleteReceipt(idx) {
   if (!confirm('Beleg wirklich löschen?')) return;
   receipts.splice(idx, 1); persistReceipts(); renderReceipts();
+}
+
+function doInvite() {
+  var email = document.getElementById('invite-email').value.trim().toLowerCase();
+  var name  = document.getElementById('invite-name').value.trim();
+  var m     = document.getElementById('invite-msg');
+  if (!email || email.indexOf('@') < 0) { m.textContent = 'Bitte gültige E-Mail eingeben.'; m.className = 'msg error'; return; }
+  if (!currentUser || currentUser.type !== 'dealer') { m.textContent = 'Nur für Händler verfügbar.'; m.className = 'msg error'; return; }
+
+  // Sicherstellen dass dealerId existiert (Migration alter Accounts)
+  if (!currentUser.dealerId) {
+    currentUser.dealerId = genDealerId();
+    var stored = records.find(function(r){ return r.recId === currentUser.recId; });
+    if (stored) { stored.dealerId = currentUser.dealerId; persist(); }
+    var dId = document.getElementById('dealer-id-display');
+    if (dId) dId.textContent = currentUser.dealerId;
+  }
+
+  var inviteLink = PORTAL_URL + '?tab=ambassador&dealer_id=' + encodeURIComponent(currentUser.dealerId) + '&dealer_name=' + encodeURIComponent(currentUser.name);
+  m.textContent = 'Wird gesendet…'; m.className = 'msg';
+
+  fetch('https://hook.eu1.make.com/gp6741htb42abcggv11qhpi2lfbu1cxm', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      event:        'ba_invite',
+      inviteeEmail: email,
+      inviteeName:  name || '—',
+      dealerId:     currentUser.dealerId,
+      dealerName:   currentUser.name,
+      dealerEmail:  currentUser.email,
+      inviteLink:   inviteLink
+    })
+  })
+  .then(function(res) {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    invites.push({ email: email, name: name || '—', date: new Date().toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' }) });
+    persistInvites(); renderInvites();
+    m.textContent = '✓ Einladung gesendet an ' + email; m.className = 'msg success';
+    document.getElementById('invite-email').value = '';
+    document.getElementById('invite-name').value = '';
+  })
+  .catch(function(err) {
+    console.error('Invite fetch error:', err, err.message);
+    m.textContent = 'Fehler: ' + (err.message || 'Netzwerkfehler') + ' — Seite neu laden und erneut versuchen.'; m.className = 'msg error';
+  });
+}
+
+function renderInvites() {
+  var tbody = document.getElementById('invites-body');
+  if (!tbody) return;
+  if (!invites.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="4">Noch keine Einladungen gesendet.</td></tr>'; return;
+  }
+  tbody.innerHTML = invites.map(function(inv, i) {
+    return '<tr><td style="color:var(--gray-400)">' + (i+1) + '</td><td style="color:var(--black);font-weight:600">' + inv.email + '</td><td>' + inv.name + '</td><td>' + inv.date + '</td></tr>';
+  }).join('');
 }
 
 function doLogout() {
