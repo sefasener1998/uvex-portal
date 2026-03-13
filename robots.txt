@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# uvex Portal – internes System, keine öffentliche Indexierung
