@@ -1238,35 +1238,44 @@ function buildPassPendingHTML(recId) {
   '</div>';
 }
 
+// ── PASS POLLING via Make Proxy ──
+var PASS_POLL_URL = 'https://hook.eu1.make.com/28rviagm4uoewghl9uaqm4wpjn4iital';
+
 var passPollingInterval = null;
 function startPassPolling(recId) {
   if (passPollingInterval) clearInterval(passPollingInterval);
   var attempts = 0;
   passPollingInterval = setInterval(function() {
     attempts++;
-    if (attempts > 20) { clearInterval(passPollingInterval); return; } // stop after ~2min
-    fetch('https://hook.eu1.make.com/28rviagm4uoewghl9uaqm4wpjn4iital', {
+    if (attempts > 20) {
+      clearInterval(passPollingInterval);
+      var body = document.getElementById('pass-body');
+      if (body) body.innerHTML = '<div class="pass-pending"><div class="pass-pending-icon">⚠️</div><div class="pass-pending-text">Pass noch nicht bereit</div><div class="pass-pending-sub">Bitte Seite neu laden um erneut zu prüfen.</div></div>';
+      return;
+    }
+    fetch(PASS_POLL_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ event: 'poll', recId: recId })
     })
-    .then(function(res) { return res.json(); })
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
     .then(function(data) {
-      if (data && data.passUrl && data.passId) {
+      if (data && data.passUrl && data.passUrl.length > 5) {
         clearInterval(passPollingInterval);
-        // Store in localStorage
-        localStorage.setItem('pass_' + recId, JSON.stringify({ passId: data.passId, passUrl: data.passUrl }));
-        // Update UI
+        var passData = { passId: data.passId || '', passUrl: data.passUrl };
+        localStorage.setItem('pass_' + recId, JSON.stringify(passData));
         var body = document.getElementById('pass-body');
         if (body) {
-          body.innerHTML = buildPassReadyHTML(data);
-          // Animate
+          body.innerHTML = buildPassReadyHTML(passData);
           body.style.animation = 'fadeUp 0.3s ease';
         }
       }
     })
-    .catch(function(){});
-  }, 6000); // poll every 6 seconds
+    .catch(function(e) { console.warn('Pass poll attempt ' + attempts + ':', e.message); });
+  }, 7000);
 }
 
 // ── CONSUMER BACKEND ──
