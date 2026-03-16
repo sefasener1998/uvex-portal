@@ -426,6 +426,29 @@ tr:hover td { background: var(--gray-50); }
   background: var(--white); border: 3px solid var(--black);
   width: 100%; max-width: 360px; animation: fadeUp 0.18s ease;
 }
+
+/* ── PORTAL SELECTION CARDS ── */
+.portal-card {
+  display: block; text-decoration: none;
+  border: 3px solid var(--black);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.portal-card:hover { transform: translateY(-3px); box-shadow: 4px 4px 0 var(--black); }
+.pc-header {
+  padding: 18px 24px; border-bottom: 3px solid var(--black);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.pc-eye {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 2px;
+}
+.pc-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px; font-weight: 900; text-transform: uppercase; flex: 1;
+}
+.pc-arrow { font-size: 20px; }
+.pc-body { padding: 13px 24px; background: var(--white); font-size: 13px; color: var(--gray-500); line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -433,7 +456,7 @@ tr:hover td { background: var(--gray-50); }
 
   <!-- ── TOPBAR ── -->
   <div id="topbar">
-    <svg width="96" height="29" viewBox="0 0 96 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="105" height="29" viewBox="0 0 105 29" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0 0h5.5v17c0 2.9 1.7 4.5 4.2 4.5s4.2-1.6 4.2-4.5V0h5.5v17.2C19.4 23.5 15.4 28 9.7 28S0 23.5 0 17.2V0z" fill="white"/>
       <path d="M23 0h5.9L35 19.6 41.1 0H47L38.1 28h-6.1L23 0z" fill="white"/>
       <path d="M50 13.8C50 6.2 55.2 0 63 0c7.2 0 11.7 5.5 11.7 13.4v2.1H55.6c.5 4 3.2 6.6 6.9 6.6 2.6 0 4.8-1.1 6.4-3.2l3.4 3.1C69.4 25.2 65.6 28 61 28c-7.4 0-11-5.8-11-14.2zm5.6-2.7h11.7c-.5-3.7-2.7-6.3-5.8-6.3s-5.3 2.6-5.9 6.3z" fill="white"/>
@@ -452,6 +475,40 @@ tr:hover td { background: var(--gray-50); }
 
   <!-- ── FRONT PANELS ── -->
   <div id="main-area">
+
+
+        <!-- LANDING SELECTION — shown when no ?tab= in URL -->
+    <div id="panel-landing" class="panel active" style="max-width:560px;width:100%;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#888;margin-bottom:8px;">uvex Portal</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:28px;letter-spacing:-0.01em;">Willkommen.</div>
+
+      <a href="?tab=dealer" class="portal-card" style="background:var(--c-dealer);">
+        <div class="pc-header" style="background:var(--c-dealer);">
+          <div class="pc-eye" style="color:rgba(0,0,0,0.45);">Ich bin ein</div>
+          <div class="pc-title" style="color:var(--black);">Händler</div>
+          <div class="pc-arrow" style="color:var(--black);">→</div>
+        </div>
+        <div class="pc-body">Registriere deinen Shop und lade Brand Ambassadors ein.</div>
+      </a>
+
+      <a href="?tab=ambassador" class="portal-card" style="margin-top:12px;">
+        <div class="pc-header" style="background:var(--c-amb);">
+          <div class="pc-eye" style="color:rgba(255,255,255,0.6);">Ich bin ein</div>
+          <div class="pc-title" style="color:var(--white);">Brand Ambassador</div>
+          <div class="pc-arrow" style="color:var(--white);">→</div>
+        </div>
+        <div class="pc-body">Empfehle uvex Produkte und verdiene Provisionen.</div>
+      </a>
+
+      <a href="?tab=consumer" class="portal-card" style="margin-top:12px;">
+        <div class="pc-header" style="background:var(--c-con);">
+          <div class="pc-eye" style="color:rgba(255,255,255,0.6);">Ich bin ein</div>
+          <div class="pc-title" style="color:var(--white);">Follower</div>
+          <div class="pc-arrow" style="color:var(--white);">→</div>
+        </div>
+        <div class="pc-body">Reiche Kassenbons ein und sichere dir deinen Cashback.</div>
+      </a>
+    </div>
 
     <!-- DEALER -->
     <div class="panel" id="panel-dealer">
@@ -611,7 +668,7 @@ tr:hover td { background: var(--gray-50); }
   <div id="backend">
 
     <div class="be-topbar">
-      <svg width="64" height="19" viewBox="0 0 96 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="70" height="19" viewBox="0 0 105 29" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 0h5.5v17c0 2.9 1.7 4.5 4.2 4.5s4.2-1.6 4.2-4.5V0h5.5v17.2C19.4 23.5 15.4 28 9.7 28S0 23.5 0 17.2V0z" fill="white"/>
         <path d="M23 0h5.9L35 19.6 41.1 0H47L38.1 28h-6.1L23 0z" fill="white"/>
         <path d="M50 13.8C50 6.2 55.2 0 63 0c7.2 0 11.7 5.5 11.7 13.4v2.1H55.6c.5 4 3.2 6.6 6.9 6.6 2.6 0 4.8-1.1 6.4-3.2l3.4 3.1C69.4 25.2 65.6 28 61 28c-7.4 0-11-5.8-11-14.2zm5.6-2.7h11.7c-.5-3.7-2.7-6.3-5.8-6.3s-5.3 2.6-5.9 6.3z" fill="white"/>
@@ -738,83 +795,48 @@ function webhook(url, data) {
 }
 
 // ── URL-ONLY ACCESS GATE ──
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   var p    = new URLSearchParams(window.location.search);
   var tab  = (p.get('tab') || '').toLowerCase();
-  var area = document.getElementById('main-area');
   var VALID_TABS = ['dealer', 'ambassador', 'consumer'];
 
-  // No valid ?tab= → show portal selection
-  if (VALID_TABS.indexOf(tab) === -1) {
-    area.classList.add('landing');
+  if (VALID_TABS.indexOf(tab) !== -1) {
+    // Hide landing selection, show correct panel
+    document.getElementById('panel-landing').classList.remove('active');
+    document.getElementById('panel-' + tab).classList.add('active');
+    document.getElementById('main-area').classList.remove('landing');
 
-    var cards = [
-      { tab:'dealer',      color:'var(--c-dealer)', textColor:'var(--black)',  eyeColor:'rgba(0,0,0,0.45)',     label:'Händler',          desc:'Registriere deinen Shop und lade Brand Ambassadors ein.' },
-      { tab:'ambassador',  color:'var(--c-amb)',    textColor:'var(--white)',  eyeColor:'rgba(255,255,255,0.6)', label:'Brand Ambassador',  desc:'Empfehle uvex Produkte und verdiene Provisionen.' },
-      { tab:'consumer',    color:'var(--c-con)',    textColor:'var(--white)',  eyeColor:'rgba(255,255,255,0.6)', label:'Follower',          desc:'Reiche Kassenbons ein und sichere dir deinen Cashback.' }
-    ];
-
-    var cardsHTML = cards.map(function(c, i) {
-      return '<a href="?tab=' + c.tab + '" style="display:block;text-decoration:none;' +
-        'border:3px solid #000;margin-bottom:' + (i < 2 ? '12px' : '0') + ';' +
-        'transition:transform 0.12s,box-shadow 0.12s;" ' +
-        'onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='4px 4px 0 #000'" ' +
-        'onmouseout="this.style.transform='';this.style.boxShadow=''">' +
-          '<div style="background:' + c.color + ';padding:18px 24px;border-bottom:3px solid #000;' +
-            'display:flex;align-items:center;justify-content:space-between;">' +
-            '<div>' +
-              '<div style="font-family:Barlow Condensed,sans-serif;font-size:10px;font-weight:700;' +
-                'letter-spacing:0.22em;text-transform:uppercase;color:' + c.eyeColor + ';margin-bottom:2px;">Ich bin ein</div>' +
-              '<div style="font-family:Barlow Condensed,sans-serif;font-size:28px;font-weight:900;' +
-                'text-transform:uppercase;color:' + c.textColor + ';">' + c.label + '</div>' +
-            '</div>' +
-            '<div style="font-size:20px;color:' + c.textColor + ';">→</div>' +
-          '</div>' +
-          '<div style="padding:13px 24px;background:#fff;">' +
-            '<p style="font-size:13px;color:#555;margin:0;line-height:1.6;">' + c.desc + '</p>' +
-          '</div>' +
-        '</a>';
-    }).join('');
-
-    area.innerHTML =
-      '<div style="font-family:Barlow Condensed,sans-serif;font-size:11px;font-weight:700;' +
-        'letter-spacing:0.22em;text-transform:uppercase;color:#888;margin-bottom:8px;">uvex Portal</div>' +
-      '<div style="font-family:Barlow Condensed,sans-serif;font-size:40px;font-weight:900;' +
-        'text-transform:uppercase;line-height:1;margin-bottom:28px;letter-spacing:-0.01em;">Willkommen.</div>' +
-      cardsHTML;
-    return;
-  }
-
-  // Show correct panel
-  document.getElementById('panel-' + tab).classList.add('active');
-
-  // BA-ID prefill for consumer
-  if (tab === 'consumer') {
-    var ba = p.get('ba_id');
-    if (ba) {
-      document.getElementById('consumer-ba-id').value = ba;
-      document.getElementById('ba-hint').style.display = '';
-    }
-  }
-
-  // Dealer invite hint + prefill for ambassador
-  if (tab === 'ambassador') {
-    var dealerId   = p.get('dealer_id');
-    var dealerName = p.get('dealer_name');
-    if (dealerId) {
-      var hint = document.getElementById('dealer-invite-hint');
-      if (hint) {
-        hint.textContent = 'Du wurdest von Händler ' + (dealerName ? decodeURIComponent(dealerName) : dealerId) + ' eingeladen.';
-        hint.style.display = '';
-      }
-      var dealerField = document.getElementById('ambassador-dealer-id');
-      if (dealerField) {
-        dealerField.value = dealerId;
-        document.getElementById('ambassador-dealer-hint').style.display = '';
+    // BA-ID prefill for consumer
+    if (tab === 'consumer') {
+      var ba = p.get('ba_id');
+      if (ba) {
+        document.getElementById('consumer-ba-id').value = ba;
+        document.getElementById('ba-hint').style.display = '';
       }
     }
+
+    // Dealer invite hint + prefill for ambassador
+    if (tab === 'ambassador') {
+      var dealerId   = p.get('dealer_id');
+      var dealerName = p.get('dealer_name');
+      if (dealerId) {
+        var hint = document.getElementById('dealer-invite-hint');
+        if (hint) {
+          hint.textContent = 'Du wurdest von Händler ' + (dealerName ? decodeURIComponent(dealerName) : dealerId) + ' eingeladen.';
+          hint.style.display = '';
+        }
+        var dealerField = document.getElementById('ambassador-dealer-id');
+        if (dealerField) {
+          dealerField.value = dealerId;
+          document.getElementById('ambassador-dealer-hint').style.display = '';
+        }
+      }
+    }
+  } else {
+    // Show landing selection
+    document.getElementById('main-area').classList.add('landing');
   }
-})();
+});
 
 // ── TAB NAV (disabled – URL-only) ──
 
@@ -838,7 +860,7 @@ function togglePw(id, btn) {
 }
 
 // ── SESSION RESTORE ──
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   try {
     var saved = localStorage.getItem('portal_session');
     if (saved) {
@@ -849,7 +871,7 @@ function togglePw(id, btn) {
       else { localStorage.removeItem('portal_session'); }
     }
   } catch(e) { localStorage.removeItem('portal_session'); }
-})();
+});
 
 // ── REGISTER ──
 function doRegister(type) {
