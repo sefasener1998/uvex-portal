@@ -63,6 +63,8 @@ html, body { min-height: 100%; background: var(--white); color: var(--black); fo
 }
 .panel { display: none; width: 100%; max-width: 400px; }
 .panel.active { display: block; animation: fadeUp 0.18s ease; }
+/* Tab nav hidden by default — only shown via URL */
+#site-header { display: none !important; }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -432,8 +434,8 @@ tr:hover td { background: var(--gray-50); }
     </svg>
   </div>
 
-  <!-- ── TAB NAV ── -->
-  <div id="site-header">
+  <!-- ── TAB NAV (hidden – URL-only access) ── -->
+  <div id="site-header" style="display:none">
     <nav class="tabs">
       <button class="tab-btn active" data-tab="dealer">Händler</button>
       <button class="tab-btn" data-tab="ambassador">Brand Ambassador</button>
@@ -445,7 +447,7 @@ tr:hover td { background: var(--gray-50); }
   <div id="main-area">
 
     <!-- DEALER -->
-    <div class="panel active" id="panel-dealer">
+    <div class="panel" id="panel-dealer">
       <div class="card">
         <div class="card-header">
           <div class="card-eye">Händler-Portal</div>
@@ -661,7 +663,13 @@ tr:hover td { background: var(--gray-50); }
 var ADMIN_EMAIL = 'admin@uvex.de';
 var ADMIN_PW    = 'uvex2024admin';
 
-var PORTAL_URL = window.location.origin + window.location.pathname;
+// URL automatisch ermitteln — funktioniert auf jeder Domain ohne Anpassung
+var PORTAL_URL = (function() {
+  var loc = window.location;
+  // Lokal geöffnet als Datei → Warnung, kein funktionierender Link
+  if (loc.protocol === 'file:') return null;
+  return loc.origin + loc.pathname;
+})();
 
 var LABELS = { dealer: 'Händler', ambassador: 'Brand Ambassador', consumer: 'Follower', admin: 'Admin' };
 var HOOKS  = {
@@ -713,41 +721,51 @@ function webhook(url, data) {
   fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) }).catch(function(){});
 }
 
-// ── URL PARAMS ──
+// ── URL-ONLY ACCESS GATE ──
 (function() {
-  var p = new URLSearchParams(window.location.search);
-  var tab = p.get('tab');
-  if (tab === 'consumer' || tab === 'ambassador') {
-    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-    document.querySelectorAll('.panel').forEach(function(b){ b.classList.remove('active'); });
-    document.querySelector('[data-tab="'+tab+'"]').classList.add('active');
-    document.getElementById('panel-'+tab).classList.add('active');
+  var p    = new URLSearchParams(window.location.search);
+  var tab  = (p.get('tab') || '').toLowerCase();
+  var area = document.getElementById('main-area');
+  var VALID_TABS = ['dealer', 'ambassador', 'consumer'];
+
+  // No ?tab= → show "Kein Zugang" screen
+  if (!VALID_TABS.includes(tab)) {
+    area.innerHTML =
+      '<div style="text-align:center;padding:80px 24px;max-width:400px;">' +
+        '<div style="font-family:'Barlow Condensed',sans-serif;font-size:64px;font-weight:900;color:var(--gray-200);line-height:1;">404</div>' +
+        '<div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:0.04em;margin:12px 0 10px;">Kein Zugang</div>' +
+        '<p style="font-size:13px;color:var(--gray-500);line-height:1.6;">Diese Seite ist nur über einen persönlichen Einladungslink erreichbar.</p>' +
+      '</div>';
+    return;
   }
-  var ba = p.get('ba_id');
-  if (ba) {
-    document.getElementById('consumer-ba-id').value = ba;
-    document.getElementById('ba-hint').style.display = '';
+
+  // Show only the correct panel
+  document.getElementById('panel-' + tab).classList.add('active');
+
+  // BA-ID prefill for consumer
+  if (tab === 'consumer') {
+    var ba = p.get('ba_id');
+    if (ba) {
+      document.getElementById('consumer-ba-id').value = ba;
+      document.getElementById('ba-hint').style.display = '';
+    }
   }
-  var dealerId = p.get('dealer_id');
-  var dealerName = p.get('dealer_name');
-  if (dealerId && tab === 'ambassador') {
-    var hint = document.getElementById('dealer-invite-hint');
-    if (hint) {
-      hint.textContent = 'Du wurdest von Händler ' + (dealerName ? decodeURIComponent(dealerName) : dealerId) + ' eingeladen.';
-      hint.style.display = '';
+
+  // Dealer invite hint for ambassador
+  if (tab === 'ambassador') {
+    var dealerId   = p.get('dealer_id');
+    var dealerName = p.get('dealer_name');
+    if (dealerId) {
+      var hint = document.getElementById('dealer-invite-hint');
+      if (hint) {
+        hint.textContent = 'Du wurdest von Händler ' + (dealerName ? decodeURIComponent(dealerName) : dealerId) + ' eingeladen.';
+        hint.style.display = '';
+      }
     }
   }
 })();
 
-// ── TAB NAV ──
-document.querySelectorAll('.tab-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-    document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
-    btn.classList.add('active');
-    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
-  });
-});
+// ── TAB NAV (disabled – URL-only) ──
 
 function switchMode(type, mode) {
   document.getElementById(type+'-register').style.display = mode==='register' ? '' : 'none';
@@ -1202,6 +1220,10 @@ function doInvite() {
     var stored = records.find(function(r){ return r.recId===currentUser.recId; });
     if (stored) { stored.dealerId=currentUser.dealerId; persist(); }
   }
+  if (!PORTAL_URL) {
+    m.textContent = 'Einladungen können nur über die live Seite (Netlify) gesendet werden, nicht lokal.';
+    m.className = 'msg error'; return;
+  }
   var inviteLink = PORTAL_URL + '?tab=ambassador&dealer_id=' + encodeURIComponent(currentUser.dealerId) + '&dealer_name=' + encodeURIComponent(currentUser.name);
   m.textContent = 'Wird gesendet…'; m.className = 'msg';
   fetch(HOOKS.invite, {
@@ -1236,7 +1258,6 @@ function doLogout() {
   document.getElementById('be-tabs').innerHTML = '';
   document.getElementById('be-content').innerHTML = '';
   document.getElementById('topbar').style.display     = '';
-  document.getElementById('site-header').style.display = '';
   document.getElementById('main-area').style.display   = '';
 }
 
