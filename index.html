@@ -21,52 +21,34 @@
   --c-dealer: #c8ff00;
   --c-amb:    #ff3a00;
   --c-con:    #0055ff;
+  --c-admin:  #9000ff;
   --error:    #e00;
   --success:  #009944;
 }
 
-html, body {
-  min-height: 100%;
-  background: var(--white);
-  color: var(--black);
-  font-family: 'Barlow', sans-serif;
-}
-
+html, body { min-height: 100%; background: var(--white); color: var(--black); font-family: 'Barlow', sans-serif; }
 #app { min-height: 100vh; display: flex; flex-direction: column; }
 
 /* ── TOPBAR ── */
 #topbar {
-  width: 100%;
-  background: var(--black);
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: sticky; top: 0; z-index: 100;
+  width: 100%; background: var(--black); height: 64px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: sticky; top: 0; z-index: 100;
 }
-
-/* ── TAB NAV ── */
 #site-header {
-  width: 100%;
-  border-bottom: 3px solid var(--black);
-  display: flex;
-  justify-content: center;
+  width: 100%; border-bottom: 3px solid var(--black);
+  display: flex; justify-content: center;
 }
 .tabs { display: flex; }
 .tab-btn {
-  height: 52px;
-  padding: 0 36px;
-  background: transparent;
-  border: none;
+  height: 52px; padding: 0 36px;
+  background: transparent; border: none;
   border-right: 1px solid var(--gray-200);
   color: var(--gray-400);
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 14px; font-weight: 800;
   letter-spacing: 0.14em; text-transform: uppercase;
-  cursor: pointer;
-  transition: color 0.12s, background 0.12s;
-  white-space: nowrap;
+  cursor: pointer; transition: color 0.12s, background 0.12s; white-space: nowrap;
 }
 .tab-btn:first-child { border-left: 1px solid var(--gray-200); }
 .tab-btn:hover { color: var(--black); background: var(--gray-50); }
@@ -74,31 +56,19 @@ html, body {
 .tab-btn.active[data-tab="ambassador"] { color: var(--white);  background: var(--c-amb);    border-color: transparent; }
 .tab-btn.active[data-tab="consumer"]   { color: var(--white);  background: var(--c-con);    border-color: transparent; }
 
-/* ── MAIN ── */
 #main-area {
-  flex: 1;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 52px 24px 72px;
+  flex: 1; display: flex; align-items: flex-start;
+  justify-content: center; padding: 52px 24px 72px;
   background: var(--white);
 }
-
 .panel { display: none; width: 100%; max-width: 400px; }
 .panel.active { display: block; animation: fadeUp 0.18s ease; }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ── CARD ── */
 .card { border: 3px solid var(--black); background: var(--white); }
-
-.card-header {
-  padding: 20px 24px 18px;
-  border-bottom: 3px solid var(--black);
-}
+.card-header { padding: 20px 24px 18px; border-bottom: 3px solid var(--black); }
 #panel-dealer     .card-header { background: var(--c-dealer); }
 #panel-ambassador .card-header { background: var(--c-amb); }
 #panel-consumer   .card-header { background: var(--c-con); }
@@ -107,34 +77,22 @@ html, body {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.22em; text-transform: uppercase;
-  color: rgba(0,0,0,0.45);
-  margin-bottom: 4px;
+  color: rgba(0,0,0,0.45); margin-bottom: 4px;
 }
-#panel-ambassador .card-eye,
-#panel-consumer   .card-eye { color: rgba(255,255,255,0.55); }
-
+#panel-ambassador .card-eye, #panel-consumer .card-eye { color: rgba(255,255,255,0.55); }
 .card-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 40px; font-weight: 900;
-  line-height: 1; text-transform: uppercase;
-  letter-spacing: -0.01em;
-  color: var(--black);
+  line-height: 1; text-transform: uppercase; letter-spacing: -0.01em; color: var(--black);
 }
-#panel-ambassador .card-title,
-#panel-consumer   .card-title { color: var(--white); }
-
+#panel-ambassador .card-title, #panel-consumer .card-title { color: var(--white); }
 .card-body { padding: 22px 24px 24px; }
 
 /* ── TOGGLE ── */
-.form-toggle {
-  display: flex;
-  border: 2px solid var(--black);
-  margin-bottom: 22px;
-}
+.form-toggle { display: flex; border: 2px solid var(--black); margin-bottom: 22px; }
 .toggle-btn {
   flex: 1; padding: 10px 0;
-  background: transparent; border: none;
-  color: var(--gray-400);
+  background: transparent; border: none; color: var(--gray-400);
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px; font-weight: 800;
   letter-spacing: 0.14em; text-transform: uppercase;
@@ -147,28 +105,31 @@ html, body {
 /* ── FIELDS ── */
 .field { margin-bottom: 14px; }
 label {
-  display: block;
-  font-family: 'Barlow Condensed', sans-serif;
+  display: block; font-family: 'Barlow Condensed', sans-serif;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--gray-500); margin-bottom: 5px;
 }
-input[type=text], input[type=email] {
+input[type=text], input[type=email], input[type=password] {
   width: 100%; padding: 11px 13px;
-  background: var(--white);
-  border: 2px solid var(--gray-200);
-  color: var(--black);
-  font-family: 'Barlow', sans-serif;
+  background: var(--white); border: 2px solid var(--gray-200);
+  color: var(--black); font-family: 'Barlow', sans-serif;
   font-size: 14px; font-weight: 500;
   outline: none; border-radius: 0; -webkit-appearance: none;
   transition: border-color 0.12s;
 }
 input:focus { border-color: var(--black); }
 input::placeholder { color: var(--gray-300); }
-input[readonly] {
-  color: var(--gray-400); cursor: not-allowed;
-  background: var(--gray-50); border-style: dashed;
+input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(--gray-50); border-style: dashed; }
+
+.pw-wrap { position: relative; }
+.pw-wrap input { padding-right: 42px; }
+.pw-toggle {
+  position: absolute; right: 11px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  font-size: 13px; color: var(--gray-400); padding: 2px;
 }
+.pw-toggle:hover { color: var(--black); }
 
 .ba-wrap { position: relative; }
 .ba-wrap input { padding-right: 36px; }
@@ -176,8 +137,7 @@ input[readonly] {
 .ba-hint { margin-top: 4px; font-size: 11px; color: var(--gray-500); }
 
 .btn-submit {
-  width: 100%; padding: 13px;
-  margin-top: 6px;
+  width: 100%; padding: 13px; margin-top: 6px;
   background: var(--black); color: var(--white);
   border: none; border-radius: 0;
   font-family: 'Barlow Condensed', sans-serif;
@@ -187,10 +147,16 @@ input[readonly] {
 }
 .btn-submit:hover { opacity: 0.75; }
 
-.msg {
-  min-height: 18px; margin-top: 10px;
-  font-size: 12px; font-weight: 600; text-align: center;
+.btn-link {
+  background: none; border: none; cursor: pointer;
+  font-size: 12px; color: var(--gray-400);
+  text-decoration: underline; padding: 0;
+  margin-top: 10px; display: block; text-align: center;
+  font-family: 'Barlow', sans-serif;
 }
+.btn-link:hover { color: var(--black); }
+
+.msg { min-height: 18px; margin-top: 10px; font-size: 12px; font-weight: 600; text-align: center; }
 .msg.error   { color: var(--error); }
 .msg.success { color: var(--success); }
 
@@ -199,41 +165,33 @@ input[readonly] {
 #backend.active { display: flex; }
 
 .be-topbar {
-  background: var(--black);
-  display: flex; align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
+  background: var(--black); display: flex; align-items: center;
+  justify-content: space-between; padding: 0 28px;
   height: 64px; flex-shrink: 0;
 }
 .be-meta {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--gray-400);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-400);
 }
 .btn-logout {
-  background: transparent;
-  border: 2px solid var(--gray-600);
-  color: var(--gray-400);
-  font-family: 'Barlow Condensed', sans-serif;
+  background: transparent; border: 2px solid var(--gray-600);
+  color: var(--gray-400); font-family: 'Barlow Condensed', sans-serif;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 7px 16px; cursor: pointer; border-radius: 0;
-  transition: all 0.12s;
+  padding: 7px 16px; cursor: pointer; border-radius: 0; transition: all 0.12s;
 }
 .btn-logout:hover { color: var(--white); border-color: var(--white); }
 
 .be-tabs {
-  display: flex;
-  border-bottom: 3px solid var(--black);
-  background: var(--white);
+  display: flex; border-bottom: 3px solid var(--black);
+  background: var(--white); flex-wrap: wrap;
 }
 .be-tab {
-  height: 48px; padding: 0 28px;
+  height: 48px; padding: 0 24px;
   background: transparent; border: none;
   border-right: 1px solid var(--gray-200);
-  color: var(--gray-400);
-  font-family: 'Barlow Condensed', sans-serif;
+  color: var(--gray-400); font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px; font-weight: 800;
   letter-spacing: 0.14em; text-transform: uppercase;
   cursor: pointer; transition: all 0.12s;
@@ -244,6 +202,49 @@ input[readonly] {
 .be-content { flex: 1; padding: 28px; background: var(--gray-100); }
 .be-panel { display: none; }
 .be-panel.active { display: block; animation: fadeUp 0.18s ease; }
+
+/* ── PROFILE CARD ── */
+.profile-card {
+  background: var(--white); border: 2px solid var(--black);
+  max-width: 480px;
+}
+.profile-header {
+  padding: 16px 20px; border-bottom: 2px solid var(--black);
+}
+.profile-header .ph-eye {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gray-500); margin-bottom: 2px;
+}
+.profile-header .ph-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px; font-weight: 900;
+  text-transform: uppercase; color: var(--white);
+}
+.profile-header.dealer-hd  { background: var(--c-dealer); }
+.profile-header.dealer-hd .ph-eye { color: rgba(0,0,0,0.5); }
+.profile-header.dealer-hd .ph-title { color: var(--black); }
+.profile-header.amb-hd     { background: var(--c-amb); }
+.profile-header.con-hd     { background: var(--c-con); }
+.profile-header.admin-hd   { background: var(--c-admin); }
+
+.profile-body { padding: 20px; }
+.profile-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 10px 0; border-bottom: 1px solid var(--gray-100);
+}
+.profile-row:last-child { border-bottom: none; }
+.pr-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-400);
+}
+.pr-value { font-size: 14px; font-weight: 600; color: var(--black); }
+.pr-id {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 900; letter-spacing: 0.06em;
+}
 
 /* ── TABLE ── */
 .tbl-wrap { background: var(--white); border: 2px solid var(--black); overflow-x: auto; }
@@ -264,46 +265,32 @@ tr:hover td { background: var(--gray-50); }
   display: inline-block; padding: 2px 7px;
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 10px; font-weight: 800;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  border: 2px solid;
+  letter-spacing: 0.1em; text-transform: uppercase; border: 2px solid;
 }
-.badge-dealer     { background: #c8ff0022; color: #4a6000; border-color: var(--c-dealer); }
+.badge-dealer     { background: #c8ff0022; color: #4a6000;     border-color: var(--c-dealer); }
 .badge-ambassador { background: #ff3a0010; color: var(--c-amb); border-color: var(--c-amb); }
 .badge-consumer   { background: #0055ff10; color: var(--c-con); border-color: var(--c-con); }
+.badge-admin      { background: #9000ff10; color: var(--c-admin); border-color: var(--c-admin); }
 
 .empty-row td { text-align: center; padding: 44px; color: var(--gray-400); font-weight: 500; }
 
 .act-btns { display: flex; gap: 6px; }
 .btn-act {
-  background: transparent;
-  border: 2px solid var(--gray-200);
-  color: var(--gray-400);
-  font-family: 'Barlow Condensed', sans-serif;
+  background: transparent; border: 2px solid var(--gray-200);
+  color: var(--gray-400); font-family: 'Barlow Condensed', sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 4px 9px; cursor: pointer; border-radius: 0; transition: all 0.12s;
 }
 .btn-act:hover     { color: var(--black); border-color: var(--black); }
-.btn-act.del:hover { color: var(--error); border-color: var(--error); }
+.btn-act.del:hover { color: var(--error);  border-color: var(--error); }
 
 /* ── UPLOAD ── */
-.upload-grid {
-  display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 24px;
-  align-items: start;
-}
-@media (max-width: 900px) {
-  .upload-grid { grid-template-columns: 1fr; }
-  .be-content { padding: 16px; }
-}
+.upload-grid { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: start; }
+@media (max-width: 900px) { .upload-grid { grid-template-columns: 1fr; } .be-content { padding: 16px; } }
 
 .upload-card { background: var(--white); border: 2px solid var(--black); }
-.upload-card-header {
-  padding: 16px 20px;
-  border-bottom: 2px solid var(--black);
-  background: var(--black);
-}
+.upload-card-header { padding: 16px 20px; border-bottom: 2px solid var(--black); background: var(--black); }
 .upload-card-header .uc-eye {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 10px; font-weight: 700;
@@ -313,48 +300,27 @@ tr:hover td { background: var(--gray-50); }
 .upload-card-header .uc-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 24px; font-weight: 900;
-  text-transform: uppercase; letter-spacing: 0.02em;
-  color: var(--white);
+  text-transform: uppercase; letter-spacing: 0.02em; color: var(--white);
 }
 .upload-card-body { padding: 18px 20px 20px; }
-
 .upload-drop {
-  border: 2px dashed var(--gray-300);
-  background: var(--gray-50);
-  padding: 32px 20px;
-  text-align: center;
-  cursor: pointer;
+  border: 2px dashed var(--gray-300); background: var(--gray-50);
+  padding: 32px 20px; text-align: center; cursor: pointer;
   transition: border-color 0.12s, background 0.12s;
 }
 .upload-drop:hover { border-color: var(--black); background: var(--gray-100); }
 .upload-drop.over  { border-color: var(--c-con); background: #eef2ff; }
 .upload-icon { font-size: 22px; margin-bottom: 8px; opacity: 0.45; }
-.upload-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--gray-500); display: block;
-}
+.upload-label { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); display: block; }
 .upload-sub { font-size: 11px; color: var(--gray-400); margin-top: 3px; }
-
-.upload-preview {
-  display: none; margin-top: 12px; padding: 10px 12px;
-  background: var(--gray-50); border: 2px solid var(--gray-200);
-  align-items: center; gap: 10px;
-}
+.upload-preview { display: none; margin-top: 12px; padding: 10px 12px; background: var(--gray-50); border: 2px solid var(--gray-200); align-items: center; gap: 10px; }
 .upload-preview.show { display: flex; }
 .preview-thumb { width: 40px; height: 40px; object-fit: cover; border: 1px solid var(--gray-200); }
 .preview-name  { font-size: 12px; font-weight: 500; color: var(--gray-600); flex: 1; }
 .preview-clear { background: transparent; border: none; color: var(--gray-400); font-size: 13px; cursor: pointer; transition: color 0.12s; }
 .preview-clear:hover { color: var(--error); }
-
-.upload-user-info {
-  margin-top: 12px; padding: 10px 12px;
-  background: var(--gray-50); border: 1px solid var(--gray-200);
-  font-size: 12px; color: var(--gray-500);
-}
+.upload-user-info { margin-top: 12px; padding: 10px 12px; background: var(--gray-50); border: 1px solid var(--gray-200); font-size: 12px; color: var(--gray-500); }
 .upload-user-info span { color: var(--black); font-weight: 700; }
-
 .btn-upload {
   margin-top: 12px; width: 100%; padding: 13px;
   background: var(--black); color: var(--white);
@@ -366,16 +332,37 @@ tr:hover td { background: var(--gray-50); }
 }
 .btn-upload:hover { opacity: 0.75; }
 .btn-upload:disabled { opacity: 0.28; cursor: not-allowed; }
-
 .upload-msg { min-height: 18px; margin-top: 10px; font-size: 12px; font-weight: 600; text-align: center; }
 .upload-msg.error   { color: var(--error); }
 .upload-msg.success { color: var(--success); }
-
 .receipts-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px; font-weight: 800;
   letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--gray-500); margin-bottom: 10px;
+}
+
+/* ── INVITE ── */
+.invite-id-box {
+  background: var(--gray-100); border: 1px solid var(--gray-200);
+  padding: 12px 14px; margin-bottom: 20px;
+}
+.invite-id-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-500);
+}
+.invite-id-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 900; letter-spacing: 0.06em; color: var(--black);
+}
+
+/* ── SECTION HEADING ── */
+.section-hd {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 800;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gray-500); margin-bottom: 12px;
 }
 
 /* ── MODAL ── */
@@ -386,68 +373,61 @@ tr:hover td { background: var(--gray-50); }
 }
 #modal-overlay.open { display: flex; }
 #modal-box {
-  background: var(--white);
-  border: 3px solid var(--black);
-  width: 100%; max-width: 380px;
-  animation: fadeUp 0.18s ease;
+  background: var(--white); border: 3px solid var(--black);
+  width: 100%; max-width: 380px; animation: fadeUp 0.18s ease;
 }
 .modal-hd {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 18px;
-  background: var(--black);
-  border-bottom: 3px solid var(--black);
+  padding: 14px 18px; background: var(--black); border-bottom: 3px solid var(--black);
 }
 .modal-hd-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 20px; font-weight: 900;
-  text-transform: uppercase; letter-spacing: 0.04em;
-  color: var(--white);
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--white);
 }
-.btn-modal-close {
-  background: transparent; border: none;
-  color: var(--gray-500); font-size: 15px;
-  cursor: pointer; padding: 2px 4px; transition: color 0.12s;
-}
+.btn-modal-close { background: transparent; border: none; color: var(--gray-500); font-size: 15px; cursor: pointer; padding: 2px 4px; transition: color 0.12s; }
 .btn-modal-close:hover { color: var(--white); }
 .modal-body { padding: 18px 18px 20px; }
 .modal-actions { display: flex; gap: 10px; margin-top: 6px; }
 .btn-save {
-  flex: 1; padding: 11px;
-  background: var(--black); color: var(--white);
-  border: none; border-radius: 0;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px; font-weight: 900;
-  letter-spacing: 0.14em; text-transform: uppercase;
+  flex: 1; padding: 11px; background: var(--black); color: var(--white);
+  border: none; border-radius: 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase;
   cursor: pointer; transition: opacity 0.12s;
 }
 .btn-save:hover { opacity: 0.75; }
 .btn-cancel {
-  flex: 1; padding: 11px;
-  background: transparent; border: 2px solid var(--gray-200);
-  color: var(--gray-500); border-radius: 0;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase;
+  flex: 1; padding: 11px; background: transparent; border: 2px solid var(--gray-200);
+  color: var(--gray-500); border-radius: 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
   cursor: pointer; transition: all 0.12s;
 }
 .btn-cancel:hover { color: var(--black); border-color: var(--black); }
 #modal-msg { min-height: 16px; margin-top: 8px; font-size: 12px; font-weight: 600; }
 #modal-msg.error { color: var(--error); }
+
+/* ── PW RESET MODAL ── */
+#pw-reset-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 600; align-items: center; justify-content: center;
+}
+#pw-reset-overlay.open { display: flex; }
+#pw-reset-box {
+  background: var(--white); border: 3px solid var(--black);
+  width: 100%; max-width: 360px; animation: fadeUp 0.18s ease;
+}
 </style>
 </head>
 <body>
 <div id="app">
 
-  <!-- ── BLACK TOPBAR ── -->
+  <!-- ── TOPBAR ── -->
   <div id="topbar">
     <svg width="96" height="29" viewBox="0 0 96 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- u -->
       <path d="M0 0h5.5v17c0 2.9 1.7 4.5 4.2 4.5s4.2-1.6 4.2-4.5V0h5.5v17.2C19.4 23.5 15.4 28 9.7 28S0 23.5 0 17.2V0z" fill="white"/>
-      <!-- v -->
       <path d="M23 0h5.9L35 19.6 41.1 0H47L38.1 28h-6.1L23 0z" fill="white"/>
-      <!-- e -->
       <path d="M50 13.8C50 6.2 55.2 0 63 0c7.2 0 11.7 5.5 11.7 13.4v2.1H55.6c.5 4 3.2 6.6 6.9 6.6 2.6 0 4.8-1.1 6.4-3.2l3.4 3.1C69.4 25.2 65.6 28 61 28c-7.4 0-11-5.8-11-14.2zm5.6-2.7h11.7c-.5-3.7-2.7-6.3-5.8-6.3s-5.3 2.6-5.9 6.3z" fill="white"/>
-      <!-- x -->
       <path d="M78 0h6.4l4.8 7.7L94 0h6.4l-8 12.7 8.2 15.3h-6.6l-5.1-8.8-5.1 8.8H78l8.2-15.3L78 0z" fill="white"/>
     </svg>
   </div>
@@ -479,11 +459,30 @@ tr:hover td { background: var(--gray-50); }
           <div id="dealer-register">
             <div class="field"><label>Name</label><input type="text" id="dealer-name" placeholder="Max Mustermann"></div>
             <div class="field"><label>E-Mail</label><input type="email" id="dealer-email" placeholder="name@firma.de"></div>
+            <div class="field">
+              <label>Passwort</label>
+              <div class="pw-wrap">
+                <input type="password" id="dealer-pw" placeholder="Mindestens 6 Zeichen">
+                <button type="button" class="pw-toggle" onclick="togglePw('dealer-pw',this)">👁</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Passwort bestätigen</label>
+              <input type="password" id="dealer-pw2" placeholder="Wiederholen">
+            </div>
             <button class="btn-submit" onclick="doRegister('dealer')">Registrieren</button>
           </div>
           <div id="dealer-login" style="display:none">
             <div class="field"><label>E-Mail</label><input type="email" id="dealer-login-email" placeholder="name@firma.de"></div>
+            <div class="field">
+              <label>Passwort</label>
+              <div class="pw-wrap">
+                <input type="password" id="dealer-login-pw" placeholder="Dein Passwort">
+                <button type="button" class="pw-toggle" onclick="togglePw('dealer-login-pw',this)">👁</button>
+              </div>
+            </div>
             <button class="btn-submit" onclick="doLogin('dealer')">Einloggen</button>
+            <button class="btn-link" onclick="openPwReset('dealer')">Passwort vergessen?</button>
           </div>
           <div class="msg" id="dealer-msg"></div>
         </div>
@@ -506,11 +505,30 @@ tr:hover td { background: var(--gray-50); }
           <div id="ambassador-register">
             <div class="field"><label>Name</label><input type="text" id="ambassador-name" placeholder="Max Mustermann"></div>
             <div class="field"><label>E-Mail</label><input type="email" id="ambassador-email" placeholder="name@brand.de"></div>
+            <div class="field">
+              <label>Passwort</label>
+              <div class="pw-wrap">
+                <input type="password" id="ambassador-pw" placeholder="Mindestens 6 Zeichen">
+                <button type="button" class="pw-toggle" onclick="togglePw('ambassador-pw',this)">👁</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Passwort bestätigen</label>
+              <input type="password" id="ambassador-pw2" placeholder="Wiederholen">
+            </div>
             <button class="btn-submit" onclick="doRegister('ambassador')">Registrieren</button>
           </div>
           <div id="ambassador-login" style="display:none">
             <div class="field"><label>E-Mail</label><input type="email" id="ambassador-login-email" placeholder="name@brand.de"></div>
+            <div class="field">
+              <label>Passwort</label>
+              <div class="pw-wrap">
+                <input type="password" id="ambassador-login-pw" placeholder="Dein Passwort">
+                <button type="button" class="pw-toggle" onclick="togglePw('ambassador-login-pw',this)">👁</button>
+              </div>
+            </div>
             <button class="btn-submit" onclick="doLogin('ambassador')">Einloggen</button>
+            <button class="btn-link" onclick="openPwReset('ambassador')">Passwort vergessen?</button>
           </div>
           <div class="msg" id="ambassador-msg"></div>
         </div>
@@ -522,7 +540,7 @@ tr:hover td { background: var(--gray-50); }
       <div class="card">
         <div class="card-header">
           <div class="card-eye">Follower-Portal</div>
-          <div class="card-title">Registrieren</div>
+          <div class="card-title">Anmelden</div>
         </div>
         <div class="card-body">
           <div class="form-toggle">
@@ -532,6 +550,17 @@ tr:hover td { background: var(--gray-50); }
           <div id="consumer-register">
             <div class="field"><label>Name</label><input type="text" id="consumer-name" placeholder="Max Mustermann"></div>
             <div class="field"><label>E-Mail</label><input type="email" id="consumer-email" placeholder="name@mail.de"></div>
+            <div class="field">
+              <label>Passwort</label>
+              <div class="pw-wrap">
+                <input type="password" id="consumer-pw" placeholder="Mindestens 6 Zeichen">
+                <button type="button" class="pw-toggle" onclick="togglePw('consumer-pw',this)">👁</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Passwort bestätigen</label>
+              <input type="password" id="consumer-pw2" placeholder="Wiederholen">
+            </div>
             <div class="field">
               <label>Brand Ambassador ID</label>
               <div class="ba-wrap">
@@ -544,7 +573,15 @@ tr:hover td { background: var(--gray-50); }
           </div>
           <div id="consumer-login" style="display:none">
             <div class="field"><label>E-Mail</label><input type="email" id="consumer-login-email" placeholder="name@mail.de"></div>
+            <div class="field">
+              <label>Passwort</label>
+              <div class="pw-wrap">
+                <input type="password" id="consumer-login-pw" placeholder="Dein Passwort">
+                <button type="button" class="pw-toggle" onclick="togglePw('consumer-login-pw',this)">👁</button>
+              </div>
+            </div>
             <button class="btn-submit" onclick="doLogin('consumer')">Einloggen</button>
+            <button class="btn-link" onclick="openPwReset('consumer')">Passwort vergessen?</button>
           </div>
           <div class="msg" id="consumer-msg"></div>
         </div>
@@ -567,108 +604,19 @@ tr:hover td { background: var(--gray-50); }
       <button class="btn-logout" onclick="doLogout()">Ausloggen</button>
     </div>
 
-    <div class="be-tabs">
-      <button class="be-tab active" onclick="switchBeTab('registrations', this)">Registrierungen</button>
-      <button class="be-tab" onclick="switchBeTab('invite', this)" id="be-tab-invite" style="display:none">BA Einladen</button>
-      <button class="be-tab" onclick="switchBeTab('receipts', this)">Rechnung hochladen</button>
+    <div class="be-tabs" id="be-tabs">
+      <!-- tabs injected by JS based on role -->
     </div>
 
-    <div class="be-content">
-
-      <div class="be-panel active" id="be-panel-registrations">
-        <div class="tbl-wrap">
-          <table>
-            <thead>
-              <tr><th>#</th><th>Rec-ID</th><th>Typ</th><th>Name</th><th>E-Mail</th><th>BA-ID</th><th>Registriert</th><th></th></tr>
-            </thead>
-            <tbody id="tbl-body"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="be-panel" id="be-panel-invite">
-        <div style="max-width:480px;">
-          <div style="background:var(--black);padding:16px 20px;border:2px solid var(--black);border-bottom:none;">
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gray-500);margin-bottom:2px;">Händler-Funktion</div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;text-transform:uppercase;color:var(--white);">BA einladen</div>
-          </div>
-          <div style="border:2px solid var(--black);border-top:none;padding:20px;background:var(--white);">
-            <div style="background:var(--gray-100);border:1px solid var(--gray-200);padding:12px 14px;margin-bottom:20px;font-size:13px;">
-              <span style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray-500);">Deine Händler-ID</span><br>
-              <span style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;letter-spacing:0.06em;color:var(--black);" id="dealer-id-display">—</span>
-            </div>
-            <div class="field">
-              <label>E-Mail des zukünftigen Brand Ambassadors</label>
-              <input type="email" id="invite-email" placeholder="name@email.de">
-            </div>
-            <div class="field">
-              <label>Name (optional)</label>
-              <input type="text" id="invite-name" placeholder="Max Mustermann">
-            </div>
-            <button class="btn-submit" style="margin-top:4px;" onclick="doInvite()">Einladung senden</button>
-            <div class="msg" id="invite-msg" style="text-align:left;"></div>
-          </div>
-          <div style="margin-top:24px;">
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray-500);margin-bottom:10px;">Gesendete Einladungen</div>
-            <div class="tbl-wrap">
-              <table>
-                <thead><tr><th>#</th><th>E-Mail</th><th>Name</th><th>Gesendet</th></tr></thead>
-                <tbody id="invites-body"></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="be-panel" id="be-panel-receipts">
-        <div class="upload-grid">
-
-          <div class="upload-card">
-            <div class="upload-card-header">
-              <div class="uc-eye">Beleg einreichen</div>
-              <div class="uc-title">Rechnung hochladen</div>
-            </div>
-            <div class="upload-card-body">
-              <div class="upload-drop" id="drop-zone" onclick="document.getElementById('receipt-file').click()">
-                <input type="file" id="receipt-file" accept="image/*,application/pdf" onchange="onFileSelect(event)" style="display:none">
-                <div class="upload-icon">📎</div>
-                <span class="upload-label">Klicken oder Datei ablegen</span>
-                <span class="upload-sub">JPG, PNG, PDF — max. 10 MB</span>
-              </div>
-              <div class="upload-preview" id="upload-preview">
-                <img class="preview-thumb" id="preview-thumb" src="" alt="">
-                <span class="preview-name" id="preview-name"></span>
-                <button class="preview-clear" onclick="clearFile()">✕</button>
-              </div>
-              <div class="upload-user-info">
-                Für: <span id="upload-user-label">—</span>
-              </div>
-              <button class="btn-upload" id="btn-upload" onclick="doUpload()" disabled>Rechnung einreichen</button>
-              <div class="upload-msg" id="upload-msg"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="receipts-title">Eingereichte Belege</div>
-            <div class="tbl-wrap">
-              <table>
-                <thead>
-                  <tr><th>#</th><th>Rec-ID</th><th>Name</th><th>E-Mail</th><th>BA-ID</th><th>Dateiname</th><th>Bild</th><th>Datum</th><th></th></tr>
-                </thead>
-                <tbody id="receipts-body"></tbody>
-              </table>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
+    <div class="be-content" id="be-content">
+      <!-- panels injected by JS based on role -->
     </div>
+
   </div><!-- /backend -->
 
 </div><!-- /app -->
 
-<!-- ── MODAL ── -->
+<!-- ── EDIT MODAL ── -->
 <div id="modal-overlay" onclick="handleOverlayClick(event)">
   <div id="modal-box">
     <div class="modal-hd">
@@ -688,24 +636,101 @@ tr:hover td { background: var(--gray-50); }
   </div>
 </div>
 
+<!-- ── PASSWORD RESET MODAL ── -->
+<div id="pw-reset-overlay">
+  <div id="pw-reset-box">
+    <div class="modal-hd">
+      <div class="modal-hd-title">Passwort zurücksetzen</div>
+      <button class="btn-modal-close" onclick="closePwReset()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--gray-500);margin-bottom:16px;line-height:1.6;">Gib deine E-Mail-Adresse ein. Du erhältst dann ein temporäres Passwort.</p>
+      <div class="field"><label>E-Mail</label><input type="email" id="pw-reset-email" placeholder="deine@email.de"></div>
+      <input type="hidden" id="pw-reset-type">
+      <div class="modal-actions">
+        <button class="btn-save" onclick="doPasswordReset()">Zurücksetzen</button>
+        <button class="btn-cancel" onclick="closePwReset()">Abbrechen</button>
+      </div>
+      <div id="pw-reset-msg" class="msg" style="text-align:left;margin-top:12px;"></div>
+    </div>
+  </div>
+</div>
+
 <script>
+// ── CONSTANTS ──
+var ADMIN_EMAIL = 'admin@uvex.de';
+var ADMIN_PW    = 'uvex2024admin';
+
+var PORTAL_URL = window.location.origin + window.location.pathname;
+
+var LABELS = { dealer: 'Händler', ambassador: 'Brand Ambassador', consumer: 'Follower', admin: 'Admin' };
+var HOOKS  = {
+  ambassador: 'https://hook.eu1.make.com/y1kkru9y3dafldhs7j42hmejxa2a0ie7',
+  consumer:   'https://hook.eu1.make.com/mq256zpjlz5pu9r1tv9l42ssfw0ds2vp',
+  receipt:    'https://hook.eu1.make.com/tj33y0ug3kjlcgc38gk7b493jwfie7ns',
+  invite:     'https://hook.eu1.make.com/gp6741htb42abcggv11qhpi2lfbu1cxm'
+};
+
+// ── STORAGE ──
+var records  = JSON.parse(localStorage.getItem('portal_v2') || '[]');
+var receipts = JSON.parse(localStorage.getItem('portal_receipts') || '[]');
+var invites  = JSON.parse(localStorage.getItem('portal_invites') || '[]');
+var currentUser = null, editId = null, selectedFile = null;
+
+function persist()        { localStorage.setItem('portal_v2',        JSON.stringify(records)); }
+function persistReceipts(){ localStorage.setItem('portal_receipts',  JSON.stringify(receipts)); }
+function persistInvites() { localStorage.setItem('portal_invites',   JSON.stringify(invites)); }
+
+// ── ID GENERATORS ──
+function genId() {
+  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', id;
+  do { id = 'R-'; for (var i=0;i<8;i++) id+=chars[Math.floor(Math.random()*chars.length)]; }
+  while (records.some(function(r){ return r.recId===id; }));
+  return id;
+}
+function genDealerId() {
+  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', id;
+  do { id = 'H-'; for (var i=0;i<6;i++) id+=chars[Math.floor(Math.random()*chars.length)]; }
+  while (records.some(function(r){ return r.dealerId===id; }));
+  return id;
+}
+function genTempPw() {
+  var chars = 'abcdefghjkmnpqrstuvwxyz23456789', pw='';
+  for (var i=0;i<8;i++) pw+=chars[Math.floor(Math.random()*chars.length)];
+  return pw;
+}
+
+// ── SIMPLE HASH (not cryptographic, just obfuscation for localStorage) ──
+function hashPw(pw) {
+  var hash = 0;
+  for (var i=0;i<pw.length;i++) { hash = ((hash<<5)-hash)+pw.charCodeAt(i); hash|=0; }
+  return 'h'+Math.abs(hash).toString(36)+'_'+pw.length;
+}
+
+// ── WEBHOOK ──
+function webhook(url, data) {
+  if (!url) return;
+  fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) }).catch(function(){});
+}
+
+// ── URL PARAMS ──
 (function() {
   var p = new URLSearchParams(window.location.search);
-  if (p.get('tab') === 'consumer') {
+  var tab = p.get('tab');
+  if (tab === 'consumer' || tab === 'ambassador') {
     document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
     document.querySelectorAll('.panel').forEach(function(b){ b.classList.remove('active'); });
-    document.querySelector('[data-tab="consumer"]').classList.add('active');
-    document.getElementById('panel-consumer').classList.add('active');
+    document.querySelector('[data-tab="'+tab+'"]').classList.add('active');
+    document.getElementById('panel-'+tab).classList.add('active');
   }
   var ba = p.get('ba_id');
   if (ba) {
     document.getElementById('consumer-ba-id').value = ba;
     document.getElementById('ba-hint').style.display = '';
   }
-  // Händler-Einladung für Ambassador
   var dealerId = p.get('dealer_id');
   var dealerName = p.get('dealer_name');
-  if (dealerId && p.get('tab') === 'ambassador') {
+  if (dealerId && tab === 'ambassador') {
     var hint = document.getElementById('dealer-invite-hint');
     if (hint) {
       hint.textContent = 'Du wurdest von Händler ' + (dealerName ? decodeURIComponent(dealerName) : dealerId) + ' eingeladen.';
@@ -714,362 +739,594 @@ tr:hover td { background: var(--gray-50); }
   }
 })();
 
-var records  = JSON.parse(localStorage.getItem('portal_v2') || '[]');
-var receipts = JSON.parse(localStorage.getItem('portal_receipts') || '[]');
-var currentUser = null, editId = null, selectedFile = null;
-
-var LABELS = { dealer: 'Händler', ambassador: 'Brand Ambassador', consumer: 'Follower' };
-var HOOKS  = {
-  ambassador: 'https://hook.eu1.make.com/y1kkru9y3dafldhs7j42hmejxa2a0ie7',
-  consumer:   'https://hook.eu1.make.com/mq256zpjlz5pu9r1tv9l42ssfw0ds2vp',
-  receipt:    'https://hook.eu1.make.com/tj33y0ug3kjlcgc38gk7b493jwfie7ns',
-  invite:     'https://hook.eu1.make.com/gp6741htb42abcggv11qhpi2lfbu1cxm'
-};
-var PORTAL_URL = window.location.origin + window.location.pathname;
-
-function persist() { localStorage.setItem('portal_v2', JSON.stringify(records)); }
-function persistReceipts() { localStorage.setItem('portal_receipts', JSON.stringify(receipts)); }
-var invites = JSON.parse(localStorage.getItem('portal_invites') || '[]');
-function persistInvites() { localStorage.setItem('portal_invites', JSON.stringify(invites)); }
-
-function genId() {
-  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', id;
-  do {
-    id = 'R-';
-    for (var i = 0; i < 8; i++) id += chars[Math.floor(Math.random() * chars.length)];
-  } while (records.some(function(r){ return r.recId === id; }));
-  return id;
-}
-
-function genDealerId() {
-  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', id;
-  do {
-    id = 'H-';
-    for (var i = 0; i < 6; i++) id += chars[Math.floor(Math.random() * chars.length)];
-  } while (records.some(function(r){ return r.dealerId === id; }));
-  return id;
-}
-
-function webhook(url, data) {
-  if (!url) return;
-  fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).catch(function(){});
-}
-
-(function() {
-  var saved = localStorage.getItem('portal_session');
-  if (!saved) return;
-  try {
-    var user = JSON.parse(saved);
-    var rec = records.find(function(r){ return r.recId === user.recId; });
-    if (rec) { setTimeout(function(){ showBackend(rec); }, 50); }
-    else { localStorage.removeItem('portal_session'); }
-  } catch(e) { localStorage.removeItem('portal_session'); }
-})();
-
+// ── TAB NAV ──
 document.querySelectorAll('.tab-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
     document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
     document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
     btn.classList.add('active');
-    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
   });
 });
 
 function switchMode(type, mode) {
-  var card = document.getElementById('panel-' + type);
-  var btns = card.querySelectorAll('.toggle-btn');
-  btns[0].classList.toggle('active', mode === 'register');
-  btns[1].classList.toggle('active', mode === 'login');
-  document.getElementById(type + '-register').style.display = mode === 'register' ? '' : 'none';
-  document.getElementById(type + '-login').style.display    = mode === 'login'    ? '' : 'none';
-  msg(type, '', '');
+  document.getElementById(type+'-register').style.display = mode==='register' ? '' : 'none';
+  document.getElementById(type+'-login').style.display    = mode==='login'    ? '' : 'none';
+  document.querySelectorAll('#panel-'+type+' .toggle-btn').forEach(function(b,i){
+    b.classList.toggle('active', (i===0 && mode==='register') || (i===1 && mode==='login'));
+  });
 }
 
 function msg(type, text, cls) {
-  var el = document.getElementById(type + '-msg');
-  el.textContent = text; el.className = 'msg ' + (cls || '');
+  var el = document.getElementById(type+'-msg');
+  el.textContent = text; el.className = 'msg'+(cls?' '+cls:'');
 }
 
+function togglePw(id, btn) {
+  var inp = document.getElementById(id);
+  inp.type = inp.type==='password' ? 'text' : 'password';
+  btn.textContent = inp.type==='password' ? '👁' : '🙈';
+}
+
+// ── SESSION RESTORE ──
+(function() {
+  try {
+    var saved = localStorage.getItem('portal_session');
+    if (saved) {
+      var user = JSON.parse(saved);
+      if (user.isAdmin) { showBackend({ isAdmin:true, name:'Admin', type:'admin', email:ADMIN_EMAIL }); return; }
+      var rec = records.find(function(r){ return r.recId===user.recId; });
+      if (rec) { setTimeout(function(){ showBackend(rec); }, 50); }
+      else { localStorage.removeItem('portal_session'); }
+    }
+  } catch(e) { localStorage.removeItem('portal_session'); }
+})();
+
+// ── REGISTER ──
 function doRegister(type) {
-  var name  = document.getElementById(type + '-name').value.trim();
-  var email = document.getElementById(type + '-email').value.trim().toLowerCase();
-  var baId  = type === 'consumer' ? document.getElementById('consumer-ba-id').value.trim() : '';
-  if (!name || !email)        { msg(type, 'Name und E-Mail erforderlich.', 'error'); return; }
-  if (email.indexOf('@') < 0) { msg(type, 'Ungültige E-Mail-Adresse.', 'error'); return; }
-  if (records.some(function(r){ return r.email === email && r.type === type; })) {
-    msg(type, 'E-Mail bereits registriert.', 'error'); return;
+  var name  = document.getElementById(type+'-name').value.trim();
+  var email = document.getElementById(type+'-email').value.trim().toLowerCase();
+  var pw    = document.getElementById(type+'-pw').value;
+  var pw2   = document.getElementById(type+'-pw2').value;
+  var baId  = type==='consumer' ? document.getElementById('consumer-ba-id').value.trim() : '';
+
+  if (!name || !email)        { msg(type,'Name und E-Mail erforderlich.','error'); return; }
+  if (email.indexOf('@')<0)   { msg(type,'Ungültige E-Mail-Adresse.','error'); return; }
+  if (!pw || pw.length<6)     { msg(type,'Passwort mindestens 6 Zeichen.','error'); return; }
+  if (pw !== pw2)             { msg(type,'Passwörter stimmen nicht überein.','error'); return; }
+  if (records.some(function(r){ return r.email===email && r.type===type; })) {
+    msg(type,'E-Mail bereits registriert.','error'); return;
   }
-  var rec = { recId: genId(), type: type, name: name, email: email, baId: baId || '–',
-    date: new Date().toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' }),
-    dealerId: type === 'dealer' ? genDealerId() : undefined };
+
+  var rec = {
+    recId: genId(), type: type, name: name, email: email,
+    pwHash: hashPw(pw),
+    baId: baId || '–',
+    date: new Date().toLocaleString('de-DE', { dateStyle:'short', timeStyle:'short' }),
+    dealerId: type==='dealer' ? genDealerId() : undefined
+  };
   records.push(rec); persist();
-  webhook(HOOKS[type], Object.assign({}, rec, { event: 'register' }));
-  msg(type, 'Erfolgreich registriert — wird weitergeleitet…', 'success');
+  if (type !== 'dealer') webhook(HOOKS[type], Object.assign({}, rec, { event:'register' }));
+  msg(type,'Erfolgreich registriert — wird weitergeleitet…','success');
   setTimeout(function(){ showBackend(rec); }, 900);
 }
 
+// ── LOGIN ──
 function doLogin(type) {
-  var email = document.getElementById(type + '-login-email').value.trim().toLowerCase();
-  if (!email) { msg(type, 'Bitte E-Mail eingeben.', 'error'); return; }
-  var rec = records.find(function(r){ return r.email === email && r.type === type; });
-  if (!rec) { msg(type, 'Kein Account gefunden.', 'error'); return; }
-  webhook(HOOKS[type], Object.assign({}, rec, { event: 'login' }));
-  msg(type, 'Login erfolgreich — wird weitergeleitet…', 'success');
+  var email = document.getElementById(type+'-login-email').value.trim().toLowerCase();
+  var pw    = document.getElementById(type+'-login-pw').value;
+
+  // Admin check
+  if (email === ADMIN_EMAIL && pw === ADMIN_PW) {
+    localStorage.setItem('portal_session', JSON.stringify({ isAdmin:true }));
+    showBackend({ isAdmin:true, name:'Admin', type:'admin', email:ADMIN_EMAIL });
+    return;
+  }
+
+  if (!email) { msg(type,'Bitte E-Mail eingeben.','error'); return; }
+  if (!pw)    { msg(type,'Bitte Passwort eingeben.','error'); return; }
+
+  var rec = records.find(function(r){ return r.email===email && r.type===type; });
+  if (!rec) { msg(type,'Kein Account gefunden.','error'); return; }
+
+  // Accounts without password hash (legacy) — accept any pw and set hash
+  if (!rec.pwHash) {
+    rec.pwHash = hashPw(pw); persist();
+  } else if (rec.pwHash !== hashPw(pw)) {
+    msg(type,'Falsches Passwort.','error'); return;
+  }
+
+  webhook(HOOKS[type], Object.assign({}, rec, { event:'login' }));
+  msg(type,'Login erfolgreich — wird weitergeleitet…','success');
   setTimeout(function(){ showBackend(rec); }, 700);
 }
 
+// ── PASSWORD RESET ──
+function openPwReset(type) {
+  document.getElementById('pw-reset-type').value = type;
+  document.getElementById('pw-reset-email').value = '';
+  document.getElementById('pw-reset-msg').textContent = '';
+  document.getElementById('pw-reset-msg').className = 'msg';
+  document.getElementById('pw-reset-overlay').classList.add('open');
+}
+function closePwReset() {
+  document.getElementById('pw-reset-overlay').classList.remove('open');
+}
+function doPasswordReset() {
+  var email = document.getElementById('pw-reset-email').value.trim().toLowerCase();
+  var type  = document.getElementById('pw-reset-type').value;
+  var m     = document.getElementById('pw-reset-msg');
+  if (!email || email.indexOf('@')<0) { m.textContent='Bitte gültige E-Mail eingeben.'; m.className='msg error'; return; }
+
+  var rec = records.find(function(r){ return r.email===email && r.type===type; });
+  if (!rec) { m.textContent='Kein Account mit dieser E-Mail gefunden.'; m.className='msg error'; return; }
+
+  var tempPw = genTempPw();
+  rec.pwHash = hashPw(tempPw); persist();
+
+  // Send via Make webhook
+  fetch(HOOKS.invite, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      event:      'password_reset',
+      email:      email,
+      name:       rec.name,
+      tempPw:     tempPw,
+      type:       type,
+      portalUrl:  PORTAL_URL
+    })
+  }).catch(function(){});
+
+  m.textContent = '✓ Temporäres Passwort wurde gesendet an '+email+'. Bitte E-Mails prüfen.';
+  m.className = 'msg success';
+  setTimeout(closePwReset, 3000);
+}
+
+// ── SHOW BACKEND ──
 function showBackend(user) {
   currentUser = user;
-  localStorage.setItem('portal_session', JSON.stringify({ recId: user.recId }));
-  document.getElementById('topbar').style.display = 'none';
-  document.getElementById('site-header').style.display = 'none';
-  document.getElementById('main-area').style.display = 'none';
-  var metaText = user.name + ' · ' + LABELS[user.type];
-  if (user.type === 'dealer' && user.dealerId) metaText += ' · ' + user.dealerId;
-  document.getElementById('be-meta').textContent = metaText;
-  document.getElementById('upload-user-label').textContent = user.name + ' (' + user.email + ')';
-  // Show/hide dealer-specific features
-  var inviteTab = document.getElementById('be-tab-invite');
-  if (user.type === 'dealer') {
-    // Migration: alte Accounts ohne dealerId nachträglich ID zuweisen
-    if (!user.dealerId) {
-      user.dealerId = genDealerId();
-      var storedRec = records.find(function(r){ return r.recId === user.recId; });
-      if (storedRec) { storedRec.dealerId = user.dealerId; persist(); }
-    }
-    inviteTab.style.display = '';
-    var dId = document.getElementById('dealer-id-display');
-    if (dId) dId.textContent = user.dealerId;
+  if (user.isAdmin) {
+    localStorage.setItem('portal_session', JSON.stringify({ isAdmin:true }));
   } else {
-    inviteTab.style.display = 'none';
+    localStorage.setItem('portal_session', JSON.stringify({ recId:user.recId }));
+    // Migration: Händler ohne dealerId
+    if (user.type==='dealer' && !user.dealerId) {
+      user.dealerId = genDealerId();
+      var stored = records.find(function(r){ return r.recId===user.recId; });
+      if (stored) { stored.dealerId = user.dealerId; persist(); }
+    }
   }
-  renderTable(); renderReceipts(); renderInvites();
+
+  // Hide front
+  document.getElementById('topbar').style.display     = 'none';
+  document.getElementById('site-header').style.display = 'none';
+  document.getElementById('main-area').style.display   = 'none';
+
+  // Meta label
+  var metaText = user.name + ' · ' + LABELS[user.type];
+  if (user.type==='dealer' && user.dealerId) metaText += ' · ' + user.dealerId;
+  document.getElementById('be-meta').textContent = metaText;
+
+  buildBackend(user);
   document.getElementById('backend').classList.add('active');
 }
 
+// ── BUILD BACKEND BASED ON ROLE ──
+function buildBackend(user) {
+  var tabsEl    = document.getElementById('be-tabs');
+  var contentEl = document.getElementById('be-content');
+  tabsEl.innerHTML = '';
+  contentEl.innerHTML = '';
+
+  if (user.isAdmin) {
+    buildAdminBackend(tabsEl, contentEl);
+  } else if (user.type === 'dealer') {
+    buildDealerBackend(tabsEl, contentEl, user);
+  } else if (user.type === 'ambassador') {
+    buildAmbassadorBackend(tabsEl, contentEl, user);
+  } else if (user.type === 'consumer') {
+    buildConsumerBackend(tabsEl, contentEl, user);
+  }
+}
+
+function addTab(tabsEl, id, label, active) {
+  var btn = document.createElement('button');
+  btn.className = 'be-tab' + (active ? ' active' : '');
+  btn.textContent = label;
+  btn.onclick = function() { switchBeTab(id, btn); };
+  tabsEl.appendChild(btn);
+}
+function addPanel(contentEl, id, active) {
+  var div = document.createElement('div');
+  div.className = 'be-panel' + (active ? ' active' : '');
+  div.id = 'be-panel-' + id;
+  contentEl.appendChild(div);
+  return div;
+}
+
+// ── DEALER BACKEND ──
+function buildDealerBackend(tabsEl, contentEl, user) {
+  addTab(tabsEl, 'profile', 'Mein Profil', true);
+  addTab(tabsEl, 'invite',  'BA Einladen', false);
+
+  // Profile panel
+  var profilePanel = addPanel(contentEl, 'profile', true);
+  profilePanel.innerHTML =
+    '<div class="profile-card">' +
+      '<div class="profile-header dealer-hd">' +
+        '<div class="ph-eye">Händler-Portal</div>' +
+        '<div class="ph-title">' + esc(user.name) + '</div>' +
+      '</div>' +
+      '<div class="profile-body">' +
+        '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id">' + (user.dealerId||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
+      '</div>' +
+    '</div>';
+
+  // Invite panel
+  var invitePanel = addPanel(contentEl, 'invite', false);
+  invitePanel.innerHTML =
+    '<div style="max-width:480px;">' +
+      '<div class="profile-card" style="max-width:100%">' +
+        '<div class="profile-header dealer-hd">' +
+          '<div class="ph-eye">Händler-Funktion</div>' +
+          '<div class="ph-title">BA Einladen</div>' +
+        '</div>' +
+        '<div class="profile-body">' +
+          '<div class="invite-id-box"><div class="invite-id-label">Deine Händler-ID</div><div class="invite-id-value">' + (user.dealerId||'—') + '</div></div>' +
+          '<div class="field"><label>E-Mail des Brand Ambassadors</label><input type="email" id="invite-email" placeholder="name@email.de"></div>' +
+          '<div class="field"><label>Name (optional)</label><input type="text" id="invite-name" placeholder="Max Mustermann"></div>' +
+          '<button class="btn-submit" onclick="doInvite()">Einladung senden</button>' +
+          '<div class="msg" id="invite-msg" style="text-align:left;"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="margin-top:24px;">' +
+        '<div class="section-hd">Gesendete Einladungen</div>' +
+        '<div class="tbl-wrap"><table><thead><tr><th>#</th><th>E-Mail</th><th>Name</th><th>Gesendet</th></tr></thead><tbody id="invites-body"></tbody></table></div>' +
+      '</div>' +
+    '</div>';
+  renderInvites();
+}
+
+// ── AMBASSADOR BACKEND ──
+function buildAmbassadorBackend(tabsEl, contentEl, user) {
+  addTab(tabsEl, 'profile', 'Mein Profil', true);
+
+  var panel = addPanel(contentEl, 'profile', true);
+  panel.innerHTML =
+    '<div class="profile-card">' +
+      '<div class="profile-header amb-hd">' +
+        '<div class="ph-eye">Brand Ambassador</div>' +
+        '<div class="ph-title">' + esc(user.name) + '</div>' +
+      '</div>' +
+      '<div class="profile-body">' +
+        '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value pr-id">' + (user.baId||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
+      '</div>' +
+    '</div>';
+}
+
+// ── CONSUMER BACKEND ──
+function buildConsumerBackend(tabsEl, contentEl, user) {
+  addTab(tabsEl, 'profile',  'Mein Profil',  true);
+  addTab(tabsEl, 'receipts', 'Rechnung hochladen', false);
+
+  // Profile
+  var profilePanel = addPanel(contentEl, 'profile', true);
+  profilePanel.innerHTML =
+    '<div class="profile-card">' +
+      '<div class="profile-header con-hd">' +
+        '<div class="ph-eye">Follower</div>' +
+        '<div class="ph-title">' + esc(user.name) + '</div>' +
+      '</div>' +
+      '<div class="profile-body">' +
+        '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value">' + (user.baId||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
+      '</div>' +
+    '</div>';
+
+  // Receipts
+  var recPanel = addPanel(contentEl, 'receipts', false);
+  recPanel.innerHTML = buildReceiptsHTML(user);
+  document.getElementById('upload-user-label').textContent = user.name + ' (' + user.email + ')';
+  renderReceipts(user.recId);
+  initDropZone();
+}
+
+// ── ADMIN BACKEND ──
+function buildAdminBackend(tabsEl, contentEl) {
+  addTab(tabsEl, 'all',       'Alle Registrierungen', true);
+  addTab(tabsEl, 'dealers',   'Händler',              false);
+  addTab(tabsEl, 'ambas',     'Brand Ambassadors',    false);
+  addTab(tabsEl, 'consumers', 'Follower',             false);
+  addTab(tabsEl, 'receipts-admin', 'Rechnungen',      false);
+
+  var allPanel = addPanel(contentEl, 'all', true);
+  allPanel.innerHTML = '<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Rec-ID</th><th>Typ</th><th>Name</th><th>E-Mail</th><th>BA-ID</th><th>Registriert</th><th></th></tr></thead><tbody id="tbl-body-all"></tbody></table></div>';
+
+  var dealerPanel = addPanel(contentEl, 'dealers', false);
+  dealerPanel.innerHTML = '<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Händler-ID</th><th>Name</th><th>E-Mail</th><th>Registriert</th><th></th></tr></thead><tbody id="tbl-body-dealers"></tbody></table></div>';
+
+  var ambaPanel = addPanel(contentEl, 'ambas', false);
+  ambaPanel.innerHTML = '<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Rec-ID</th><th>Name</th><th>E-Mail</th><th>BA-ID</th><th>Registriert</th><th></th></tr></thead><tbody id="tbl-body-ambas"></tbody></table></div>';
+
+  var conPanel = addPanel(contentEl, 'consumers', false);
+  conPanel.innerHTML = '<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Rec-ID</th><th>Name</th><th>E-Mail</th><th>BA-ID</th><th>Registriert</th><th></th></tr></thead><tbody id="tbl-body-consumers"></tbody></table></div>';
+
+  var recPanel = addPanel(contentEl, 'receipts-admin', false);
+  recPanel.innerHTML = buildReceiptsHTML(null);
+  renderReceipts(null);
+  initDropZone();
+
+  renderAdminTables();
+}
+
+function renderAdminTables() {
+  var all = document.getElementById('tbl-body-all');
+  if (!all) return;
+  if (!records.length) {
+    all.innerHTML = '<tr class="empty-row"><td colspan="8">Noch keine Registrierungen.</td></tr>';
+  } else {
+    all.innerHTML = records.map(function(r,i){
+      return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td><td style="font-family:monospace;font-size:11px">'+r.recId+'</td>' +
+        '<td><span class="badge badge-'+r.type+'">'+LABELS[r.type]+'</span></td>' +
+        '<td style="color:var(--black);font-weight:600">'+esc(r.name)+'</td><td>'+esc(r.email)+'</td>' +
+        '<td>'+r.baId+'</td><td>'+r.date+'</td>' +
+        '<td><div class="act-btns"><button class="btn-act" onclick="openEdit(\''+r.recId+'\')">Bearb.</button>' +
+        '<button class="btn-act del" onclick="deleteRec(\''+r.recId+'\')">Löschen</button></div></td></tr>';
+    }).join('');
+  }
+
+  var dealers   = records.filter(function(r){ return r.type==='dealer'; });
+  var ambas     = records.filter(function(r){ return r.type==='ambassador'; });
+  var consumers = records.filter(function(r){ return r.type==='consumer'; });
+
+  var dBody = document.getElementById('tbl-body-dealers');
+  if (dBody) dBody.innerHTML = !dealers.length
+    ? '<tr class="empty-row"><td colspan="6">Keine Händler.</td></tr>'
+    : dealers.map(function(r,i){
+        return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td><td style="font-family:\'Barlow Condensed\';font-weight:900;font-size:16px">'+(r.dealerId||'—')+'</td>' +
+          '<td style="color:var(--black);font-weight:600">'+esc(r.name)+'</td><td>'+esc(r.email)+'</td><td>'+r.date+'</td>' +
+          '<td><div class="act-btns"><button class="btn-act" onclick="openEdit(\''+r.recId+'\')">Bearb.</button>' +
+          '<button class="btn-act del" onclick="deleteRec(\''+r.recId+'\')">Löschen</button></div></td></tr>';
+      }).join('');
+
+  var aBody = document.getElementById('tbl-body-ambas');
+  if (aBody) aBody.innerHTML = !ambas.length
+    ? '<tr class="empty-row"><td colspan="6">Keine Brand Ambassadors.</td></tr>'
+    : ambas.map(function(r,i){
+        return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td><td style="font-family:monospace;font-size:11px">'+r.recId+'</td>' +
+          '<td style="color:var(--black);font-weight:600">'+esc(r.name)+'</td><td>'+esc(r.email)+'</td><td>'+r.baId+'</td><td>'+r.date+'</td>' +
+          '<td><div class="act-btns"><button class="btn-act" onclick="openEdit(\''+r.recId+'\')">Bearb.</button>' +
+          '<button class="btn-act del" onclick="deleteRec(\''+r.recId+'\')">Löschen</button></div></td></tr>';
+      }).join('');
+
+  var cBody = document.getElementById('tbl-body-consumers');
+  if (cBody) cBody.innerHTML = !consumers.length
+    ? '<tr class="empty-row"><td colspan="6">Keine Follower.</td></tr>'
+    : consumers.map(function(r,i){
+        return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td><td style="font-family:monospace;font-size:11px">'+r.recId+'</td>' +
+          '<td style="color:var(--black);font-weight:600">'+esc(r.name)+'</td><td>'+esc(r.email)+'</td><td>'+r.baId+'</td><td>'+r.date+'</td>' +
+          '<td><div class="act-btns"><button class="btn-act" onclick="openEdit(\''+r.recId+'\')">Bearb.</button>' +
+          '<button class="btn-act del" onclick="deleteRec(\''+r.recId+'\')">Löschen</button></div></td></tr>';
+      }).join('');
+}
+
+// ── SWITCH BE TAB ──
 function switchBeTab(name, btn) {
   document.querySelectorAll('.be-tab').forEach(function(b){ b.classList.remove('active'); });
   document.querySelectorAll('.be-panel').forEach(function(p){ p.classList.remove('active'); });
   btn.classList.add('active');
-  document.getElementById('be-panel-' + name).classList.add('active');
+  var panel = document.getElementById('be-panel-'+name);
+  if (panel) panel.classList.add('active');
 }
 
-function renderTable() {
-  var tbody = document.getElementById('tbl-body');
-  if (!records.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Noch keine Einträge vorhanden.</td></tr>'; return;
-  }
-  tbody.innerHTML = records.map(function(r, i) {
-    return '<tr>' +
-      '<td style="color:var(--gray-400)">' + (i+1) + '</td>' +
-      '<td style="color:var(--gray-400);font-size:11px">' + r.recId + '</td>' +
-      '<td><span class="badge badge-' + r.type + '">' + LABELS[r.type] + '</span></td>' +
-      '<td style="color:var(--black);font-weight:600">' + r.name + '</td>' +
-      '<td>' + r.email + '</td>' +
-      '<td>' + r.baId + '</td>' +
-      '<td>' + r.date + '</td>' +
-      '<td><div class="act-btns">' +
-        '<button class="btn-act" onclick="openEdit(\'' + r.recId + '\')">Bearbeiten</button>' +
-        '<button class="btn-act del" onclick="deleteRec(\'' + r.recId + '\')">Löschen</button>' +
-      '</div></td></tr>';
-  }).join('');
+// ── RECEIPTS HTML ──
+function buildReceiptsHTML(user) {
+  return '<div class="upload-grid">' +
+    '<div class="upload-card">' +
+      '<div class="upload-card-header"><div class="uc-eye">Beleg einreichen</div><div class="uc-title">Rechnung hochladen</div></div>' +
+      '<div class="upload-card-body">' +
+        '<div class="upload-drop" id="drop-zone" onclick="document.getElementById(\'receipt-file\').click()">' +
+          '<input type="file" id="receipt-file" accept="image/*,application/pdf" onchange="onFileSelect(event)" style="display:none">' +
+          '<div class="upload-icon">📎</div>' +
+          '<span class="upload-label">Klicken oder Datei ablegen</span>' +
+          '<span class="upload-sub">JPG, PNG, PDF — max. 10 MB</span>' +
+        '</div>' +
+        '<div class="upload-preview" id="upload-preview">' +
+          '<img class="preview-thumb" id="preview-thumb" src="" alt="">' +
+          '<span class="preview-name" id="preview-name"></span>' +
+          '<button class="preview-clear" onclick="clearFile()">✕</button>' +
+        '</div>' +
+        '<div class="upload-user-info">Für: <span id="upload-user-label">—</span></div>' +
+        '<button class="btn-upload" id="btn-upload" onclick="doUpload()" disabled>Rechnung einreichen</button>' +
+        '<div class="upload-msg" id="upload-msg"></div>' +
+      '</div>' +
+    '</div>' +
+    '<div>' +
+      '<div class="receipts-title">Eingereichte Belege</div>' +
+      '<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Rec-ID</th><th>Name</th><th>E-Mail</th><th>Dateiname</th><th>Bild</th><th>Datum</th><th></th></tr></thead><tbody id="receipts-body"></tbody></table></div>' +
+    '</div>' +
+  '</div>';
 }
 
-function deleteRec(recId) {
-  if (!confirm('Eintrag wirklich löschen?')) return;
-  records = records.filter(function(r){ return r.recId !== recId; });
-  persist(); renderTable();
-}
-
-function openEdit(recId) {
-  var r = records.find(function(r){ return r.recId === recId; });
-  if (!r) return;
-  editId = recId;
-  document.getElementById('m-name').value  = r.name;
-  document.getElementById('m-email').value = r.email;
-  document.getElementById('m-baid').value  = r.baId === '–' ? '' : r.baId;
-  document.getElementById('m-baid-row').style.display = r.type === 'consumer' ? '' : 'none';
-  var mm = document.getElementById('modal-msg'); mm.textContent = ''; mm.className = '';
-  document.getElementById('modal-overlay').classList.add('open');
-}
-function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); editId = null; }
-function handleOverlayClick(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
-function saveEdit() {
-  var r = records.find(function(r){ return r.recId === editId; }); if (!r) return;
-  var name  = document.getElementById('m-name').value.trim();
-  var email = document.getElementById('m-email').value.trim().toLowerCase();
-  var baId  = document.getElementById('m-baid').value.trim();
-  var mm    = document.getElementById('modal-msg');
-  if (!name || !email) { mm.textContent = 'Name und E-Mail erforderlich.'; mm.className = 'error'; return; }
-  if (records.some(function(x){ return x.email === email && x.type === r.type && x.recId !== editId; })) {
-    mm.textContent = 'E-Mail bereits in Verwendung.'; mm.className = 'error'; return;
-  }
-  r.name = name; r.email = email;
-  if (r.type === 'consumer') r.baId = baId || '–';
-  persist(); renderTable(); closeModal();
-}
-
-var dropZone = document.getElementById('drop-zone');
-dropZone.addEventListener('dragover', function(e){ e.preventDefault(); dropZone.classList.add('over'); });
-dropZone.addEventListener('dragleave', function(){ dropZone.classList.remove('over'); });
-dropZone.addEventListener('drop', function(e){
-  e.preventDefault(); dropZone.classList.remove('over');
-  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-});
-
-function onFileSelect(e) { if (e.target.files.length) handleFile(e.target.files[0]); }
-
-function handleFile(file) {
-  if (file.size > 10 * 1024 * 1024) { setUploadMsg('Datei zu groß (max. 10 MB).', 'error'); return; }
-  selectedFile = file;
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    var thumb = document.getElementById('preview-thumb');
-    document.getElementById('preview-name').textContent = file.name + ' (' + (file.size/1024).toFixed(1) + ' KB)';
-    if (file.type.indexOf('image') === 0) { thumb.src = ev.target.result; thumb.style.display = ''; }
-    else { thumb.style.display = 'none'; }
-    document.getElementById('upload-preview').classList.add('show');
-    document.getElementById('btn-upload').disabled = false;
-    setUploadMsg('', '');
-  };
-  reader.readAsDataURL(file);
-}
-
-function clearFile() {
-  selectedFile = null;
-  document.getElementById('receipt-file').value = '';
-  document.getElementById('upload-preview').classList.remove('show');
-  document.getElementById('btn-upload').disabled = true;
-  setUploadMsg('', '');
-}
-
-function setUploadMsg(text, cls) {
-  var el = document.getElementById('upload-msg');
-  el.textContent = text; el.className = 'upload-msg ' + (cls || '');
-}
-
-function doUpload() {
-  if (!selectedFile) { setUploadMsg('Bitte zuerst eine Datei auswählen.', 'error'); return; }
-  if (!currentUser)  { setUploadMsg('Kein Benutzer eingeloggt.', 'error'); return; }
-  var btn = document.getElementById('btn-upload');
-  btn.disabled = true; btn.textContent = 'Wird gesendet…'; setUploadMsg('', '');
-  var formData = new FormData();
-  formData.append('event', 'receipt_upload');
-  formData.append('recId', currentUser.recId);
-  formData.append('type',  currentUser.type);
-  formData.append('name',  currentUser.name);
-  formData.append('email', currentUser.email);
-  formData.append('baId',  currentUser.baId || '–');
-  formData.append('date',  new Date().toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' }));
-  formData.append('file', selectedFile, selectedFile.name);
-  fetch(HOOKS.receipt, { method: 'POST', body: formData })
-  .then(function(res) {
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    var rec = { recId: currentUser.recId, name: currentUser.name, email: currentUser.email,
-      baId: currentUser.baId || '–', fileName: selectedFile.name,
-      date: new Date().toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' }) };
-    receipts.push(rec); persistReceipts(); renderReceipts();
-    setUploadMsg('✓ Rechnung erfolgreich eingereicht.', 'success');
-    clearFile(); btn.textContent = 'Rechnung einreichen';
-  })
-  .catch(function(err) {
-    console.error(err); setUploadMsg('Fehler beim Senden. Bitte erneut versuchen.', 'error');
-    btn.disabled = false; btn.textContent = 'Rechnung einreichen';
-  });
-}
-
-function renderReceipts() {
+// ── RENDER RECEIPTS (filtered by user unless admin/null) ──
+function renderReceipts(filterRecId) {
   var tbody = document.getElementById('receipts-body');
-  if (!receipts.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="9">Noch keine Belege eingereicht.</td></tr>'; return;
+  if (!tbody) return;
+  var list = filterRecId
+    ? receipts.filter(function(r){ return r.recId === filterRecId; })
+    : receipts;
+  if (!list.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Noch keine Belege hochgeladen.</td></tr>'; return;
   }
-  tbody.innerHTML = receipts.map(function(r, i) {
-    var urlCell = r.imageUrl
-      ? '<a href="' + r.imageUrl + '" target="_blank" style="color:var(--c-con);font-size:11px;font-weight:600;text-decoration:none">Öffnen ↗</a>'
-      : '–';
-    return '<tr>' +
-      '<td style="color:var(--gray-400)">' + (i+1) + '</td>' +
-      '<td style="color:var(--gray-400);font-size:11px">' + r.recId + '</td>' +
-      '<td style="color:var(--black);font-weight:600">' + r.name + '</td>' +
-      '<td>' + r.email + '</td>' + '<td>' + r.baId + '</td>' +
-      '<td>' + r.fileName + '</td>' + '<td>' + urlCell + '</td>' +
-      '<td>' + r.date + '</td>' +
-      '<td><button class="btn-act del" onclick="deleteReceipt(' + i + ')">Löschen</button></td></tr>';
+  tbody.innerHTML = list.map(function(r,i){
+    var img = r.imageUrl
+      ? '<a href="'+r.imageUrl+'" target="_blank" style="color:var(--c-con);font-weight:600;font-size:11px">Anzeigen</a>'
+      : '—';
+    return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td>' +
+      '<td style="font-family:monospace;font-size:11px">'+r.recId+'</td>' +
+      '<td style="color:var(--black);font-weight:600">'+esc(r.name)+'</td>' +
+      '<td>'+esc(r.email)+'</td>' +
+      '<td>'+esc(r.filename||'—')+'</td>' +
+      '<td>'+img+'</td><td>'+r.date+'</td>' +
+      '<td><button class="btn-act del" onclick="deleteReceipt(\''+r.recId+'\','+i+')">Löschen</button></td></tr>';
   }).join('');
 }
 
-function deleteReceipt(idx) {
-  if (!confirm('Beleg wirklich löschen?')) return;
-  receipts.splice(idx, 1); persistReceipts(); renderReceipts();
+function deleteReceipt(recId, idx) {
+  if (!confirm('Beleg löschen?')) return;
+  receipts = receipts.filter(function(r,i){ return !(r.recId===recId && i===idx); });
+  persistReceipts();
+  renderReceipts(currentUser && !currentUser.isAdmin ? currentUser.recId : null);
 }
 
+// ── INVITE ──
 function doInvite() {
   var email = document.getElementById('invite-email').value.trim().toLowerCase();
   var name  = document.getElementById('invite-name').value.trim();
   var m     = document.getElementById('invite-msg');
-  if (!email || email.indexOf('@') < 0) { m.textContent = 'Bitte gültige E-Mail eingeben.'; m.className = 'msg error'; return; }
-  if (!currentUser || currentUser.type !== 'dealer') { m.textContent = 'Nur für Händler verfügbar.'; m.className = 'msg error'; return; }
-
-  // Sicherstellen dass dealerId existiert (Migration alter Accounts)
+  if (!email || email.indexOf('@')<0) { m.textContent='Bitte gültige E-Mail eingeben.'; m.className='msg error'; return; }
+  if (!currentUser || currentUser.type!=='dealer') { m.textContent='Nur für Händler verfügbar.'; m.className='msg error'; return; }
   if (!currentUser.dealerId) {
     currentUser.dealerId = genDealerId();
-    var stored = records.find(function(r){ return r.recId === currentUser.recId; });
-    if (stored) { stored.dealerId = currentUser.dealerId; persist(); }
-    var dId = document.getElementById('dealer-id-display');
-    if (dId) dId.textContent = currentUser.dealerId;
+    var stored = records.find(function(r){ return r.recId===currentUser.recId; });
+    if (stored) { stored.dealerId=currentUser.dealerId; persist(); }
   }
-
   var inviteLink = PORTAL_URL + '?tab=ambassador&dealer_id=' + encodeURIComponent(currentUser.dealerId) + '&dealer_name=' + encodeURIComponent(currentUser.name);
   m.textContent = 'Wird gesendet…'; m.className = 'msg';
-
-  fetch('https://hook.eu1.make.com/gp6741htb42abcggv11qhpi2lfbu1cxm', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      event:        'ba_invite',
-      inviteeEmail: email,
-      inviteeName:  name || '—',
-      dealerId:     currentUser.dealerId,
-      dealerName:   currentUser.name,
-      dealerEmail:  currentUser.email,
-      inviteLink:   inviteLink
-    })
+  fetch(HOOKS.invite, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ event:'ba_invite', inviteeEmail:email, inviteeName:name||'—', dealerId:currentUser.dealerId, dealerName:currentUser.name, dealerEmail:currentUser.email, inviteLink:inviteLink })
   })
-  .then(function(res) {
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    invites.push({ email: email, name: name || '—', date: new Date().toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' }) });
+  .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res; })
+  .then(function() {
+    invites.push({ email:email, name:name||'—', date:new Date().toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short'}) });
     persistInvites(); renderInvites();
-    m.textContent = '✓ Einladung gesendet an ' + email; m.className = 'msg success';
-    document.getElementById('invite-email').value = '';
-    document.getElementById('invite-name').value = '';
+    m.textContent='✓ Einladung gesendet an '+email; m.className='msg success';
+    document.getElementById('invite-email').value='';
+    document.getElementById('invite-name').value='';
   })
-  .catch(function(err) {
-    console.error('Invite fetch error:', err, err.message);
-    m.textContent = 'Fehler: ' + (err.message || 'Netzwerkfehler') + ' — Seite neu laden und erneut versuchen.'; m.className = 'msg error';
-  });
+  .catch(function(err){ m.textContent='Fehler: '+(err.message||'Netzwerkfehler'); m.className='msg error'; });
 }
 
 function renderInvites() {
   var tbody = document.getElementById('invites-body');
   if (!tbody) return;
-  if (!invites.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="4">Noch keine Einladungen gesendet.</td></tr>'; return;
-  }
-  tbody.innerHTML = invites.map(function(inv, i) {
-    return '<tr><td style="color:var(--gray-400)">' + (i+1) + '</td><td style="color:var(--black);font-weight:600">' + inv.email + '</td><td>' + inv.name + '</td><td>' + inv.date + '</td></tr>';
+  if (!invites.length) { tbody.innerHTML='<tr class="empty-row"><td colspan="4">Noch keine Einladungen gesendet.</td></tr>'; return; }
+  tbody.innerHTML = invites.map(function(inv,i){
+    return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td><td style="font-weight:600">'+esc(inv.email)+'</td><td>'+esc(inv.name)+'</td><td>'+inv.date+'</td></tr>';
   }).join('');
 }
 
+// ── LOGOUT ──
 function doLogout() {
-  currentUser = null;
   localStorage.removeItem('portal_session');
+  currentUser = null; selectedFile = null;
   document.getElementById('backend').classList.remove('active');
-  document.getElementById('topbar').style.display = '';
+  document.getElementById('be-tabs').innerHTML = '';
+  document.getElementById('be-content').innerHTML = '';
+  document.getElementById('topbar').style.display     = '';
   document.getElementById('site-header').style.display = '';
-  document.getElementById('main-area').style.display = '';
-  document.querySelectorAll('input:not([readonly])').forEach(function(i){ i.value = ''; });
-  document.querySelectorAll('.msg').forEach(function(m){ m.textContent = ''; m.className = 'msg'; });
-  clearFile();
+  document.getElementById('main-area').style.display   = '';
+}
+
+// ── EDIT MODAL (admin only) ──
+function openEdit(recId) {
+  var rec = records.find(function(r){ return r.recId===recId; });
+  if (!rec) return;
+  editId = recId;
+  document.getElementById('m-name').value  = rec.name;
+  document.getElementById('m-email').value = rec.email;
+  document.getElementById('m-baid').value  = rec.baId||'';
+  document.getElementById('m-baid-row').style.display = rec.type==='consumer'||rec.type==='ambassador' ? '' : 'none';
+  document.getElementById('modal-msg').textContent = '';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); editId=null; }
+function handleOverlayClick(e) { if(e.target===document.getElementById('modal-overlay')) closeModal(); }
+function saveEdit() {
+  var rec = records.find(function(r){ return r.recId===editId; });
+  if (!rec) return;
+  var name  = document.getElementById('m-name').value.trim();
+  var email = document.getElementById('m-email').value.trim().toLowerCase();
+  var baId  = document.getElementById('m-baid').value.trim();
+  if (!name || !email) { document.getElementById('modal-msg').textContent='Pflichtfelder ausfüllen.'; document.getElementById('modal-msg').className='error'; return; }
+  rec.name=name; rec.email=email;
+  if (rec.type==='consumer'||rec.type==='ambassador') rec.baId=baId||'—';
+  persist(); renderAdminTables(); closeModal();
+}
+function deleteRec(recId) {
+  if (!confirm('Datensatz wirklich löschen?')) return;
+  records = records.filter(function(r){ return r.recId!==recId; });
+  persist(); renderAdminTables();
+}
+
+// ── FILE UPLOAD ──
+function initDropZone() {
+  var dz = document.getElementById('drop-zone');
+  if (!dz) return;
+  dz.addEventListener('dragover', function(e){ e.preventDefault(); dz.classList.add('over'); });
+  dz.addEventListener('dragleave', function(){ dz.classList.remove('over'); });
+  dz.addEventListener('drop', function(e){ e.preventDefault(); dz.classList.remove('over'); var f=e.dataTransfer.files[0]; if(f) setFile(f); });
+}
+function onFileSelect(e) { var f=e.target.files[0]; if(f) setFile(f); }
+function setFile(f) {
+  selectedFile = f;
+  var prev = document.getElementById('upload-preview');
+  var thumb = document.getElementById('preview-thumb');
+  var nameEl = document.getElementById('preview-name');
+  nameEl.textContent = f.name;
+  if (f.type.startsWith('image/')) { var r=new FileReader(); r.onload=function(e){ thumb.src=e.target.result; }; r.readAsDataURL(f); prev.classList.add('show'); }
+  else { thumb.src=''; prev.classList.add('show'); }
+  document.getElementById('btn-upload').disabled = false;
+}
+function clearFile() {
+  selectedFile = null;
+  document.getElementById('upload-preview').classList.remove('show');
+  document.getElementById('receipt-file').value = '';
+  document.getElementById('btn-upload').disabled = true;
+  document.getElementById('upload-msg').textContent = '';
+}
+function doUpload() {
+  if (!selectedFile || !currentUser) return;
+  var user = currentUser.isAdmin ? { recId:'admin', name:'Admin', email:ADMIN_EMAIL, baId:'—' } : currentUser;
+  var btn = document.getElementById('btn-upload');
+  var msgEl = document.getElementById('upload-msg');
+  btn.disabled = true; msgEl.textContent = 'Wird hochgeladen…'; msgEl.className = 'upload-msg';
+  var formData = new FormData();
+  formData.append('file', selectedFile);
+  formData.append('recId',  user.recId);
+  formData.append('name',   user.name);
+  formData.append('email',  user.email);
+  formData.append('baId',   user.baId||'—');
+  formData.append('type',   user.type||'admin');
+  formData.append('date',   new Date().toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short'}));
+  fetch(HOOKS.receipt, { method:'POST', body:formData })
+    .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.json().catch(function(){ return {}; }); })
+    .then(function(data) {
+      var rec = { recId:user.recId, name:user.name, email:user.email, filename:selectedFile.name, imageUrl:data.url||'', date:new Date().toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short'}) };
+      receipts.push(rec); persistReceipts();
+      renderReceipts(currentUser.isAdmin ? null : user.recId);
+      msgEl.textContent='✓ Rechnung erfolgreich eingereicht!'; msgEl.className='upload-msg success';
+      clearFile();
+    })
+    .catch(function(err){ msgEl.textContent='Fehler: '+(err.message||'Netzwerkfehler'); msgEl.className='upload-msg error'; btn.disabled=false; });
+}
+
+// ── UTILS ──
+function esc(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 </script>
 </body>
