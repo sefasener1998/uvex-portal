@@ -296,7 +296,6 @@ tr:hover td { background: var(--gray-50); }
 
 /* ── UPLOAD ── */
 .upload-grid { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: start; }
-
 @media (max-width: 900px) { .upload-grid { grid-template-columns: 1fr; } .be-content { padding: 16px; } }
 
 .upload-card { background: var(--white); border: 2px solid var(--black); }
@@ -366,82 +365,6 @@ tr:hover td { background: var(--gray-50); }
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 22px; font-weight: 900; letter-spacing: 0.06em; color: var(--black);
 }
-
-/* ── YOURPASS CARD ── */
-.pass-card {
-  margin-top: 20px;
-  border: 3px solid var(--black);
-  background: var(--white);
-  max-width: 480px;
-}
-.pass-card-header {
-  background: var(--black);
-  padding: 16px 20px;
-  border-bottom: 3px solid var(--black);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.pass-card-eye {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--gray-500); margin-bottom: 2px;
-}
-.pass-card-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 22px; font-weight: 900;
-  text-transform: uppercase; color: var(--white);
-}
-.pass-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: #1a1a1a; border: 1px solid #333;
-  padding: 5px 10px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--gray-400);
-}
-.pass-body { padding: 20px; }
-.pass-id-box {
-  background: var(--gray-50); border: 1px solid var(--gray-200);
-  padding: 10px 14px; margin-bottom: 16px;
-}
-.pass-id-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 9px; font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gray-400); margin-bottom: 2px;
-}
-.pass-id-value {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 18px; font-weight: 900;
-  letter-spacing: 0.04em; color: var(--black);
-  word-break: break-all;
-}
-.pass-wallet-btn {
-  display: block; width: 100%;
-  padding: 14px; margin-top: 4px;
-  background: var(--c-amb); color: var(--white);
-  border: none; border-radius: 0;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 15px; font-weight: 900;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  text-align: center; text-decoration: none;
-  cursor: pointer; transition: opacity 0.12s;
-}
-.pass-wallet-btn:hover { opacity: 0.8; }
-.pass-wallet-btn.loading { opacity: 0.5; pointer-events: none; }
-.pass-pending {
-  text-align: center; padding: 28px 20px;
-  color: var(--gray-400);
-}
-.pass-pending-icon { font-size: 28px; margin-bottom: 8px; }
-.pass-pending-text {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--gray-400);
-}
-.pass-pending-sub { font-size: 11px; color: var(--gray-300); margin-top: 4px; }
 
 /* ── SECTION HEADING ── */
 .section-hd {
@@ -559,7 +482,7 @@ tr:hover td { background: var(--gray-50); }
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#888;margin-bottom:8px;">uvex Portal</div>
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:28px;letter-spacing:-0.01em;">Willkommen.</div>
 
-      <a href="?tab=dealer" class="portal-card" onclick="window.location.href='?tab=dealer';return false;">
+      <a href="?tab=dealer" class="portal-card">
         <div class="pc-header" style="background:var(--c-dealer);">
           <div class="pc-text">
             <div class="pc-eye" style="color:rgba(0,0,0,0.5);">Ich bin ein</div>
@@ -570,7 +493,7 @@ tr:hover td { background: var(--gray-50); }
         <div class="pc-body">Registriere deinen Shop und lade Brand Ambassadors ein.</div>
       </a>
 
-      <a href="?tab=ambassador" class="portal-card" style="margin-top:12px;" onclick="window.location.href='?tab=ambassador';return false;">
+      <a href="?tab=ambassador" class="portal-card" style="margin-top:12px;">
         <div class="pc-header" style="background:var(--c-amb);">
           <div class="pc-text">
             <div class="pc-eye" style="color:rgba(255,255,255,0.65);">Ich bin ein</div>
@@ -581,7 +504,7 @@ tr:hover td { background: var(--gray-50); }
         <div class="pc-body">Empfehle uvex Produkte und verdiene Provisionen.</div>
       </a>
 
-      <a href="?tab=consumer" class="portal-card" style="margin-top:12px;" onclick="window.location.href='?tab=consumer';return false;">
+      <a href="?tab=consumer" class="portal-card" style="margin-top:12px;">
         <div class="pc-header" style="background:var(--c-con);">
           <div class="pc-text">
             <div class="pc-eye" style="color:rgba(255,255,255,0.65);">Ich bin ein</div>
@@ -878,7 +801,7 @@ function webhook(url, data) {
 }
 
 // ── URL-ONLY ACCESS GATE ──
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   var p    = new URLSearchParams(window.location.search);
   var tab  = (p.get('tab') || '').toLowerCase();
   var VALID_TABS = ['dealer', 'ambassador', 'consumer'];
@@ -919,7 +842,7 @@ function webhook(url, data) {
     // Show landing selection
     document.getElementById('main-area').classList.add('landing');
   }
-})();
+});
 
 // ── TAB NAV (disabled – URL-only) ──
 
@@ -1172,82 +1095,21 @@ function buildAmbassadorBackend(tabsEl, contentEl, user) {
   addTab(tabsEl, 'profile', 'Mein Profil', true);
 
   var panel = addPanel(contentEl, 'profile', true);
-
-  // Check if pass already stored in localStorage
-  var passData = null;
-  try {
-    var stored = localStorage.getItem('pass_' + user.recId);
-    if (stored) passData = JSON.parse(stored);
-  } catch(e) {}
-  // Pass arrives via email — just show email-sent state
-
   panel.innerHTML =
-    '<div style="max-width:480px;">' +
-      '<div class="profile-card" style="max-width:100%">' +
-        '<div class="profile-header amb-hd">' +
-          '<div class="ph-eye">Brand Ambassador</div>' +
-          '<div class="ph-title">' + esc(user.name) + '</div>' +
-        '</div>' +
-        '<div class="profile-body">' +
-          '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
-          '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
-          '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value pr-id">' + (user.baId||'—') + '</span></div>' +
-          (user.dealerRef ? '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id">' + user.dealerRef + '</span></div>' : '') +
-          '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
-        '</div>' +
+    '<div class="profile-card">' +
+      '<div class="profile-header amb-hd">' +
+        '<div class="ph-eye">Brand Ambassador</div>' +
+        '<div class="ph-title">' + esc(user.name) + '</div>' +
       '</div>' +
-
-      // YourPass card
-      '<div class="pass-card">' +
-        '<div class="pass-card-header">' +
-          '<div>' +
-            '<div class="pass-card-eye">Digital Wallet</div>' +
-            '<div class="pass-card-title">Dein BA-Pass</div>' +
-          '</div>' +
-          '<div class="pass-badge">&#11044; YourPass</div>' +
-        '</div>' +
-        '<div class="pass-body" id="pass-body">' +
-          (passData
-            ? buildPassReadyHTML(passData)
-            : buildPassEmailSentHTML(user.email)
-          ) +
-        '</div>' +
+      '<div class="profile-body">' +
+        '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value pr-id">' + (user.baId||'—') + '</span></div>' +
+        (user.dealerRef ? '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id">' + user.dealerRef + '</span></div>' : '') +
+        '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
       '</div>' +
     '</div>';
-
-  // Pass is sent via email — no polling needed
-}
-
-function buildPassReadyHTML(passData) {
-  return '<div class="pass-id-box">' +
-      '<div class="pass-id-label">Pass-ID</div>' +
-      '<div class="pass-id-value">' + esc(passData.passId) + '</div>' +
-    '</div>' +
-    '<a href="' + esc(passData.passUrl) + '" target="_blank" class="pass-wallet-btn">' +
-      '&#128179; Zu Apple / Google Wallet hinzufügen' +
-    '</a>' +
-    '<p style="font-size:11px;color:var(--gray-400);margin-top:10px;text-align:center;line-height:1.5;">' +
-      'Link öffnen → Pass installieren → in Wallet speichern' +
-    '</p>';
-}
-
-function buildPassEmailSentHTML(email) {
-  return '<div style="text-align:center;padding:24px 16px;">' +
-    '<div style="font-size:32px;margin-bottom:12px;">&#128231;</div>' +
-    '<div style="font-family:Barlow Condensed,sans-serif;font-size:15px;font-weight:800;' +
-      'letter-spacing:0.1em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">' +
-      'Pass-Link wurde gesendet' +
-    '</div>' +
-    '<p style="font-size:13px;color:var(--gray-500);line-height:1.7;margin:0 0 16px;">' +
-      'Wir haben dir eine E-Mail an <strong>' + esc(email) + '</strong> geschickt.<br>' +
-      'Klicke dort auf den Button um deinen Pass zum Wallet hinzuzufügen.' +
-    '</p>' +
-    '<div style="background:var(--gray-50);border:1px solid var(--gray-200);padding:12px 16px;' +
-      'font-size:12px;color:var(--gray-500);text-align:left;">' +
-      '<strong style="display:block;margin-bottom:4px;color:var(--black);">So geht's:</strong>' +
-      '1. E-Mail öffnen → 2. Button klicken → 3. Pass zum Wallet hinzufügen' +
-    '</div>' +
-  '</div>';
 }
 
 // ── CONSUMER BACKEND ──
@@ -1258,32 +1120,17 @@ function buildConsumerBackend(tabsEl, contentEl, user) {
   // Profile
   var profilePanel = addPanel(contentEl, 'profile', true);
   profilePanel.innerHTML =
-    '<div style="max-width:480px;">' +
-      '<div class="profile-card" style="max-width:100%">' +
-        '<div class="profile-header con-hd">' +
-          '<div class="ph-eye">Follower</div>' +
-          '<div class="ph-title">' + esc(user.name) + '</div>' +
-        '</div>' +
-        '<div class="profile-body">' +
-          '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
-          '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
-          '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value">' + (user.baId||'—') + '</span></div>' +
-          '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
-        '</div>' +
+    '<div class="profile-card">' +
+      '<div class="profile-header con-hd">' +
+        '<div class="ph-eye">Follower</div>' +
+        '<div class="ph-title">' + esc(user.name) + '</div>' +
       '</div>' +
-
-      // YourPass card for consumer
-      '<div class="pass-card">' +
-        '<div class="pass-card-header">' +
-          '<div>' +
-            '<div class="pass-card-eye">Digital Wallet</div>' +
-            '<div class="pass-card-title">Dein Follower-Pass</div>' +
-          '</div>' +
-          '<div class="pass-badge">⬤ YourPass</div>' +
-        '</div>' +
-        '<div class="pass-body">' +
-          buildPassEmailSentHTML(user.email) +
-        '</div>' +
+      '<div class="profile-body">' +
+        '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value">' + (user.baId||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
       '</div>' +
     '</div>';
 
