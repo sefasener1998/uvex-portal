@@ -663,16 +663,17 @@ tr:hover td { background: var(--gray-50); }
 var ADMIN_EMAIL = 'admin@uvex.de';
 var ADMIN_PW    = 'uvex2024admin';
 
-// URL automatisch ermitteln — funktioniert auf jeder Domain ohne Anpassung
+// URL automatisch ermitteln — Netlify URL als Fallback wenn lokal geöffnet
 var PORTAL_URL = (function() {
   var loc = window.location;
-  // Lokal geöffnet als Datei → Warnung, kein funktionierender Link
   if (loc.protocol === 'file:') return null;
-  return loc.origin + loc.pathname;
+  return loc.origin + loc.pathname.replace(/\/+$/, '');
 })();
+var NETLIFY_URL = 'https://glistening-pika-00f3a9.netlify.app';
 
 var LABELS = { dealer: 'Händler', ambassador: 'Brand Ambassador', consumer: 'Follower', admin: 'Admin' };
 var HOOKS  = {
+  dealer:     'https://hook.eu1.make.com/xgypa8fw4o4qy69i7hon41wfs33nsejc',
   ambassador: 'https://hook.eu1.make.com/y1kkru9y3dafldhs7j42hmejxa2a0ie7',
   consumer:   'https://hook.eu1.make.com/mq256zpjlz5pu9r1tv9l42ssfw0ds2vp',
   receipt:    'https://hook.eu1.make.com/tj33y0ug3kjlcgc38gk7b493jwfie7ns',
@@ -728,14 +729,22 @@ function webhook(url, data) {
   var area = document.getElementById('main-area');
   var VALID_TABS = ['dealer', 'ambassador', 'consumer'];
 
-  // No ?tab= → show "Kein Zugang" screen
-  if (!VALID_TABS.includes(tab)) {
-    area.innerHTML =
-      '<div style="text-align:center;padding:80px 24px;max-width:400px;">' +
-        '<div style="font-family:'Barlow Condensed',sans-serif;font-size:64px;font-weight:900;color:var(--gray-200);line-height:1;">404</div>' +
-        '<div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:0.04em;margin:12px 0 10px;">Kein Zugang</div>' +
-        '<p style="font-size:13px;color:var(--gray-500);line-height:1.6;">Diese Seite ist nur über einen persönlichen Einladungslink erreichbar.</p>' +
-      '</div>';
+  // No valid ?tab= in URL → show Kein Zugang
+  if (VALID_TABS.indexOf(tab) === -1) {
+    area.style.alignItems = 'center';
+    area.style.justifyContent = 'center';
+    area.style.flexDirection = 'column';
+    area.innerHTML = [
+      '<div style="text-align:center;padding:60px 24px;max-width:400px;">',
+        '<div style="font-family:Barlow Condensed,sans-serif;font-size:80px;font-weight:900;',
+             'color:var(--gray-200);line-height:1;letter-spacing:-0.03em;">404</div>',
+        '<div style="font-family:Barlow Condensed,sans-serif;font-size:24px;font-weight:900;',
+             'text-transform:uppercase;letter-spacing:0.04em;margin:12px 0 10px;">Kein Zugang</div>',
+        '<p style="font-size:13px;color:var(--gray-500);line-height:1.7;">',
+          'Diese Seite ist nur über einen persönlichen Einladungslink erreichbar.',
+        '</p>',
+      '</div>'
+    ].join('');
     return;
   }
 
@@ -824,7 +833,7 @@ function doRegister(type) {
     dealerId: type==='dealer' ? genDealerId() : undefined
   };
   records.push(rec); persist();
-  if (type !== 'dealer') webhook(HOOKS[type], Object.assign({}, rec, { event:'register' }));
+  webhook(HOOKS[type], Object.assign({}, rec, { event:'register' }));
   msg(type,'Erfolgreich registriert — wird weitergeleitet…','success');
   setTimeout(function(){ showBackend(rec); }, 900);
 }
@@ -1220,11 +1229,8 @@ function doInvite() {
     var stored = records.find(function(r){ return r.recId===currentUser.recId; });
     if (stored) { stored.dealerId=currentUser.dealerId; persist(); }
   }
-  if (!PORTAL_URL) {
-    m.textContent = 'Einladungen können nur über die live Seite (Netlify) gesendet werden, nicht lokal.';
-    m.className = 'msg error'; return;
-  }
-  var inviteLink = PORTAL_URL + '?tab=ambassador&dealer_id=' + encodeURIComponent(currentUser.dealerId) + '&dealer_name=' + encodeURIComponent(currentUser.name);
+  var baseUrl = PORTAL_URL || NETLIFY_URL;
+  var inviteLink = baseUrl + '?tab=ambassador&dealer_id=' + encodeURIComponent(currentUser.dealerId) + '&dealer_name=' + encodeURIComponent(currentUser.name);
   m.textContent = 'Wird gesendet…'; m.className = 'msg';
   fetch(HOOKS.invite, {
     method:'POST', headers:{'Content-Type':'application/json'},
