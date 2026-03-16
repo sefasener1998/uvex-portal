@@ -366,6 +366,82 @@ tr:hover td { background: var(--gray-50); }
   font-size: 22px; font-weight: 900; letter-spacing: 0.06em; color: var(--black);
 }
 
+/* ── YOURPASS CARD ── */
+.pass-card {
+  margin-top: 20px;
+  border: 3px solid var(--black);
+  background: var(--white);
+  max-width: 480px;
+}
+.pass-card-header {
+  background: var(--black);
+  padding: 16px 20px;
+  border-bottom: 3px solid var(--black);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.pass-card-eye {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gray-500); margin-bottom: 2px;
+}
+.pass-card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 900;
+  text-transform: uppercase; color: var(--white);
+}
+.pass-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #1a1a1a; border: 1px solid #333;
+  padding: 5px 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gray-400);
+}
+.pass-body { padding: 20px; }
+.pass-id-box {
+  background: var(--gray-50); border: 1px solid var(--gray-200);
+  padding: 10px 14px; margin-bottom: 16px;
+}
+.pass-id-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gray-400); margin-bottom: 2px;
+}
+.pass-id-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px; font-weight: 900;
+  letter-spacing: 0.04em; color: var(--black);
+  word-break: break-all;
+}
+.pass-wallet-btn {
+  display: block; width: 100%;
+  padding: 14px; margin-top: 4px;
+  background: var(--c-amb); color: var(--white);
+  border: none; border-radius: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 900;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  text-align: center; text-decoration: none;
+  cursor: pointer; transition: opacity 0.12s;
+}
+.pass-wallet-btn:hover { opacity: 0.8; }
+.pass-wallet-btn.loading { opacity: 0.5; pointer-events: none; }
+.pass-pending {
+  text-align: center; padding: 28px 20px;
+  color: var(--gray-400);
+}
+.pass-pending-icon { font-size: 28px; margin-bottom: 8px; }
+.pass-pending-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gray-400);
+}
+.pass-pending-sub { font-size: 11px; color: var(--gray-300); margin-top: 4px; }
+
 /* ── SECTION HEADING ── */
 .section-hd {
   font-family: 'Barlow Condensed', sans-serif;
@@ -1095,21 +1171,102 @@ function buildAmbassadorBackend(tabsEl, contentEl, user) {
   addTab(tabsEl, 'profile', 'Mein Profil', true);
 
   var panel = addPanel(contentEl, 'profile', true);
+
+  // Check if pass already stored in localStorage
+  var passData = null;
+  try {
+    var stored = localStorage.getItem('pass_' + user.recId);
+    if (stored) passData = JSON.parse(stored);
+  } catch(e) {}
+
   panel.innerHTML =
-    '<div class="profile-card">' +
-      '<div class="profile-header amb-hd">' +
-        '<div class="ph-eye">Brand Ambassador</div>' +
-        '<div class="ph-title">' + esc(user.name) + '</div>' +
+    '<div style="max-width:480px;">' +
+      '<div class="profile-card" style="max-width:100%">' +
+        '<div class="profile-header amb-hd">' +
+          '<div class="ph-eye">Brand Ambassador</div>' +
+          '<div class="ph-title">' + esc(user.name) + '</div>' +
+        '</div>' +
+        '<div class="profile-body">' +
+          '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
+          '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
+          '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value pr-id">' + (user.baId||'—') + '</span></div>' +
+          (user.dealerRef ? '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id">' + user.dealerRef + '</span></div>' : '') +
+          '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
+        '</div>' +
       '</div>' +
-      '<div class="profile-body">' +
-        '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
-        '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
-        '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value pr-id">' + (user.baId||'—') + '</span></div>' +
-        (user.dealerRef ? '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id">' + user.dealerRef + '</span></div>' : '') +
-        '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
-        '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
+
+      // YourPass card
+      '<div class="pass-card">' +
+        '<div class="pass-card-header">' +
+          '<div>' +
+            '<div class="pass-card-eye">Digital Wallet</div>' +
+            '<div class="pass-card-title">Dein BA-Pass</div>' +
+          '</div>' +
+          '<div class="pass-badge">&#11044; YourPass</div>' +
+        '</div>' +
+        '<div class="pass-body" id="pass-body">' +
+          (passData
+            ? buildPassReadyHTML(passData)
+            : buildPassPendingHTML(user.recId)
+          ) +
+        '</div>' +
       '</div>' +
     '</div>';
+
+  // Start polling if no pass yet
+  if (!passData) startPassPolling(user.recId);
+}
+
+function buildPassReadyHTML(passData) {
+  return '<div class="pass-id-box">' +
+      '<div class="pass-id-label">Pass-ID</div>' +
+      '<div class="pass-id-value">' + esc(passData.passId) + '</div>' +
+    '</div>' +
+    '<a href="' + esc(passData.passUrl) + '" target="_blank" class="pass-wallet-btn">' +
+      '&#128179; Zu Apple/Google Wallet hinzufügen' +
+    '</a>' +
+    '<p style="font-size:11px;color:var(--gray-400);margin-top:10px;text-align:center;line-height:1.5;">' +
+      'Link öffnen &rarr; Pass installieren &rarr; in Wallet speichern' +
+    '</p>';
+}
+
+function buildPassPendingHTML(recId) {
+  return '<div class="pass-pending">' +
+    '<div class="pass-pending-icon">⏳</div>' +
+    '<div class="pass-pending-text">Pass wird erstellt…</div>' +
+    '<div class="pass-pending-sub">Wird automatisch aktualisiert sobald der Pass bereit ist.</div>' +
+  '</div>';
+}
+
+var passPollingInterval = null;
+function startPassPolling(recId) {
+  if (passPollingInterval) clearInterval(passPollingInterval);
+  var attempts = 0;
+  passPollingInterval = setInterval(function() {
+    attempts++;
+    if (attempts > 20) { clearInterval(passPollingInterval); return; } // stop after ~2min
+    fetch('https://hook.eu1.make.com/28rviagm4uoewghl9uaqm4wpjn4iital', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ event: 'poll', recId: recId })
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data && data.passUrl && data.passId) {
+        clearInterval(passPollingInterval);
+        // Store in localStorage
+        localStorage.setItem('pass_' + recId, JSON.stringify({ passId: data.passId, passUrl: data.passUrl }));
+        // Update UI
+        var body = document.getElementById('pass-body');
+        if (body) {
+          body.innerHTML = buildPassReadyHTML(data);
+          // Animate
+          body.style.animation = 'fadeUp 0.3s ease';
+        }
+      }
+    })
+    .catch(function(){});
+  }, 6000); // poll every 6 seconds
 }
 
 // ── CONSUMER BACKEND ──
