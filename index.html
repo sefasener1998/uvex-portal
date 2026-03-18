@@ -155,6 +155,7 @@ input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(-
   cursor: pointer; transition: opacity 0.12s;
 }
 .btn-submit:hover { opacity: 0.75; }
+.btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .btn-link {
   background: none; border: none; cursor: pointer;
@@ -476,13 +477,12 @@ tr:hover td { background: var(--gray-50); }
   <!-- ── FRONT PANELS ── -->
   <div id="main-area">
 
-
-        <!-- LANDING SELECTION — shown when no ?tab= in URL -->
+    <!-- LANDING SELECTION — shown when no ?tab= in URL -->
     <div id="panel-landing" class="panel active" style="max-width:560px;width:100%;">
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#888;margin-bottom:8px;">uvex Portal</div>
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:28px;letter-spacing:-0.01em;">Willkommen.</div>
 
-      <a href="?tab=dealer" class="portal-card">
+      <a href="?tab=dealer" class="portal-card" onclick="window.location.href='?tab=dealer';return false;">
         <div class="pc-header" style="background:var(--c-dealer);">
           <div class="pc-text">
             <div class="pc-eye" style="color:rgba(0,0,0,0.5);">Ich bin ein</div>
@@ -493,7 +493,7 @@ tr:hover td { background: var(--gray-50); }
         <div class="pc-body">Registriere deinen Shop und lade Brand Ambassadors ein.</div>
       </a>
 
-      <a href="?tab=ambassador" class="portal-card" style="margin-top:12px;">
+      <a href="?tab=ambassador" class="portal-card" style="margin-top:12px;" onclick="window.location.href='?tab=ambassador';return false;">
         <div class="pc-header" style="background:var(--c-amb);">
           <div class="pc-text">
             <div class="pc-eye" style="color:rgba(255,255,255,0.65);">Ich bin ein</div>
@@ -504,7 +504,7 @@ tr:hover td { background: var(--gray-50); }
         <div class="pc-body">Empfehle uvex Produkte und verdiene Provisionen.</div>
       </a>
 
-      <a href="?tab=consumer" class="portal-card" style="margin-top:12px;">
+      <a href="?tab=consumer" class="portal-card" style="margin-top:12px;" onclick="window.location.href='?tab=consumer';return false;">
         <div class="pc-header" style="background:var(--c-con);">
           <div class="pc-text">
             <div class="pc-eye" style="color:rgba(255,255,255,0.65);">Ich bin ein</div>
@@ -542,7 +542,7 @@ tr:hover td { background: var(--gray-50); }
               <label>Passwort bestätigen</label>
               <input type="password" id="dealer-pw2" placeholder="Wiederholen">
             </div>
-            <button class="btn-submit" onclick="doRegister('dealer')">Registrieren</button>
+            <button class="btn-submit" id="dealer-reg-btn" onclick="doRegister('dealer')">Registrieren</button>
           </div>
           <div id="dealer-login" style="display:none">
             <div class="field"><label>E-Mail</label><input type="email" id="dealer-login-email" placeholder="name@firma.de"></div>
@@ -553,7 +553,7 @@ tr:hover td { background: var(--gray-50); }
                 <button type="button" class="pw-toggle" onclick="togglePw('dealer-login-pw',this)">👁</button>
               </div>
             </div>
-            <button class="btn-submit" onclick="doLogin('dealer')">Einloggen</button>
+            <button class="btn-submit" id="dealer-login-btn" onclick="doLogin('dealer')">Einloggen</button>
             <button class="btn-link" onclick="openPwReset('dealer')">Passwort vergessen?</button>
           </div>
           <div class="msg" id="dealer-msg"></div>
@@ -596,7 +596,7 @@ tr:hover td { background: var(--gray-50); }
               </div>
               <div class="ba-hint" id="ambassador-dealer-hint" style="display:none">Zugewiesen über deinen Händler-Link.</div>
             </div>
-            <button class="btn-submit" onclick="doRegister('ambassador')">Registrieren</button>
+            <button class="btn-submit" id="ambassador-reg-btn" onclick="doRegister('ambassador')">Registrieren</button>
           </div>
           <div id="ambassador-login" style="display:none">
             <div class="field"><label>E-Mail</label><input type="email" id="ambassador-login-email" placeholder="name@brand.de"></div>
@@ -607,7 +607,7 @@ tr:hover td { background: var(--gray-50); }
                 <button type="button" class="pw-toggle" onclick="togglePw('ambassador-login-pw',this)">👁</button>
               </div>
             </div>
-            <button class="btn-submit" onclick="doLogin('ambassador')">Einloggen</button>
+            <button class="btn-submit" id="ambassador-login-btn" onclick="doLogin('ambassador')">Einloggen</button>
             <button class="btn-link" onclick="openPwReset('ambassador')">Passwort vergessen?</button>
           </div>
           <div class="msg" id="ambassador-msg"></div>
@@ -649,7 +649,7 @@ tr:hover td { background: var(--gray-50); }
               </div>
               <div class="ba-hint" id="ba-hint" style="display:none">Zugewiesen über deinen Ambassador-Link.</div>
             </div>
-            <button class="btn-submit" onclick="doRegister('consumer')">Registrieren</button>
+            <button class="btn-submit" id="consumer-reg-btn" onclick="doRegister('consumer')">Registrieren</button>
           </div>
           <div id="consumer-login" style="display:none">
             <div class="field"><label>E-Mail</label><input type="email" id="consumer-login-email" placeholder="name@mail.de"></div>
@@ -660,7 +660,7 @@ tr:hover td { background: var(--gray-50); }
                 <button type="button" class="pw-toggle" onclick="togglePw('consumer-login-pw',this)">👁</button>
               </div>
             </div>
-            <button class="btn-submit" onclick="doLogin('consumer')">Einloggen</button>
+            <button class="btn-submit" id="consumer-login-btn" onclick="doLogin('consumer')">Einloggen</button>
             <button class="btn-link" onclick="openPwReset('consumer')">Passwort vergessen?</button>
           </div>
           <div class="msg" id="consumer-msg"></div>
@@ -684,13 +684,8 @@ tr:hover td { background: var(--gray-50); }
       <button class="btn-logout" onclick="doLogout()">Ausloggen</button>
     </div>
 
-    <div class="be-tabs" id="be-tabs">
-      <!-- tabs injected by JS based on role -->
-    </div>
-
-    <div class="be-content" id="be-content">
-      <!-- panels injected by JS based on role -->
-    </div>
+    <div class="be-tabs" id="be-tabs"></div>
+    <div class="be-content" id="be-content"></div>
 
   </div><!-- /backend -->
 
@@ -740,15 +735,12 @@ tr:hover td { background: var(--gray-50); }
 // ── CONSTANTS ──
 var ADMIN_EMAIL = 'admin@uvex.de';
 var ADMIN_PW    = 'uvex2024admin';
-
-// URL automatisch ermitteln — Netlify URL als Fallback wenn lokal geöffnet
 var PORTAL_URL = (function() {
   var loc = window.location;
   if (loc.protocol === 'file:') return null;
   return loc.origin + loc.pathname.replace(/\/+$/, '');
 })();
 var NETLIFY_URL = 'https://glistening-pika-00f3a9.netlify.app';
-
 var LABELS = { dealer: 'Händler', ambassador: 'Brand Ambassador', consumer: 'Follower', admin: 'Admin' };
 var HOOKS  = {
   dealer:     'https://hook.eu1.make.com/xgypa8fw4o4qy69i7hon41wfs33nsejc',
@@ -758,15 +750,15 @@ var HOOKS  = {
   invite:     'https://hook.eu1.make.com/gp6741htb42abcggv11qhpi2lfbu1cxm'
 };
 
-// ── STORAGE ──
+// ── STORAGE — records/receipts/invites bleiben in localStorage ──
 var records  = JSON.parse(localStorage.getItem('portal_v2') || '[]');
 var receipts = JSON.parse(localStorage.getItem('portal_receipts') || '[]');
 var invites  = JSON.parse(localStorage.getItem('portal_invites') || '[]');
 var currentUser = null, editId = null, selectedFile = null;
 
-function persist()        { localStorage.setItem('portal_v2',        JSON.stringify(records)); }
-function persistReceipts(){ localStorage.setItem('portal_receipts',  JSON.stringify(receipts)); }
-function persistInvites() { localStorage.setItem('portal_invites',   JSON.stringify(invites)); }
+function persist()         { localStorage.setItem('portal_v2',       JSON.stringify(records)); }
+function persistReceipts() { localStorage.setItem('portal_receipts', JSON.stringify(receipts)); }
+function persistInvites()  { localStorage.setItem('portal_invites',  JSON.stringify(invites)); }
 
 // ── ID GENERATORS ──
 function genId() {
@@ -787,14 +779,14 @@ function genTempPw() {
   return pw;
 }
 
-// ── SIMPLE HASH (not cryptographic, just obfuscation for localStorage) ──
-function hashPw(pw) {
-  var hash = 0;
-  for (var i=0;i<pw.length;i++) { hash = ((hash<<5)-hash)+pw.charCodeAt(i); hash|=0; }
-  return 'h'+Math.abs(hash).toString(36)+'_'+pw.length;
+// ── CHANGE 1: SHA-256 statt einfachem Hash ──
+async function hashPw(pw) {
+  var enc = new TextEncoder();
+  var buf = await crypto.subtle.digest('SHA-256', enc.encode(pw));
+  return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
 }
 
-// ── WEBHOOK ──
+// ── WEBHOOK (fire & forget) ──
 function webhook(url, data) {
   if (!url) return;
   fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) }).catch(function(){});
@@ -807,44 +799,28 @@ document.addEventListener('DOMContentLoaded', function() {
   var VALID_TABS = ['dealer', 'ambassador', 'consumer'];
 
   if (VALID_TABS.indexOf(tab) !== -1) {
-    // Hide landing selection, show correct panel
     document.getElementById('panel-landing').classList.remove('active');
     document.getElementById('panel-' + tab).classList.add('active');
     document.getElementById('main-area').classList.remove('landing');
 
-    // BA-ID prefill for consumer
     if (tab === 'consumer') {
       var ba = p.get('ba_id');
-      if (ba) {
-        document.getElementById('consumer-ba-id').value = ba;
-        document.getElementById('ba-hint').style.display = '';
-      }
+      if (ba) { document.getElementById('consumer-ba-id').value = ba; document.getElementById('ba-hint').style.display = ''; }
     }
-
-    // Dealer invite hint + prefill for ambassador
     if (tab === 'ambassador') {
       var dealerId   = p.get('dealer_id');
       var dealerName = p.get('dealer_name');
       if (dealerId) {
         var hint = document.getElementById('dealer-invite-hint');
-        if (hint) {
-          hint.textContent = 'Du wurdest von Händler ' + (dealerName ? decodeURIComponent(dealerName) : dealerId) + ' eingeladen.';
-          hint.style.display = '';
-        }
+        if (hint) { hint.textContent = 'Du wurdest von Händler ' + (dealerName ? decodeURIComponent(dealerName) : dealerId) + ' eingeladen.'; hint.style.display = ''; }
         var dealerField = document.getElementById('ambassador-dealer-id');
-        if (dealerField) {
-          dealerField.value = dealerId;
-          document.getElementById('ambassador-dealer-hint').style.display = '';
-        }
+        if (dealerField) { dealerField.value = dealerId; document.getElementById('ambassador-dealer-hint').style.display = ''; }
       }
     }
   } else {
-    // Show landing selection
     document.getElementById('main-area').classList.add('landing');
   }
 });
-
-// ── TAB NAV (disabled – URL-only) ──
 
 function switchMode(type, mode) {
   document.getElementById(type+'-register').style.display = mode==='register' ? '' : 'none';
@@ -853,71 +829,86 @@ function switchMode(type, mode) {
     b.classList.toggle('active', (i===0 && mode==='register') || (i===1 && mode==='login'));
   });
 }
+function msg(type, text, cls) { var el=document.getElementById(type+'-msg'); el.textContent=text; el.className='msg'+(cls?' '+cls:''); }
+function togglePw(id, btn) { var inp=document.getElementById(id); inp.type=inp.type==='password'?'text':'password'; btn.textContent=inp.type==='password'?'👁':'🙈'; }
 
-function msg(type, text, cls) {
-  var el = document.getElementById(type+'-msg');
-  el.textContent = text; el.className = 'msg'+(cls?' '+cls:'');
-}
-
-function togglePw(id, btn) {
-  var inp = document.getElementById(id);
-  inp.type = inp.type==='password' ? 'text' : 'password';
-  btn.textContent = inp.type==='password' ? '👁' : '🙈';
-}
-
-// ── SESSION RESTORE ──
+// ── CHANGE 2: SESSION RESTORE via sessionStorage ──
 document.addEventListener('DOMContentLoaded', function() {
   try {
-    var saved = localStorage.getItem('portal_session');
+    var saved = sessionStorage.getItem('portal_session');
     if (saved) {
       var user = JSON.parse(saved);
       if (user.isAdmin) { showBackend({ isAdmin:true, name:'Admin', type:'admin', email:ADMIN_EMAIL }); return; }
       var rec = records.find(function(r){ return r.recId===user.recId; });
       if (rec) { setTimeout(function(){ showBackend(rec); }, 50); }
-      else { localStorage.removeItem('portal_session'); }
+      else { sessionStorage.removeItem('portal_session'); }
     }
-  } catch(e) { localStorage.removeItem('portal_session'); }
+  } catch(e) { sessionStorage.removeItem('portal_session'); }
 });
 
-// ── REGISTER ──
-function doRegister(type) {
+// ── CHANGE 3: REGISTER → /api/register ──
+async function doRegister(type) {
   var name  = document.getElementById(type+'-name').value.trim();
   var email = document.getElementById(type+'-email').value.trim().toLowerCase();
   var pw    = document.getElementById(type+'-pw').value;
   var pw2   = document.getElementById(type+'-pw2').value;
-  var baId      = type==='consumer'   ? document.getElementById('consumer-ba-id').value.trim()     : '';
+  var baId      = type==='consumer'   ? document.getElementById('consumer-ba-id').value.trim()      : '';
   var dealerRef = type==='ambassador' ? document.getElementById('ambassador-dealer-id').value.trim() : '';
 
-  if (!name || !email)        { msg(type,'Name und E-Mail erforderlich.','error'); return; }
-  if (email.indexOf('@')<0)   { msg(type,'Ungültige E-Mail-Adresse.','error'); return; }
-  if (!pw || pw.length<6)     { msg(type,'Passwort mindestens 6 Zeichen.','error'); return; }
-  if (pw !== pw2)             { msg(type,'Passwörter stimmen nicht überein.','error'); return; }
-  if (records.some(function(r){ return r.email===email && r.type===type; })) {
-    msg(type,'E-Mail bereits registriert.','error'); return;
-  }
+  if (!name || !email)      { msg(type,'Name und E-Mail erforderlich.','error'); return; }
+  if (email.indexOf('@')<0) { msg(type,'Ungültige E-Mail-Adresse.','error'); return; }
+  if (!pw || pw.length<6)   { msg(type,'Passwort mindestens 6 Zeichen.','error'); return; }
+  if (pw !== pw2)           { msg(type,'Passwörter stimmen nicht überein.','error'); return; }
 
-  var rec = {
-    recId: genId(), type: type, name: name, email: email,
-    pwHash: hashPw(pw),
-    baId:     baId     || '–',
-    dealerRef: dealerRef || undefined,
-    date: new Date().toLocaleString('de-DE', { dateStyle:'short', timeStyle:'short' }),
-    dealerId: type==='dealer' ? genDealerId() : undefined
-  };
-  records.push(rec); persist();
-  webhook(HOOKS[type], Object.assign({}, rec, { event:'register', dealerRef: rec.dealerRef || '' }));
-  msg(type,'Erfolgreich registriert — wird weitergeleitet…','success');
-  setTimeout(function(){ showBackend(rec); }, 900);
+  var btn = document.getElementById(type+'-reg-btn');
+  if (btn) btn.disabled = true;
+  msg(type,'Wird registriert…','');
+
+  var pwHash   = await hashPw(pw);
+  var recId    = genId();
+  var dealerId = type==='dealer' ? genDealerId() : undefined;
+  var date     = new Date().toLocaleString('de-DE', { dateStyle:'short', timeStyle:'short' });
+
+  var payload = { recId, type, name, email, pwHash, baId:baId||'–', dealerRef:dealerRef||undefined, date, dealerId };
+
+  try {
+    var res  = await fetch('/api/register', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    var data = await res.json().catch(function(){ return {}; });
+
+    if (res.status === 409 || (data && !data.ok)) {
+      msg(type, data.message || 'E-Mail bereits registriert.', 'error');
+      if (btn) btn.disabled = false; return;
+    }
+
+    // Lokal speichern + Make Webhooks feuern
+    var rec = Object.assign({}, payload);
+    records.push(rec); persist();
+    webhook(HOOKS[type], Object.assign({}, rec, { event:'register', dealerRef: rec.dealerRef || '' }));
+
+    msg(type,'Erfolgreich registriert — wird weitergeleitet…','success');
+    setTimeout(function(){ showBackend(rec); }, 900);
+
+  } catch(e) {
+    // Fallback: lokale Duplikatprüfung
+    if (records.some(function(r){ return r.email===email && r.type===type; })) {
+      msg(type,'E-Mail bereits registriert.','error'); if (btn) btn.disabled = false; return;
+    }
+    var rec = Object.assign({}, payload);
+    records.push(rec); persist();
+    webhook(HOOKS[type], Object.assign({}, rec, { event:'register', dealerRef: rec.dealerRef || '' }));
+    msg(type,'Erfolgreich registriert — wird weitergeleitet…','success');
+    setTimeout(function(){ showBackend(rec); }, 900);
+  }
 }
 
-// ── LOGIN ──
-function doLogin(type) {
+// ── CHANGE 4: LOGIN → /api/login ──
+async function doLogin(type) {
   var email = document.getElementById(type+'-login-email').value.trim().toLowerCase();
   var pw    = document.getElementById(type+'-login-pw').value;
 
   // Admin check
   if (email === ADMIN_EMAIL && pw === ADMIN_PW) {
-    localStorage.setItem('portal_session', JSON.stringify({ isAdmin:true }));
+    sessionStorage.setItem('portal_session', JSON.stringify({ isAdmin:true }));
     showBackend({ isAdmin:true, name:'Admin', type:'admin', email:ADMIN_EMAIL });
     return;
   }
@@ -925,19 +916,53 @@ function doLogin(type) {
   if (!email) { msg(type,'Bitte E-Mail eingeben.','error'); return; }
   if (!pw)    { msg(type,'Bitte Passwort eingeben.','error'); return; }
 
-  var rec = records.find(function(r){ return r.email===email && r.type===type; });
-  if (!rec) { msg(type,'Kein Account gefunden.','error'); return; }
+  var btn = document.getElementById(type+'-login-btn');
+  if (btn) btn.disabled = true;
+  msg(type,'Wird eingeloggt…','');
 
-  // Accounts without password hash (legacy) — accept any pw and set hash
-  if (!rec.pwHash) {
-    rec.pwHash = hashPw(pw); persist();
-  } else if (rec.pwHash !== hashPw(pw)) {
-    msg(type,'Falsches Passwort.','error'); return;
+  var pwHash = await hashPw(pw);
+
+  // Erst lokal prüfen (schnell)
+  var rec = records.find(function(r){ return r.email===email && r.type===type; });
+  if (rec && rec.pwHash === pwHash) {
+    webhook(HOOKS[type], Object.assign({}, rec, { event:'login' }));
+    msg(type,'Login erfolgreich — wird weitergeleitet…','success');
+    setTimeout(function(){ showBackend(rec); }, 700);
+    return;
   }
 
-  webhook(HOOKS[type], Object.assign({}, rec, { event:'login' }));
-  msg(type,'Login erfolgreich — wird weitergeleitet…','success');
-  setTimeout(function(){ showBackend(rec); }, 700);
+  // Dann Neon DB via Netlify Function
+  try {
+    var res  = await fetch('/api/login', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ type, email, pwHash }) });
+    var data = await res.json().catch(function(){ return {}; });
+
+    if (!data.ok) {
+      msg(type, data.message || 'E-Mail oder Passwort falsch.', 'error');
+      if (btn) btn.disabled = false; return;
+    }
+
+    var user = { recId:data.recId, type:type, name:data.name, email:data.email,
+                 pwHash:pwHash, baId:data.baId||'–', dealerId:data.dealerId||undefined,
+                 dealerRef:data.dealerRef||undefined, date:data.date||'' };
+    // Lokal cachen
+    if (!records.find(function(r){ return r.recId===user.recId; })) { records.push(user); persist(); }
+    webhook(HOOKS[type], Object.assign({}, user, { event:'login' }));
+    msg(type,'Login erfolgreich — wird weitergeleitet…','success');
+    setTimeout(function(){ showBackend(user); }, 700);
+
+  } catch(e) {
+    // Lokaler Fallback wenn offline
+    if (rec) {
+      if (!rec.pwHash) { rec.pwHash = pwHash; persist(); }
+      else { msg(type,'Falsches Passwort.','error'); if (btn) btn.disabled = false; return; }
+      webhook(HOOKS[type], Object.assign({}, rec, { event:'login' }));
+      msg(type,'Login erfolgreich — wird weitergeleitet…','success');
+      setTimeout(function(){ showBackend(rec); }, 700);
+    } else {
+      msg(type,'Netzwerkfehler. Bitte erneut versuchen.','error');
+      if (btn) btn.disabled = false;
+    }
+  }
 }
 
 // ── PASSWORD RESET ──
@@ -948,36 +973,35 @@ function openPwReset(type) {
   document.getElementById('pw-reset-msg').className = 'msg';
   document.getElementById('pw-reset-overlay').classList.add('open');
 }
-function closePwReset() {
-  document.getElementById('pw-reset-overlay').classList.remove('open');
-}
-function doPasswordReset() {
+function closePwReset() { document.getElementById('pw-reset-overlay').classList.remove('open'); }
+
+// ── CHANGE 5: PASSWORD RESET → /api/reset-password ──
+async function doPasswordReset() {
   var email = document.getElementById('pw-reset-email').value.trim().toLowerCase();
   var type  = document.getElementById('pw-reset-type').value;
   var m     = document.getElementById('pw-reset-msg');
   if (!email || email.indexOf('@')<0) { m.textContent='Bitte gültige E-Mail eingeben.'; m.className='msg error'; return; }
 
-  var rec = records.find(function(r){ return r.email===email && r.type===type; });
-  if (!rec) { m.textContent='Kein Account mit dieser E-Mail gefunden.'; m.className='msg error'; return; }
+  m.textContent = 'Wird gesendet…'; m.className = 'msg';
+  document.querySelector('#pw-reset-box .btn-save').disabled = true;
 
   var tempPw = genTempPw();
-  rec.pwHash = hashPw(tempPw); persist();
+  var pwHash = await hashPw(tempPw);
 
-  // Send via Make webhook
-  fetch(HOOKS.invite, {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({
-      event:      'password_reset',
-      email:      email,
-      name:       rec.name,
-      tempPw:     tempPw,
-      type:       type,
-      portalUrl:  PORTAL_URL
-    })
-  }).catch(function(){});
+  // Lokal updaten falls vorhanden
+  var rec = records.find(function(r){ return r.email===email && r.type===type; });
+  if (rec) { rec.pwHash = pwHash; persist(); }
+
+  try {
+    await fetch('/api/reset-password', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email, type, pwHash, tempPw, portalUrl: PORTAL_URL || NETLIFY_URL })
+    });
+  } catch(e) { /* weiter — E-Mail könnte trotzdem ankommen */ }
 
   m.textContent = '✓ Temporäres Passwort wurde gesendet an '+email+'. Bitte E-Mails prüfen.';
   m.className = 'msg success';
+  document.querySelector('#pw-reset-box .btn-save').disabled = false;
   setTimeout(closePwReset, 3000);
 }
 
@@ -985,10 +1009,9 @@ function doPasswordReset() {
 function showBackend(user) {
   currentUser = user;
   if (user.isAdmin) {
-    localStorage.setItem('portal_session', JSON.stringify({ isAdmin:true }));
+    sessionStorage.setItem('portal_session', JSON.stringify({ isAdmin:true }));
   } else {
-    localStorage.setItem('portal_session', JSON.stringify({ recId:user.recId }));
-    // Migration: Händler ohne dealerId
+    sessionStorage.setItem('portal_session', JSON.stringify({ recId:user.recId }));
     if (user.type==='dealer' && !user.dealerId) {
       user.dealerId = genDealerId();
       var stored = records.find(function(r){ return r.recId===user.recId; });
@@ -996,12 +1019,10 @@ function showBackend(user) {
     }
   }
 
-  // Hide front
   document.getElementById('topbar').style.display     = 'none';
   document.getElementById('site-header').style.display = 'none';
   document.getElementById('main-area').style.display   = 'none';
 
-  // Meta label
   var metaText = user.name + ' · ' + LABELS[user.type];
   if (user.type==='dealer' && user.dealerId) metaText += ' · ' + user.dealerId;
   document.getElementById('be-meta').textContent = metaText;
@@ -1010,22 +1031,14 @@ function showBackend(user) {
   document.getElementById('backend').classList.add('active');
 }
 
-// ── BUILD BACKEND BASED ON ROLE ──
 function buildBackend(user) {
   var tabsEl    = document.getElementById('be-tabs');
   var contentEl = document.getElementById('be-content');
-  tabsEl.innerHTML = '';
-  contentEl.innerHTML = '';
-
-  if (user.isAdmin) {
-    buildAdminBackend(tabsEl, contentEl);
-  } else if (user.type === 'dealer') {
-    buildDealerBackend(tabsEl, contentEl, user);
-  } else if (user.type === 'ambassador') {
-    buildAmbassadorBackend(tabsEl, contentEl, user);
-  } else if (user.type === 'consumer') {
-    buildConsumerBackend(tabsEl, contentEl, user);
-  }
+  tabsEl.innerHTML = ''; contentEl.innerHTML = '';
+  if (user.isAdmin)                  buildAdminBackend(tabsEl, contentEl);
+  else if (user.type === 'dealer')   buildDealerBackend(tabsEl, contentEl, user);
+  else if (user.type === 'ambassador') buildAmbassadorBackend(tabsEl, contentEl, user);
+  else if (user.type === 'consumer') buildConsumerBackend(tabsEl, contentEl, user);
 }
 
 function addTab(tabsEl, id, label, active) {
@@ -1048,68 +1061,48 @@ function buildDealerBackend(tabsEl, contentEl, user) {
   addTab(tabsEl, 'profile', 'Mein Profil', true);
   addTab(tabsEl, 'invite',  'BA Einladen', false);
 
-  // Profile panel
   var profilePanel = addPanel(contentEl, 'profile', true);
   profilePanel.innerHTML =
     '<div class="profile-card">' +
-      '<div class="profile-header dealer-hd">' +
-        '<div class="ph-eye">Händler-Portal</div>' +
-        '<div class="ph-title">' + esc(user.name) + '</div>' +
-      '</div>' +
+      '<div class="profile-header dealer-hd"><div class="ph-eye">Händler-Portal</div><div class="ph-title">' + esc(user.name) + '</div></div>' +
       '<div class="profile-body">' +
         '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id">' + (user.dealerId||'—') + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
-      '</div>' +
-    '</div>';
+      '</div></div>';
 
-  // Invite panel
   var invitePanel = addPanel(contentEl, 'invite', false);
   invitePanel.innerHTML =
-    '<div style="max-width:480px;">' +
-      '<div class="profile-card" style="max-width:100%">' +
-        '<div class="profile-header dealer-hd">' +
-          '<div class="ph-eye">Händler-Funktion</div>' +
-          '<div class="ph-title">BA Einladen</div>' +
-        '</div>' +
-        '<div class="profile-body">' +
-          '<div class="invite-id-box"><div class="invite-id-label">Deine Händler-ID</div><div class="invite-id-value">' + (user.dealerId||'—') + '</div></div>' +
-          '<div class="field"><label>E-Mail des Brand Ambassadors</label><input type="email" id="invite-email" placeholder="name@email.de"></div>' +
-          '<div class="field"><label>Name (optional)</label><input type="text" id="invite-name" placeholder="Max Mustermann"></div>' +
-          '<button class="btn-submit" onclick="doInvite()">Einladung senden</button>' +
-          '<div class="msg" id="invite-msg" style="text-align:left;"></div>' +
-        '</div>' +
-      '</div>' +
-      '<div style="margin-top:24px;">' +
-        '<div class="section-hd">Gesendete Einladungen</div>' +
-        '<div class="tbl-wrap"><table><thead><tr><th>#</th><th>E-Mail</th><th>Name</th><th>Gesendet</th></tr></thead><tbody id="invites-body"></tbody></table></div>' +
-      '</div>' +
-    '</div>';
+    '<div style="max-width:480px;"><div class="profile-card" style="max-width:100%">' +
+      '<div class="profile-header dealer-hd"><div class="ph-eye">Händler-Funktion</div><div class="ph-title">BA Einladen</div></div>' +
+      '<div class="profile-body">' +
+        '<div class="invite-id-box"><div class="invite-id-label">Deine Händler-ID</div><div class="invite-id-value">' + (user.dealerId||'—') + '</div></div>' +
+        '<div class="field"><label>E-Mail des Brand Ambassadors</label><input type="email" id="invite-email" placeholder="name@email.de"></div>' +
+        '<div class="field"><label>Name (optional)</label><input type="text" id="invite-name" placeholder="Max Mustermann"></div>' +
+        '<button class="btn-submit" onclick="doInvite()">Einladung senden</button>' +
+        '<div class="msg" id="invite-msg" style="text-align:left;"></div>' +
+      '</div></div>' +
+      '<div style="margin-top:24px;"><div class="section-hd">Gesendete Einladungen</div>' +
+      '<div class="tbl-wrap"><table><thead><tr><th>#</th><th>E-Mail</th><th>Name</th><th>Gesendet</th></tr></thead><tbody id="invites-body"></tbody></table></div></div></div>';
   renderInvites();
 }
 
 // ── AMBASSADOR BACKEND ──
 function buildAmbassadorBackend(tabsEl, contentEl, user) {
   addTab(tabsEl, 'profile', 'Mein Profil', true);
-
   var panel = addPanel(contentEl, 'profile', true);
   panel.innerHTML =
-    '<div class="profile-card">' +
-      '<div class="profile-header amb-hd">' +
-        '<div class="ph-eye">Brand Ambassador</div>' +
-        '<div class="ph-title">' + esc(user.name) + '</div>' +
-      '</div>' +
-      '<div class="profile-body">' +
-        '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
-        '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
-        '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value pr-id">' + (user.baId||'—') + '</span></div>' +
-        (user.dealerRef ? '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id">' + user.dealerRef + '</span></div>' : '') +
-        '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
-        '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
-      '</div>' +
-    '</div>';
+    '<div class="profile-card"><div class="profile-header amb-hd"><div class="ph-eye">Brand Ambassador</div><div class="ph-title">' + esc(user.name) + '</div></div>' +
+    '<div class="profile-body">' +
+      '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
+      '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
+      '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value pr-id">' + (user.baId||'—') + '</span></div>' +
+      (user.dealerRef ? '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id">' + user.dealerRef + '</span></div>' : '') +
+      '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
+      '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
+    '</div></div>';
 }
 
 // ── CONSUMER BACKEND ──
@@ -1117,24 +1110,17 @@ function buildConsumerBackend(tabsEl, contentEl, user) {
   addTab(tabsEl, 'profile',  'Mein Profil',  true);
   addTab(tabsEl, 'receipts', 'Rechnung hochladen', false);
 
-  // Profile
   var profilePanel = addPanel(contentEl, 'profile', true);
   profilePanel.innerHTML =
-    '<div class="profile-card">' +
-      '<div class="profile-header con-hd">' +
-        '<div class="ph-eye">Follower</div>' +
-        '<div class="ph-title">' + esc(user.name) + '</div>' +
-      '</div>' +
-      '<div class="profile-body">' +
-        '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
-        '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
-        '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value">' + (user.baId||'—') + '</span></div>' +
-        '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
-        '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
-      '</div>' +
-    '</div>';
+    '<div class="profile-card"><div class="profile-header con-hd"><div class="ph-eye">Follower</div><div class="ph-title">' + esc(user.name) + '</div></div>' +
+    '<div class="profile-body">' +
+      '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
+      '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
+      '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value">' + (user.baId||'—') + '</span></div>' +
+      '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
+      '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
+    '</div></div>';
 
-  // Receipts
   var recPanel = addPanel(contentEl, 'receipts', false);
   recPanel.innerHTML = buildReceiptsHTML(user);
   document.getElementById('upload-user-label').textContent = user.name + ' (' + user.email + ')';
@@ -1221,7 +1207,6 @@ function renderAdminTables() {
       }).join('');
 }
 
-// ── SWITCH BE TAB ──
 function switchBeTab(name, btn) {
   document.querySelectorAll('.be-tab').forEach(function(b){ b.classList.remove('active'); });
   document.querySelectorAll('.be-panel').forEach(function(p){ p.classList.remove('active'); });
@@ -1230,7 +1215,6 @@ function switchBeTab(name, btn) {
   if (panel) panel.classList.add('active');
 }
 
-// ── RECEIPTS HTML ──
 function buildReceiptsHTML(user) {
   return '<div class="upload-grid">' +
     '<div class="upload-card">' +
@@ -1259,25 +1243,17 @@ function buildReceiptsHTML(user) {
   '</div>';
 }
 
-// ── RENDER RECEIPTS (filtered by user unless admin/null) ──
 function renderReceipts(filterRecId) {
   var tbody = document.getElementById('receipts-body');
   if (!tbody) return;
-  var list = filterRecId
-    ? receipts.filter(function(r){ return r.recId === filterRecId; })
-    : receipts;
-  if (!list.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Noch keine Belege hochgeladen.</td></tr>'; return;
-  }
+  var list = filterRecId ? receipts.filter(function(r){ return r.recId === filterRecId; }) : receipts;
+  if (!list.length) { tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Noch keine Belege hochgeladen.</td></tr>'; return; }
   tbody.innerHTML = list.map(function(r,i){
-    var img = r.imageUrl
-      ? '<a href="'+r.imageUrl+'" target="_blank" style="color:var(--c-con);font-weight:600;font-size:11px">Anzeigen</a>'
-      : '—';
+    var img = r.imageUrl ? '<a href="'+r.imageUrl+'" target="_blank" style="color:var(--c-con);font-weight:600;font-size:11px">Anzeigen</a>' : '—';
     return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td>' +
       '<td style="font-family:monospace;font-size:11px">'+r.recId+'</td>' +
       '<td style="color:var(--black);font-weight:600">'+esc(r.name)+'</td>' +
-      '<td>'+esc(r.email)+'</td>' +
-      '<td>'+esc(r.filename||'—')+'</td>' +
+      '<td>'+esc(r.email)+'</td><td>'+esc(r.filename||'—')+'</td>' +
       '<td>'+img+'</td><td>'+r.date+'</td>' +
       '<td><button class="btn-act del" onclick="deleteReceipt(\''+r.recId+'\','+i+')">Löschen</button></td></tr>';
   }).join('');
@@ -1290,7 +1266,6 @@ function deleteReceipt(recId, idx) {
   renderReceipts(currentUser && !currentUser.isAdmin ? currentUser.recId : null);
 }
 
-// ── INVITE ──
 function doInvite() {
   var email = document.getElementById('invite-email').value.trim().toLowerCase();
   var name  = document.getElementById('invite-name').value.trim();
@@ -1329,18 +1304,17 @@ function renderInvites() {
   }).join('');
 }
 
-// ── LOGOUT ──
 function doLogout() {
-  localStorage.removeItem('portal_session');
+  sessionStorage.removeItem('portal_session');
   currentUser = null; selectedFile = null;
   document.getElementById('backend').classList.remove('active');
   document.getElementById('be-tabs').innerHTML = '';
   document.getElementById('be-content').innerHTML = '';
   document.getElementById('topbar').style.display     = '';
+  document.getElementById('site-header').style.display = 'none';
   document.getElementById('main-area').style.display   = '';
 }
 
-// ── EDIT MODAL (admin only) ──
 function openEdit(recId) {
   var rec = records.find(function(r){ return r.recId===recId; });
   if (!rec) return;
@@ -1371,10 +1345,8 @@ function deleteRec(recId) {
   persist(); renderAdminTables();
 }
 
-// ── FILE UPLOAD ──
 function initDropZone() {
-  var dz = document.getElementById('drop-zone');
-  if (!dz) return;
+  var dz = document.getElementById('drop-zone'); if (!dz) return;
   dz.addEventListener('dragover', function(e){ e.preventDefault(); dz.classList.add('over'); });
   dz.addEventListener('dragleave', function(){ dz.classList.remove('over'); });
   dz.addEventListener('drop', function(e){ e.preventDefault(); dz.classList.remove('over'); var f=e.dataTransfer.files[0]; if(f) setFile(f); });
@@ -1382,9 +1354,7 @@ function initDropZone() {
 function onFileSelect(e) { var f=e.target.files[0]; if(f) setFile(f); }
 function setFile(f) {
   selectedFile = f;
-  var prev = document.getElementById('upload-preview');
-  var thumb = document.getElementById('preview-thumb');
-  var nameEl = document.getElementById('preview-name');
+  var prev=document.getElementById('upload-preview'), thumb=document.getElementById('preview-thumb'), nameEl=document.getElementById('preview-name');
   nameEl.textContent = f.name;
   if (f.type.startsWith('image/')) { var r=new FileReader(); r.onload=function(e){ thumb.src=e.target.result; }; r.readAsDataURL(f); prev.classList.add('show'); }
   else { thumb.src=''; prev.classList.add('show'); }
@@ -1423,7 +1393,6 @@ function doUpload() {
     .catch(function(err){ msgEl.textContent='Fehler: '+(err.message||'Netzwerkfehler'); msgEl.className='upload-msg error'; btn.disabled=false; });
 }
 
-// ── UTILS ──
 function esc(str) {
   if (!str) return '';
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
