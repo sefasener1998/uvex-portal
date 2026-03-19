@@ -18,7 +18,7 @@ exports.handler = async (event) => {
 
   try {
     const body = JSON.parse(event.body);
-    const { email, pwHash, name, type, recId, dealerId, dealerRef, baId, date } = body;
+    const { email, pwHash, name, type, recId, dealerId, dealerRef, baId, date, newsletter, consentAt, consentVersion } = body;
 
     if (!email || !pwHash || !name || !type || !recId) {
       return { statusCode: 400, headers, body: JSON.stringify({ ok: false, message: 'Fehlende Pflichtfelder.' }) };
@@ -37,9 +37,9 @@ exports.handler = async (event) => {
 
     // Insert new user
     const result = await sql`
-      INSERT INTO users (rec_id, email, pw_hash, name, type, dealer_id, dealer_ref, ba_id, date)
-      VALUES (${recId}, ${email.toLowerCase()}, ${pwHash}, ${name}, ${type}, ${dealerId || null}, ${dealerRef || null}, ${baId || null}, ${date || null})
-      RETURNING id, rec_id, email, name, type, dealer_id, dealer_ref, ba_id, date, created_at
+      INSERT INTO users (rec_id, email, pw_hash, name, type, dealer_id, dealer_ref, ba_id, date, newsletter, consent_at, consent_version)
+      VALUES (${recId}, ${email.toLowerCase()}, ${pwHash}, ${name}, ${type}, ${dealerId || null}, ${dealerRef || null}, ${baId || null}, ${date || null}, ${newsletter || false}, ${consentAt || null}, ${consentVersion || 'v1.0'})
+      RETURNING id, rec_id, email, name, type, dealer_id, dealer_ref, ba_id, date, newsletter, consent_at, consent_version, created_at
     `;
 
     const user = result[0];
