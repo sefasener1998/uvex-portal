@@ -68,7 +68,7 @@ html, body { min-height: 100%; background: var(--white); color: var(--black); fo
   width: 100%;
   box-sizing: border-box;
 }
-.panel { display: none; width: 100%; max-width: 400px; }
+.panel { display: none; width: 100%; max-width: 400px; margin: 0 auto; }
 .panel.active { display: block; animation: fadeUp 0.18s ease; }
 /* Tab nav hidden by default — only shown via URL */
 #site-header { display: none !important; }
@@ -455,7 +455,7 @@ tr:hover td { background: var(--gray-50); }
 .consent-block { margin-top: 14px; margin-bottom: 2px; }
 .consent-row {
   display: flex; align-items: flex-start; gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 8px; cursor: pointer;
 }
 .consent-row input[type=checkbox] {
   position: absolute; opacity: 0; width: 0; height: 0;
@@ -521,7 +521,7 @@ tr:hover td { background: var(--gray-50); }
           </div>
           <div class="pc-arrow" style="color:var(--black);">→</div>
         </div>
-        <div class="pc-body">Registriere deinen Shop und lade Brand Ambassadors ein.</div>
+        <div class="pc-body">Registriere dein Geschäft und lade Brand Ambassadors ein.</div>
       </a>
 
       <a href="?tab=ambassador" class="portal-card" style="margin-top:12px;" onclick="window.location.href='?tab=ambassador';return false;">
@@ -532,7 +532,7 @@ tr:hover td { background: var(--gray-50); }
           </div>
           <div class="pc-arrow" style="color:var(--white);">→</div>
         </div>
-        <div class="pc-body">Empfehle uvex Produkte und verdiene Provisionen.</div>
+        <div class="pc-body">Empfehle uvex Produkte weiter.</div>
       </a>
 
       <a href="?tab=consumer" class="portal-card" style="margin-top:12px;" onclick="window.location.href='?tab=consumer';return false;">
@@ -543,7 +543,7 @@ tr:hover td { background: var(--gray-50); }
           </div>
           <div class="pc-arrow" style="color:var(--white);">→</div>
         </div>
-        <div class="pc-body">Reiche Kassenbons ein und sichere dir deinen Cashback.</div>
+        <div class="pc-body">Reiche Kassenbons ein und sichere dir deinen Rabatt.</div>
       </a>
     </div>
 
@@ -574,18 +574,14 @@ tr:hover td { background: var(--gray-50); }
               <input type="password" id="dealer-pw2" placeholder="Wiederholen">
             </div>
             <div class="consent-block">
-              <div class="consent-row">
+              <label class="consent-row" for="dealer-consent-privacy">
                 <input type="checkbox" id="dealer-consent-privacy"><span class="consent-check"></span>
-                <label class="consent-label" for="dealer-consent-privacy">
-                  Ich habe die <a href="https://www.uvex.de/de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner personenbezogenen Daten zur Nutzung des uvex Portals zu.<span class="consent-required">*</span>
-                </label>
-              </div>
-              <div class="consent-row">
+                <span class="consent-label">Ich habe die <a href="https://www.uvex.de/de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner personenbezogenen Daten zu.<span class="consent-required">*</span></span>
+              </label>
+              <label class="consent-row" for="dealer-consent-newsletter">
                 <input type="checkbox" id="dealer-consent-newsletter"><span class="consent-check"></span>
-                <label class="consent-label" for="dealer-consent-newsletter">
-                  Ich möchte den uvex Newsletter erhalten und stimme zu, dass uvex mich per E-Mail über Produkte, Angebote und Neuigkeiten informiert. Diese Einwilligung kann ich jederzeit widerrufen.
-                </label>
-              </div>
+                <span class="consent-label">Ich möchte den uvex Newsletter erhalten und über Produkte und Angebote informiert werden. Jederzeit widerrufbar.</span>
+              </label>
             </div>
             <button class="btn-submit" id="dealer-reg-btn" onclick="doRegister('dealer')">Registrieren</button>
           </div>
@@ -642,18 +638,14 @@ tr:hover td { background: var(--gray-50); }
               <div class="ba-hint" id="ambassador-dealer-hint" style="display:none">Zugewiesen über deinen Händler-Link.</div>
             </div>
             <div class="consent-block">
-              <div class="consent-row">
+              <label class="consent-row" for="ambassador-consent-privacy">
                 <input type="checkbox" id="ambassador-consent-privacy"><span class="consent-check"></span>
-                <label class="consent-label" for="ambassador-consent-privacy">
-                  Ich habe die <a href="https://www.uvex.de/de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner personenbezogenen Daten zur Nutzung des uvex Portals zu.<span class="consent-required">*</span>
-                </label>
-              </div>
-              <div class="consent-row">
+                <span class="consent-label">Ich habe die <a href="https://www.uvex.de/de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner personenbezogenen Daten zu.<span class="consent-required">*</span></span>
+              </label>
+              <label class="consent-row" for="ambassador-consent-newsletter">
                 <input type="checkbox" id="ambassador-consent-newsletter"><span class="consent-check"></span>
-                <label class="consent-label" for="ambassador-consent-newsletter">
-                  Ich möchte den uvex Newsletter erhalten und stimme zu, dass uvex mich per E-Mail über Produkte, Angebote und Neuigkeiten informiert. Diese Einwilligung kann ich jederzeit widerrufen.
-                </label>
-              </div>
+                <span class="consent-label">Ich möchte den uvex Newsletter erhalten und über Produkte und Angebote informiert werden. Jederzeit widerrufbar.</span>
+              </label>
             </div>
             <button class="btn-submit" id="ambassador-reg-btn" onclick="doRegister('ambassador')">Registrieren</button>
           </div>
@@ -709,18 +701,14 @@ tr:hover td { background: var(--gray-50); }
               <div class="ba-hint" id="ba-hint" style="display:none">Zugewiesen über deinen Ambassador-Link.</div>
             </div>
             <div class="consent-block">
-              <div class="consent-row">
+              <label class="consent-row" for="consumer-consent-privacy">
                 <input type="checkbox" id="consumer-consent-privacy"><span class="consent-check"></span>
-                <label class="consent-label" for="consumer-consent-privacy">
-                  Ich habe die <a href="https://www.uvex.de/de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner personenbezogenen Daten zur Nutzung des uvex Portals zu.<span class="consent-required">*</span>
-                </label>
-              </div>
-              <div class="consent-row">
+                <span class="consent-label">Ich habe die <a href="https://www.uvex.de/de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner personenbezogenen Daten zu.<span class="consent-required">*</span></span>
+              </label>
+              <label class="consent-row" for="consumer-consent-newsletter">
                 <input type="checkbox" id="consumer-consent-newsletter"><span class="consent-check"></span>
-                <label class="consent-label" for="consumer-consent-newsletter">
-                  Ich möchte den uvex Newsletter erhalten und stimme zu, dass uvex mich per E-Mail über Produkte, Angebote und Neuigkeiten informiert. Diese Einwilligung kann ich jederzeit widerrufen.
-                </label>
-              </div>
+                <span class="consent-label">Ich möchte den uvex Newsletter erhalten und über Produkte und Angebote informiert werden. Jederzeit widerrufbar.</span>
+              </label>
             </div>
             <button class="btn-submit" id="consumer-reg-btn" onclick="doRegister('consumer')">Registrieren</button>
           </div>
@@ -1360,7 +1348,7 @@ function doInvite() {
   })
   .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res; })
   .then(function() {
-    invites.push({ email:email, name:name||'—', date:new Date().toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short'}) });
+    invites.push({ email:email, name:name||'—', date:new Date().toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short'}), senderEmail:currentUser.email });
     persistInvites(); renderInvites();
     m.textContent='✓ Einladung gesendet an '+email; m.className='msg success';
     document.getElementById('invite-email').value='';
@@ -1372,8 +1360,12 @@ function doInvite() {
 function renderInvites() {
   var tbody = document.getElementById('invites-body');
   if (!tbody) return;
-  if (!invites.length) { tbody.innerHTML='<tr class="empty-row"><td colspan="4">Noch keine Einladungen gesendet.</td></tr>'; return; }
-  tbody.innerHTML = invites.map(function(inv,i){
+  // Nur Einladungen des aktuellen Händlers anzeigen
+  var myInvites = invites.filter(function(inv){
+    return inv.senderEmail === (currentUser && currentUser.email);
+  });
+  if (!myInvites.length) { tbody.innerHTML='<tr class="empty-row"><td colspan="4">Noch keine Einladungen gesendet.</td></tr>'; return; }
+  tbody.innerHTML = myInvites.map(function(inv,i){
     return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td><td style="font-weight:600">'+esc(inv.email)+'</td><td>'+esc(inv.name)+'</td><td>'+inv.date+'</td></tr>';
   }).join('');
 }
