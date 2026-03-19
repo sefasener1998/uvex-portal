@@ -450,6 +450,42 @@ tr:hover td { background: var(--gray-50); }
 }
 .pc-arrow { font-size: 20px; }
 .pc-body { padding: 13px 24px; background: var(--white); font-size: 13px; color: var(--gray-500); line-height: 1.6; }
+
+/* ── CONSENT CHECKBOXES ── */
+.consent-block { margin-top: 14px; margin-bottom: 2px; }
+.consent-row {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-bottom: 8px;
+}
+.consent-row input[type=checkbox] {
+  position: absolute; opacity: 0; width: 0; height: 0;
+}
+.consent-check {
+  width: 15px; height: 15px; min-width: 15px;
+  border: 2px solid var(--gray-300);
+  background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0; margin-top: 1px;
+  transition: border-color 0.12s, background 0.12s;
+}
+.consent-row input[type=checkbox]:checked + .consent-check {
+  background: #009944; border-color: #009944;
+}
+.consent-row input[type=checkbox]:checked + .consent-check::after {
+  content: '';
+  width: 4px; height: 7px;
+  border: 2px solid white;
+  border-top: none; border-left: none;
+  transform: rotate(42deg) translate(-1px, -1px);
+  display: block;
+}
+.consent-label {
+  font-size: 10px; color: var(--gray-400);
+  line-height: 1.45; cursor: pointer;
+}
+.consent-label a { color: var(--gray-600); text-decoration: underline; }
+.consent-label a:hover { color: var(--black); }
+.consent-required { color: var(--error); margin-left: 1px; }
 </style>
 </head>
 <body>
@@ -457,12 +493,7 @@ tr:hover td { background: var(--gray-50); }
 
   <!-- ── TOPBAR ── -->
   <div id="topbar">
-    <svg width="105" height="29" viewBox="0 0 105 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0h5.5v17c0 2.9 1.7 4.5 4.2 4.5s4.2-1.6 4.2-4.5V0h5.5v17.2C19.4 23.5 15.4 28 9.7 28S0 23.5 0 17.2V0z" fill="white"/>
-      <path d="M23 0h5.9L35 19.6 41.1 0H47L38.1 28h-6.1L23 0z" fill="white"/>
-      <path d="M50 13.8C50 6.2 55.2 0 63 0c7.2 0 11.7 5.5 11.7 13.4v2.1H55.6c.5 4 3.2 6.6 6.9 6.6 2.6 0 4.8-1.1 6.4-3.2l3.4 3.1C69.4 25.2 65.6 28 61 28c-7.4 0-11-5.8-11-14.2zm5.6-2.7h11.7c-.5-3.7-2.7-6.3-5.8-6.3s-5.3 2.6-5.9 6.3z" fill="white"/>
-      <path d="M78 0h6.4l4.8 7.7L94 0h6.4l-8 12.7 8.2 15.3h-6.6l-5.1-8.8-5.1 8.8H78l8.2-15.3L78 0z" fill="white"/>
-    </svg>
+    <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAwAJ8DASIAAhEBAxEB/8QAHAAAAgIDAQEAAAAAAAAAAAAACAkFBgAEBwMC/8QARhAAAQMDAgMEBgUHCgcAAAAAAQIDBAUGEQAHEiExCBNBYQkUIjJRcRY3drTSFVJWgYKRlSMzNDZic3ShsbIkQ3KSk6Kj/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AAy1NxrQuyTHakxrXrbzDqAttxuA6pK0kZCgQnBBHPOoTTZdifqQsP7N077s3oFV1ehVujpbVVqPUael0kNmVGW0FkdccQGeo1HgEnAGTo2/SWf1dsv/ABcr/Y3oKqf/AE+P/ep/10Ex9Cby/RKv/wAOe/DrXNr3MKgKd9Hav66Wu+Ef1JzvO7zjj4cZ4c8s9M6cAj3RoUu0DeX0G7aG39Ydd7uE9SG4U3nhPcvSH0Eq8kkpX+xoA0+hN5/ojX/4c9+HUG+06w8tl5tbTrailaFpIUlQOCCD0I05XkRpZXbLtYWt2ga+lpsNxqqU1NnA696MuH/yhzQcnpVMqVWkmNS6fLnvhJWWozKnFBIwCcJBOOY5+epT6E3n+iNf/hz34dFj6Nq1eGNdF6vNjK1t0yMojmAAHHf35Z/dolt7LvRYm1Vw3SVJS9ChqMbi6KfV7DQ/WtSdApt1txp1bTqFNuIUUrQoYKSOoI8Dqx2lYF73ajvLZtOs1VrJBejRFraB+BXjhH6zonex/wBnSBcFMY3G3EiGdHlnvaZTX8lDqc/z7wPvBR91J5EczkEDRaXfdNobe24mo3DU4NDpbOGmuIcIJxyQ2hIyo4HupBOB00Cy6tsju3S4xkS9vbg7tIySzELxA+JCMnVAfZdjvLYfaW062opWhaSlSSOoIPQ6aht3vbthf9UNJtm6o8moEEoivNOMOOADJ4A4lPHyyfZzgDWlvxsjaO6tEeTNiMwa8lv/AISrMtgOoUB7IXj+cR8Unzxg89As+m2zclTiJl0236tNjqJCXY8NxxBI5HBSCNeky0rqhxXJUu2a1HjtJKnHXYLqUIA8SSnAGiG7K+4VV2W3YqO118q9Vpkub6u7xq9iJL5BDoJ/5axwgnpgoVyAOTwqMOJUafIgTo7ciJJaUy804nKXEKBCkkeIIJGgTi2hbi0ttpUtaiAlKRkknwGp36E3n+iNf/hz34dF3sp2ZHrb7RNUqlYjqetmguplUVboyJTi8lrPxLWDxdPaCT0OimvW5KRZ9q1G5a5JTGp9PYLzyz1IHRKR4qJwAPEkDQKMq1JqtIeQzVqZNp7i08SESmFNKUOmQFAZGtLVv3hv6rblX/UbrqxKFSFcEaOFZTGYTngbT8h1PiSo+OqhoM02XYn6kLD+zdO+7N6U1psWwjiHdjrEUg5At2Ak/MR0A/5jQDz6S3+rtl/4uV/sb0FVP/p8f+9T/ro8PSJ2vV6zt1RK5TYjsqPRpjipobTxFptxAHeEfmgoAJ8OIaDnZyx61uBuBS7fo0N57vJCFSnkpJRGZChxuLPQADPXqcAcyNA2ZHujQD+kf+uGg/Z9v7w/o+QMDQDekf8ArhoP2fb+8P6AuOzpeP072Zty4XHe8lrihiYfHv2vYcJ+ZTxfJQ0P/pJLW7yk2vebLfNh5ymyVAdUrHeN58gUOf8AdrU9G9eXO47Cku/m1SGkn5NvAf8AyOPnomd6LEh7kbfy7UmLDaJDzDgc8UcDqVnHmUhSf16CA7KNq/RHYW2Ke42USZUb1+RkYPG+e8wfMJUlP7OuV9uyuCrVKxtqI8gtrrtUaemcJ5pbLgabz5FS1n5tjRSMtoZZQ02gIQhISlIGAAOgGln747kJrfajfvBKy9AotXYbiAHILMVwc0+SlJWv9vQMrp8SNAgR4MNlDMaO0lpltAwlCEgBKR5AADQ7dpns/wB4bvXrGqrN20+BSoUUMQ4bzS1FCicuLOOWVHA+SU/DRFxJDMqK1KjOJdZeQHG1pOQpJGQR5EaFbtZb3bq7U7is0+jMUr8gzoiH4T0iGpZKh7LiOIKAJBwceAWnQVCl9jC96XU41Sp1/wBKjTIrqXmHm47oU2tJylQPxBA0bEISEw2UylIVIDaQ6pAwkqxzI8s6XoO2Hu+SAE28SegEBX49dNZ3F7YTzKHm9vonAtIUnNPAOCM8wXcj5HQU/wBI3bken7lUG42EBCqvT1NP4HvuMKA4j58LiB8kjXaOxBu+5flmKtKuPqcr9BZSA6s5MqLyShZPipJwlXx9k8yTgWe0pc27t2V+36JuZQWYFUjoWunRY0fhcdS+pKegUonKmgB5g6NPsrbRsbVbetszG21XFUwl+qPDB4VY9lkH81AJHmoqPQjAde0BPbz3afuK7TtzSHXG6TRXczzzHrMrHTzSgHHmok88JOj1CklRSCCR1Hw0JPb22c/KlNO6NvRczYTYRWWm083WByS/y8UDkr+zg8gjQA9rNZrNBmmB9hLdKk1/beLYc6a21XqIFNssuKAVJjcRUhSPjw54SB0CUnx0vzXpGffiyG5MZ5xh5pQU242opUhQ6EEcwdA5QgKBBAIOqRuNe9kbT2vJrNYdhU5BBUzFYSlL0tzHJKED3lH49B1JA56W/E3s3biw/VGdxLj7oDA45qlqA/6lZV/nql1ur1WuVBdQrVTm1KYvkuRLfU84r5qUSToHCwnxIhsyMBPetpXw5zjIzjQGekf+uGg/Z9v7w/oeU3XdCQALkrIA5ACc5+LWhUqjUKm8l+ozpU11KeBK5DqnFBOScAqJ5ZJ/foLr2ebyNh7yW5cTjvdxG5YYmknA9Xd/k3CfjgK4vmkaawFAgHI56TRqZTdd0JSEpuSsgDkAJznL/wBtA0DtD3mLD2cuO4mnQ3LbiFmGR179z+TbI+OFKCvkk6VNqRqNdrdRj+r1Cs1GYzxBXdvyVuJyOhwTjPPUdoDS7HfaNpEW34W3t/VBuA5DSGaXUn1YaW0PdZcUeSCkckqPIpABwQOIp7vta1b7oIplx0mDWqc5hxCXUhQBxyWhQ5pOD7ySDg6UNqy2tf8AfFqtBm3LurdKZBz3Maa4hrPmgHhP7tAyWzdgto7Rq7dXotmQ0TmlhbTsh52SWlDoUh1agkjwIGRqU3a3XsvbGjOTrkqzSJPAVR6eyoKkyD4BCM5x/aOEjxOlw1LevdqoRyxJ3DuPuyMENTVtEj5owdUSXJkTJLkqXIdkPuHicddWVLWfiSeZOgOfsz2vVd1dyZ/aAvqIG21Olq3YSjlDaUZSHBnqEc0g+KytWAQNEpety0m0LUqVzVuQGKfTmFPPK8TjolI8VKOEgeJIGlKRrluOLHRHjV+qsMtp4UNtzHEpSPgADgDXxPr9enxlRp1bqUphRBLb0pa0nHTkTjQENsf2kKrG7QNRr12Sy3QrofSzKaUvLcAD2WFpz0SgHhUeWQVKOSBo/H22JUZbLyG3mXUFK0LAUlaSMEEHqCNJr1MN3Tc7aEtt3HWEISAEpTNcAAHgOeg6Z2r9oXdrNwFmnsrNtVVSn6Y51DXP22CfijIx8UlJ651xvW/Uq3WamylmpVafNbSriSiRJW4kHpkBRPPmdaGg/9k=" alt="uvex" style="height:28px;width:auto;">
   </div>
 
   <!-- ── TAB NAV (hidden – URL-only access) ── -->
@@ -542,6 +573,20 @@ tr:hover td { background: var(--gray-50); }
               <label>Passwort bestätigen</label>
               <input type="password" id="dealer-pw2" placeholder="Wiederholen">
             </div>
+            <div class="consent-block">
+              <div class="consent-row">
+                <input type="checkbox" id="dealer-consent-privacy"><span class="consent-check"></span>
+                <label class="consent-label" for="dealer-consent-privacy">
+                  Ich habe die <a href="https://www.uvex.de/de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner personenbezogenen Daten zur Nutzung des uvex Portals zu.<span class="consent-required">*</span>
+                </label>
+              </div>
+              <div class="consent-row">
+                <input type="checkbox" id="dealer-consent-newsletter"><span class="consent-check"></span>
+                <label class="consent-label" for="dealer-consent-newsletter">
+                  Ich möchte den uvex Newsletter erhalten und stimme zu, dass uvex mich per E-Mail über Produkte, Angebote und Neuigkeiten informiert. Diese Einwilligung kann ich jederzeit widerrufen.
+                </label>
+              </div>
+            </div>
             <button class="btn-submit" id="dealer-reg-btn" onclick="doRegister('dealer')">Registrieren</button>
           </div>
           <div id="dealer-login" style="display:none">
@@ -596,6 +641,20 @@ tr:hover td { background: var(--gray-50); }
               </div>
               <div class="ba-hint" id="ambassador-dealer-hint" style="display:none">Zugewiesen über deinen Händler-Link.</div>
             </div>
+            <div class="consent-block">
+              <div class="consent-row">
+                <input type="checkbox" id="ambassador-consent-privacy"><span class="consent-check"></span>
+                <label class="consent-label" for="ambassador-consent-privacy">
+                  Ich habe die <a href="https://www.uvex.de/de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner personenbezogenen Daten zur Nutzung des uvex Portals zu.<span class="consent-required">*</span>
+                </label>
+              </div>
+              <div class="consent-row">
+                <input type="checkbox" id="ambassador-consent-newsletter"><span class="consent-check"></span>
+                <label class="consent-label" for="ambassador-consent-newsletter">
+                  Ich möchte den uvex Newsletter erhalten und stimme zu, dass uvex mich per E-Mail über Produkte, Angebote und Neuigkeiten informiert. Diese Einwilligung kann ich jederzeit widerrufen.
+                </label>
+              </div>
+            </div>
             <button class="btn-submit" id="ambassador-reg-btn" onclick="doRegister('ambassador')">Registrieren</button>
           </div>
           <div id="ambassador-login" style="display:none">
@@ -649,6 +708,20 @@ tr:hover td { background: var(--gray-50); }
               </div>
               <div class="ba-hint" id="ba-hint" style="display:none">Zugewiesen über deinen Ambassador-Link.</div>
             </div>
+            <div class="consent-block">
+              <div class="consent-row">
+                <input type="checkbox" id="consumer-consent-privacy"><span class="consent-check"></span>
+                <label class="consent-label" for="consumer-consent-privacy">
+                  Ich habe die <a href="https://www.uvex.de/de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner personenbezogenen Daten zur Nutzung des uvex Portals zu.<span class="consent-required">*</span>
+                </label>
+              </div>
+              <div class="consent-row">
+                <input type="checkbox" id="consumer-consent-newsletter"><span class="consent-check"></span>
+                <label class="consent-label" for="consumer-consent-newsletter">
+                  Ich möchte den uvex Newsletter erhalten und stimme zu, dass uvex mich per E-Mail über Produkte, Angebote und Neuigkeiten informiert. Diese Einwilligung kann ich jederzeit widerrufen.
+                </label>
+              </div>
+            </div>
             <button class="btn-submit" id="consumer-reg-btn" onclick="doRegister('consumer')">Registrieren</button>
           </div>
           <div id="consumer-login" style="display:none">
@@ -674,12 +747,7 @@ tr:hover td { background: var(--gray-50); }
   <div id="backend">
 
     <div class="be-topbar">
-      <svg width="70" height="19" viewBox="0 0 105 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0h5.5v17c0 2.9 1.7 4.5 4.2 4.5s4.2-1.6 4.2-4.5V0h5.5v17.2C19.4 23.5 15.4 28 9.7 28S0 23.5 0 17.2V0z" fill="white"/>
-        <path d="M23 0h5.9L35 19.6 41.1 0H47L38.1 28h-6.1L23 0z" fill="white"/>
-        <path d="M50 13.8C50 6.2 55.2 0 63 0c7.2 0 11.7 5.5 11.7 13.4v2.1H55.6c.5 4 3.2 6.6 6.9 6.6 2.6 0 4.8-1.1 6.4-3.2l3.4 3.1C69.4 25.2 65.6 28 61 28c-7.4 0-11-5.8-11-14.2zm5.6-2.7h11.7c-.5-3.7-2.7-6.3-5.8-6.3s-5.3 2.6-5.9 6.3z" fill="white"/>
-        <path d="M78 0h6.4l4.8 7.7L94 0h6.4l-8 12.7 8.2 15.3h-6.6l-5.1-8.8-5.1 8.8H78l8.2-15.3L78 0z" fill="white"/>
-      </svg>
+      <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAwAJ8DASIAAhEBAxEB/8QAHAAAAgIDAQEAAAAAAAAAAAAACAkFBgAEBwMC/8QARhAAAQMDAgMEBgUHCgcAAAAAAQIDBAUGEQAHEiExCBNBYQkUIjJRcRY3drTSFVJWgYKRlSMzNDZic3ShsbIkQ3KSk6Kj/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AAy1NxrQuyTHakxrXrbzDqAttxuA6pK0kZCgQnBBHPOoTTZdifqQsP7N077s3oFV1ehVujpbVVqPUael0kNmVGW0FkdccQGeo1HgEnAGTo2/SWf1dsv/ABcr/Y3oKqf/AE+P/ep/10Ex9Cby/RKv/wAOe/DrXNr3MKgKd9Hav66Wu+Ef1JzvO7zjj4cZ4c8s9M6cAj3RoUu0DeX0G7aG39Ydd7uE9SG4U3nhPcvSH0Eq8kkpX+xoA0+hN5/ojX/4c9+HUG+06w8tl5tbTrailaFpIUlQOCCD0I05XkRpZXbLtYWt2ga+lpsNxqqU1NnA696MuH/yhzQcnpVMqVWkmNS6fLnvhJWWozKnFBIwCcJBOOY5+epT6E3n+iNf/hz34dFj6Nq1eGNdF6vNjK1t0yMojmAAHHf35Z/dolt7LvRYm1Vw3SVJS9ChqMbi6KfV7DQ/WtSdApt1txp1bTqFNuIUUrQoYKSOoI8Dqx2lYF73ajvLZtOs1VrJBejRFraB+BXjhH6zonex/wBnSBcFMY3G3EiGdHlnvaZTX8lDqc/z7wPvBR91J5EczkEDRaXfdNobe24mo3DU4NDpbOGmuIcIJxyQ2hIyo4HupBOB00Cy6tsju3S4xkS9vbg7tIySzELxA+JCMnVAfZdjvLYfaW062opWhaSlSSOoIPQ6aht3vbthf9UNJtm6o8moEEoivNOMOOADJ4A4lPHyyfZzgDWlvxsjaO6tEeTNiMwa8lv/AISrMtgOoUB7IXj+cR8Unzxg89As+m2zclTiJl0236tNjqJCXY8NxxBI5HBSCNeky0rqhxXJUu2a1HjtJKnHXYLqUIA8SSnAGiG7K+4VV2W3YqO118q9Vpkub6u7xq9iJL5BDoJ/5axwgnpgoVyAOTwqMOJUafIgTo7ciJJaUy804nKXEKBCkkeIIJGgTi2hbi0ttpUtaiAlKRkknwGp36E3n+iNf/hz34dF3sp2ZHrb7RNUqlYjqetmguplUVboyJTi8lrPxLWDxdPaCT0OimvW5KRZ9q1G5a5JTGp9PYLzyz1IHRKR4qJwAPEkDQKMq1JqtIeQzVqZNp7i08SESmFNKUOmQFAZGtLVv3hv6rblX/UbrqxKFSFcEaOFZTGYTngbT8h1PiSo+OqhoM02XYn6kLD+zdO+7N6U1psWwjiHdjrEUg5At2Ak/MR0A/5jQDz6S3+rtl/4uV/sb0FVP/p8f+9T/ro8PSJ2vV6zt1RK5TYjsqPRpjipobTxFptxAHeEfmgoAJ8OIaDnZyx61uBuBS7fo0N57vJCFSnkpJRGZChxuLPQADPXqcAcyNA2ZHujQD+kf+uGg/Z9v7w/o+QMDQDekf8ArhoP2fb+8P6AuOzpeP072Zty4XHe8lrihiYfHv2vYcJ+ZTxfJQ0P/pJLW7yk2vebLfNh5ymyVAdUrHeN58gUOf8AdrU9G9eXO47Cku/m1SGkn5NvAf8AyOPnomd6LEh7kbfy7UmLDaJDzDgc8UcDqVnHmUhSf16CA7KNq/RHYW2Ke42USZUb1+RkYPG+e8wfMJUlP7OuV9uyuCrVKxtqI8gtrrtUaemcJ5pbLgabz5FS1n5tjRSMtoZZQ02gIQhISlIGAAOgGln747kJrfajfvBKy9AotXYbiAHILMVwc0+SlJWv9vQMrp8SNAgR4MNlDMaO0lpltAwlCEgBKR5AADQ7dpns/wB4bvXrGqrN20+BSoUUMQ4bzS1FCicuLOOWVHA+SU/DRFxJDMqK1KjOJdZeQHG1pOQpJGQR5EaFbtZb3bq7U7is0+jMUr8gzoiH4T0iGpZKh7LiOIKAJBwceAWnQVCl9jC96XU41Sp1/wBKjTIrqXmHm47oU2tJylQPxBA0bEISEw2UylIVIDaQ6pAwkqxzI8s6XoO2Hu+SAE28SegEBX49dNZ3F7YTzKHm9vonAtIUnNPAOCM8wXcj5HQU/wBI3bken7lUG42EBCqvT1NP4HvuMKA4j58LiB8kjXaOxBu+5flmKtKuPqcr9BZSA6s5MqLyShZPipJwlXx9k8yTgWe0pc27t2V+36JuZQWYFUjoWunRY0fhcdS+pKegUonKmgB5g6NPsrbRsbVbetszG21XFUwl+qPDB4VY9lkH81AJHmoqPQjAde0BPbz3afuK7TtzSHXG6TRXczzzHrMrHTzSgHHmok88JOj1CklRSCCR1Hw0JPb22c/KlNO6NvRczYTYRWWm083WByS/y8UDkr+zg8gjQA9rNZrNBmmB9hLdKk1/beLYc6a21XqIFNssuKAVJjcRUhSPjw54SB0CUnx0vzXpGffiyG5MZ5xh5pQU242opUhQ6EEcwdA5QgKBBAIOqRuNe9kbT2vJrNYdhU5BBUzFYSlL0tzHJKED3lH49B1JA56W/E3s3biw/VGdxLj7oDA45qlqA/6lZV/nql1ur1WuVBdQrVTm1KYvkuRLfU84r5qUSToHCwnxIhsyMBPetpXw5zjIzjQGekf+uGg/Z9v7w/oeU3XdCQALkrIA5ACc5+LWhUqjUKm8l+ozpU11KeBK5DqnFBOScAqJ5ZJ/foLr2ebyNh7yW5cTjvdxG5YYmknA9Xd/k3CfjgK4vmkaawFAgHI56TRqZTdd0JSEpuSsgDkAJznL/wBtA0DtD3mLD2cuO4mnQ3LbiFmGR179z+TbI+OFKCvkk6VNqRqNdrdRj+r1Cs1GYzxBXdvyVuJyOhwTjPPUdoDS7HfaNpEW34W3t/VBuA5DSGaXUn1YaW0PdZcUeSCkckqPIpABwQOIp7vta1b7oIplx0mDWqc5hxCXUhQBxyWhQ5pOD7ySDg6UNqy2tf8AfFqtBm3LurdKZBz3Maa4hrPmgHhP7tAyWzdgto7Rq7dXotmQ0TmlhbTsh52SWlDoUh1agkjwIGRqU3a3XsvbGjOTrkqzSJPAVR6eyoKkyD4BCM5x/aOEjxOlw1LevdqoRyxJ3DuPuyMENTVtEj5owdUSXJkTJLkqXIdkPuHicddWVLWfiSeZOgOfsz2vVd1dyZ/aAvqIG21Olq3YSjlDaUZSHBnqEc0g+KytWAQNEpety0m0LUqVzVuQGKfTmFPPK8TjolI8VKOEgeJIGlKRrluOLHRHjV+qsMtp4UNtzHEpSPgADgDXxPr9enxlRp1bqUphRBLb0pa0nHTkTjQENsf2kKrG7QNRr12Sy3QrofSzKaUvLcAD2WFpz0SgHhUeWQVKOSBo/H22JUZbLyG3mXUFK0LAUlaSMEEHqCNJr1MN3Tc7aEtt3HWEISAEpTNcAAHgOeg6Z2r9oXdrNwFmnsrNtVVSn6Y51DXP22CfijIx8UlJ651xvW/Uq3WamylmpVafNbSriSiRJW4kHpkBRPPmdaGg/9k=" alt="uvex" style="height:20px;width:auto;">
       <div class="be-meta" id="be-meta"></div>
       <button class="btn-logout" onclick="doLogout()">Ausloggen</button>
     </div>
@@ -855,6 +923,12 @@ async function doRegister(type) {
   var baId      = type==='consumer'   ? document.getElementById('consumer-ba-id').value.trim()      : '';
   var dealerRef = type==='ambassador' ? document.getElementById('ambassador-dealer-id').value.trim() : '';
 
+  // Consent validation
+  var privacyBox = document.getElementById(type+'-consent-privacy');
+  if (privacyBox && !privacyBox.checked) { msg(type,'Bitte Datenschutzerklärung akzeptieren.','error'); return; }
+  var newsletterBox = document.getElementById(type+'-consent-newsletter');
+  var newsletter = newsletterBox ? newsletterBox.checked : false;
+
   if (!name || !email)      { msg(type,'Name und E-Mail erforderlich.','error'); return; }
   if (email.indexOf('@')<0) { msg(type,'Ungültige E-Mail-Adresse.','error'); return; }
   if (!pw || pw.length<6)   { msg(type,'Passwort mindestens 6 Zeichen.','error'); return; }
@@ -869,7 +943,7 @@ async function doRegister(type) {
   var dealerId = type==='dealer' ? genDealerId() : undefined;
   var date     = new Date().toLocaleString('de-DE', { dateStyle:'short', timeStyle:'short' });
 
-  var payload = { recId, type, name, email, pwHash, baId:baId||'–', dealerRef:dealerRef||undefined, date, dealerId };
+  var payload = { recId, type, name, email, pwHash, baId:baId||'–', dealerRef:dealerRef||undefined, date, dealerId, newsletter:newsletter, consentAt: new Date().toISOString(), consentVersion: 'v1.0' };
 
   try {
     var res  = await fetch('/api/register', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
