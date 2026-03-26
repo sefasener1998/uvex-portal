@@ -1283,10 +1283,13 @@ function buildReceiptsHTML(user) {
       '<div class="upload-card-header"><div class="uc-eye">Beleg einreichen</div><div class="uc-title">Rechnung hochladen</div></div>' +
       '<div class="upload-card-body">' +
         '<div class="upload-drop" id="drop-zone" onclick="document.getElementById(\'receipt-file\').click()">' +
-          '<input type="file" id="receipt-file" accept="image/*,application/pdf" onchange="onFileSelect(event)" style="display:none">' +
-          '<div class="upload-icon">📎</div>' +
-          '<span class="upload-label">Klicken oder Datei ablegen</span>' +
-          '<span class="upload-sub">JPG, PNG, PDF — max. 10 MB</span>' +
+          (isMobile()
+            ? '<input type="file" id="receipt-file" accept="image/*" capture="environment" onchange="onFileSelect(event)" style="display:none">'
+            : '<input type="file" id="receipt-file" accept="image/*,application/pdf" onchange="onFileSelect(event)" style="display:none">'
+          ) +
+          '<div class="upload-icon" id="upload-icon-el">' + (isMobile() ? '📷' : '📎') + '</div>' +
+          '<span class="upload-label">' + (isMobile() ? 'Foto aufnehmen' : 'Klicken oder Datei ablegen') + '</span>' +
+          '<span class="upload-sub">' + (isMobile() ? 'Kamera öffnet sich direkt' : 'JPG, PNG, PDF — max. 10 MB') + '</span>' +
         '</div>' +
         '<div class="upload-preview" id="upload-preview">' +
           '<img class="preview-thumb" id="preview-thumb" src="" alt="">' +
@@ -1409,6 +1412,11 @@ function deleteRec(recId) {
   if (!confirm('Datensatz wirklich löschen?')) return;
   records = records.filter(function(r){ return r.recId!==recId; });
   persist(); renderAdminTables();
+}
+
+// ── MOBILE DETECTION ──
+function isMobile() {
+  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || navigator.maxTouchPoints > 1;
 }
 
 function initDropZone() {
