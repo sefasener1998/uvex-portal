@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -19,9 +18,9 @@
   --gray-400: #888;
   --gray-500: #555;
   --gray-600: #333;
-  --c-dealer: #c8ff00;
-  --c-amb:    #ff3a00;
-  --c-con:    #0055ff;
+  --c-dealer: #EA8000;
+  --c-amb:    #EA8000;
+  --c-con:    #EA8000;
   --c-admin:  #9000ff;
   --error:    #e00;
   --success:  #009944;
@@ -53,9 +52,9 @@ html, body { min-height: 100%; background: var(--white); color: var(--black); fo
 }
 .tab-btn:first-child { border-left: 1px solid var(--gray-200); }
 .tab-btn:hover { color: var(--black); background: var(--gray-50); }
-.tab-btn.active[data-tab="dealer"]     { color: var(--black);  background: var(--c-dealer); border-color: transparent; }
-.tab-btn.active[data-tab="ambassador"] { color: var(--white);  background: var(--c-amb);    border-color: transparent; }
-.tab-btn.active[data-tab="consumer"]   { color: var(--white);  background: var(--c-con);    border-color: transparent; }
+.tab-btn.active[data-tab="dealer"]     { color: var(--white);  background: var(--c-dealer); border-color: transparent; }
+.tab-btn.active[data-tab="ambassador"] { color: var(--black);  background: var(--c-amb);    border-color: transparent; }
+.tab-btn.active[data-tab="consumer"]   { color: var(--black);  background: var(--c-con);    border-color: transparent; }
 
 #main-area {
   flex: 1; display: flex; align-items: flex-start;
@@ -87,13 +86,13 @@ html, body { min-height: 100%; background: var(--white); color: var(--black); fo
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.22em; text-transform: uppercase;
-  color: rgba(0,0,0,0.45); margin-bottom: 4px;
+  color: rgba(255,255,255,0.6); margin-bottom: 4px;
 }
-#panel-ambassador .card-eye, #panel-consumer .card-eye { color: rgba(255,255,255,0.55); }
+#panel-ambassador .card-eye, #panel-consumer .card-eye { color: rgba(255,255,255,0.6); }
 .card-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 40px; font-weight: 900;
-  line-height: 1; text-transform: uppercase; letter-spacing: -0.01em; color: var(--black);
+  line-height: 1; text-transform: uppercase; letter-spacing: -0.01em; color: var(--white);
 }
 #panel-ambassador .card-title, #panel-consumer .card-title { color: var(--white); }
 .card-body { padding: 22px 24px 24px; }
@@ -157,6 +156,26 @@ input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(-
 }
 .btn-submit:hover { opacity: 0.75; }
 .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── LINK-ARROW BUTTON (uvex style) ── */
+.btn-action {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: none; border: none;
+  border-bottom: 2px solid var(--c-dealer);
+  padding: 6px 0 8px 0; margin-top: 6px; width: 100%; max-width: 480px;
+  cursor: pointer; text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 800;
+  letter-spacing: 0.02em; text-transform: uppercase;
+  color: var(--black); transition: color 0.15s, border-color 0.15s;
+}
+.btn-action:hover { color: var(--c-dealer); border-color: var(--c-dealer); }
+.btn-action .btn-action-arrow {
+  color: var(--c-dealer); font-size: 20px;
+  transition: transform 0.15s;
+  display: inline-block; line-height: 1;
+}
+.btn-action:hover .btn-action-arrow { transform: translateX(5px); }
 
 .btn-link {
   background: none; border: none; cursor: pointer;
@@ -234,10 +253,14 @@ input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(-
   text-transform: uppercase; color: var(--white);
 }
 .profile-header.dealer-hd  { background: var(--c-dealer); }
-.profile-header.dealer-hd .ph-eye { color: rgba(0,0,0,0.5); }
-.profile-header.dealer-hd .ph-title { color: var(--black); }
+.profile-header.dealer-hd .ph-eye { color: rgba(255,255,255,0.55); }
+.profile-header.dealer-hd .ph-title { color: var(--white); }
 .profile-header.amb-hd     { background: var(--c-amb); }
+.profile-header.amb-hd .ph-eye { color: rgba(255,255,255,0.55); }
+.profile-header.amb-hd .ph-title { color: var(--white); }
 .profile-header.con-hd     { background: var(--c-con); }
+.profile-header.con-hd .ph-eye { color: rgba(255,255,255,0.55); }
+.profile-header.con-hd .ph-title { color: var(--white); }
 .profile-header.admin-hd   { background: var(--c-admin); }
 
 .profile-body { padding: 20px; }
@@ -278,9 +301,9 @@ tr:hover td { background: var(--gray-50); }
   font-size: 10px; font-weight: 800;
   letter-spacing: 0.1em; text-transform: uppercase; border: 2px solid;
 }
-.badge-dealer     { background: #c8ff0022; color: #4a6000;     border-color: var(--c-dealer); }
-.badge-ambassador { background: #ff3a0010; color: var(--c-amb); border-color: var(--c-amb); }
-.badge-consumer   { background: #0055ff10; color: var(--c-con); border-color: var(--c-con); }
+.badge-dealer     { background: #EA800022; color: var(--white);     border-color: var(--c-dealer); }
+.badge-ambassador { background: #EA800010; color: var(--c-amb); border-color: var(--c-amb); }
+.badge-consumer   { background: #EA800010; color: var(--c-con); border-color: var(--c-con); }
 .badge-admin      { background: #9000ff10; color: var(--c-admin); border-color: var(--c-admin); }
 
 .empty-row td { text-align: center; padding: 44px; color: var(--gray-400); font-weight: 500; }
@@ -320,7 +343,7 @@ tr:hover td { background: var(--gray-50); }
   transition: border-color 0.12s, background 0.12s;
 }
 .upload-drop:hover { border-color: var(--black); background: var(--gray-100); }
-.upload-drop.over  { border-color: var(--c-con); background: #eef2ff; }
+.upload-drop.over  { border-color: var(--c-con); background: #fff3e0; }
 .upload-icon { font-size: 22px; margin-bottom: 8px; opacity: 0.45; }
 .upload-label { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); display: block; }
 .upload-sub { font-size: 11px; color: var(--gray-400); margin-top: 3px; }
@@ -517,10 +540,10 @@ tr:hover td { background: var(--gray-50); }
       <a href="?tab=dealer" class="portal-card" onclick="window.location.href='?tab=dealer';return false;">
         <div class="pc-header" style="background:var(--c-dealer);">
           <div class="pc-text">
-            <div class="pc-eye" style="color:rgba(0,0,0,0.5);">Ich bin ein</div>
-            <div class="pc-title" style="color:var(--black);">Händler</div>
+            <div class="pc-eye" style="color:rgba(255,255,255,0.65);">Ich bin im</div>
+            <div class="pc-title" style="color:var(--white);">Außendienst</div>
           </div>
-          <div class="pc-arrow" style="color:var(--black);">→</div>
+          <div class="pc-arrow" style="color:var(--white);">→</div>
         </div>
         <div class="pc-body">Registriere dein Geschäft und lade Brand Ambassadors ein.</div>
       </a>
@@ -552,7 +575,7 @@ tr:hover td { background: var(--gray-50); }
     <div class="panel" id="panel-dealer">
       <div class="card">
         <div class="card-header">
-          <div class="card-eye">Händler-Portal</div>
+          <div class="card-eye">Außendienst-Portal</div>
           <div class="card-title">Anmelden</div>
         </div>
         <div class="card-body">
@@ -563,6 +586,7 @@ tr:hover td { background: var(--gray-50); }
           <div id="dealer-register">
             <div class="field"><label>Name</label><input type="text" id="dealer-name" placeholder="Max Mustermann"></div>
             <div class="field"><label>E-Mail</label><input type="email" id="dealer-email" placeholder="name@firma.de"></div>
+            <div class="field"><label>Telefonnummer</label><input type="text" id="dealer-phone" placeholder="+49 123 456789"></div>
             <div class="field">
               <label>Passwort</label>
               <div class="pw-wrap">
@@ -619,6 +643,7 @@ tr:hover td { background: var(--gray-50); }
           <div id="ambassador-register">
             <div class="field"><label>Name</label><input type="text" id="ambassador-name" placeholder="Max Mustermann"></div>
             <div class="field"><label>E-Mail</label><input type="email" id="ambassador-email" placeholder="name@brand.de"></div>
+            <div class="field"><label>Telefonnummer</label><input type="text" id="ambassador-phone" placeholder="+49 123 456789"></div>
             <div class="field">
               <label>Passwort</label>
               <div class="pw-wrap">
@@ -631,12 +656,12 @@ tr:hover td { background: var(--gray-50); }
               <input type="password" id="ambassador-pw2" placeholder="Wiederholen">
             </div>
             <div class="field">
-              <label>Händler-ID</label>
+              <label>Außendienst-ID</label>
               <div class="ba-wrap">
                 <input type="text" id="ambassador-dealer-id" placeholder="Wird automatisch befüllt" readonly>
                 <span class="lock">🔒</span>
               </div>
-              <div class="ba-hint" id="ambassador-dealer-hint" style="display:none">Zugewiesen über deinen Händler-Link.</div>
+              <div class="ba-hint" id="ambassador-dealer-hint" style="display:none">Zugewiesen über deinen Außendienst-Link.</div>
             </div>
             <div class="consent-block">
               <label class="consent-row" for="ambassador-consent-privacy">
@@ -798,7 +823,7 @@ var PORTAL_URL = (function() {
   return loc.origin + loc.pathname.replace(/\/+$/, '');
 })();
 var NETLIFY_URL = 'https://glistening-pika-00f3a9.netlify.app';
-var LABELS = { dealer: 'Händler', ambassador: 'Brand Ambassador', consumer: 'Follower', admin: 'Admin' };
+var LABELS = { dealer: 'Außendienst', ambassador: 'Brand Ambassador', consumer: 'Follower', admin: 'Admin' };
 var HOOKS  = {
   dealer:     'https://hook.eu1.make.com/xgypa8fw4o4qy69i7hon41wfs33nsejc',
   ambassador: 'https://hook.eu1.make.com/y1kkru9y3dafldhs7j42hmejxa2a0ie7',
@@ -911,6 +936,8 @@ async function doRegister(type) {
   var pw2   = document.getElementById(type+'-pw2').value;
   var baId      = type==='consumer'   ? document.getElementById('consumer-ba-id').value.trim()      : '';
   var dealerRef = type==='ambassador' ? document.getElementById('ambassador-dealer-id').value.trim() : '';
+  var phoneEl   = document.getElementById(type+'-phone');
+  var phone     = phoneEl ? phoneEl.value.trim() : '';
 
   // Consent validation
   var privacyBox = document.getElementById(type+'-consent-privacy');
@@ -932,7 +959,7 @@ async function doRegister(type) {
   var dealerId = type==='dealer' ? genDealerId() : undefined;
   var date     = new Date().toLocaleString('de-DE', { dateStyle:'short', timeStyle:'short' });
 
-  var payload = { recId, type, name, email, pwHash, baId:baId||'–', dealerRef:dealerRef||undefined, date, dealerId, newsletter:newsletter, consentAt: new Date().toISOString(), consentVersion: 'v1.0' };
+  var payload = { recId, type, name, email, phone:phone||'', pwHash, baId:baId||'–', dealerRef:dealerRef||undefined, date, dealerId, newsletter:newsletter, consentAt: new Date().toISOString(), consentVersion: 'v1.0' };
 
   try {
     var res  = await fetch('/api/register', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
@@ -1127,19 +1154,23 @@ function buildDealerBackend(tabsEl, contentEl, user) {
   var profilePanel = addPanel(contentEl, 'profile', true);
   profilePanel.innerHTML =
     '<div class="profile-card">' +
-      '<div class="profile-header dealer-hd"><div class="ph-eye">Händler-Portal</div><div class="ph-title">' + esc(user.name) + '</div></div>' +
+      '<div class="profile-header dealer-hd"><div class="ph-eye">Außendienst-Portal</div><div class="ph-title">' + esc(user.name) + '</div></div>' +
       '<div class="profile-body">' +
         '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id">' + (user.dealerId||'—') + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Telefon</span><span class="pr-value">' + (esc(user.phone)||'—') + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
-      '</div></div>';
+      '</div></div>' +
+    '<div style="margin-top:20px;max-width:480px;">' +
+      '<button class="btn-submit" onclick="switchBeTab(\'invite\')">BA Einladen</button>' +
+    '</div>';
 
   var invitePanel = addPanel(contentEl, 'invite', false);
   invitePanel.innerHTML =
     '<div style="max-width:480px;"><div class="profile-card" style="max-width:100%">' +
-      '<div class="profile-header dealer-hd"><div class="ph-eye">Händler-Funktion</div><div class="ph-title">BA Einladen</div></div>' +
+      '<div class="profile-header dealer-hd"><div class="ph-eye">Außendienst-Funktion</div><div class="ph-title">BA Einladen</div></div>' +
       '<div class="profile-body">' +
         '<div class="invite-id-box"><div class="invite-id-label">Deine Händler-ID</div><div class="invite-id-value">' + (user.dealerId||'—') + '</div></div>' +
         '<div class="field"><label>E-Mail des Brand Ambassadors</label><input type="email" id="invite-email" placeholder="name@email.de"></div>' +
@@ -1161,6 +1192,7 @@ function buildAmbassadorBackend(tabsEl, contentEl, user) {
     '<div class="profile-body">' +
       '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
       '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
+      '<div class="profile-row"><span class="pr-label">Telefon</span><span class="pr-value">' + (esc(user.phone)||'—') + '</span></div>' +
       '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value pr-id">' + (user.baId||'—') + '</span></div>' +
       (user.dealerRef ? '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id">' + user.dealerRef + '</span></div>' : '') +
       '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
@@ -1182,7 +1214,10 @@ function buildConsumerBackend(tabsEl, contentEl, user) {
       '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value">' + (user.baId||'—') + '</span></div>' +
       '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
       '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
-    '</div></div>';
+    '</div></div>' +
+    '<div style="margin-top:20px;max-width:480px;">' +
+      '<button class="btn-submit" onclick="switchBeTab(\'receipts\')">Rechnung hochladen</button>' +
+    '</div>';
 
   var recPanel = addPanel(contentEl, 'receipts', false);
   recPanel.innerHTML = buildReceiptsHTML(user);
@@ -1241,7 +1276,7 @@ function renderAdminTables() {
 
   var dBody = document.getElementById('tbl-body-dealers');
   if (dBody) dBody.innerHTML = !dealers.length
-    ? '<tr class="empty-row"><td colspan="6">Keine Händler.</td></tr>'
+    ? '<tr class="empty-row"><td colspan="6">Keine Außendienst-Mitarbeiter.</td></tr>'
     : dealers.map(function(r,i){
         return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td><td style="font-family:\'Barlow Condensed\';font-weight:900;font-size:16px">'+(r.dealerId||'—')+'</td>' +
           '<td style="color:var(--black);font-weight:600">'+esc(r.name)+'</td><td>'+esc(r.email)+'</td><td>'+r.date+'</td>' +
@@ -1273,7 +1308,8 @@ function renderAdminTables() {
 function switchBeTab(name, btn) {
   document.querySelectorAll('.be-tab').forEach(function(b){ b.classList.remove('active'); });
   document.querySelectorAll('.be-panel').forEach(function(p){ p.classList.remove('active'); });
-  btn.classList.add('active');
+  var activeBtn = btn || Array.from(document.querySelectorAll('.be-tab')).find(function(b){ return b.onclick && b.onclick.toString().indexOf("'"+name+"'") > -1; });
+  if (activeBtn) activeBtn.classList.add('active');
   var panel = document.getElementById('be-panel-'+name);
   if (panel) panel.classList.add('active');
 }
