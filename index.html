@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>uvex Portal</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Neue Haas Grotesk via system fonts + web fallback -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -18,15 +19,15 @@
   --gray-400: #888;
   --gray-500: #555;
   --gray-600: #333;
-  --c-dealer: #c8ff00;
-  --c-amb:    #ff3a00;
-  --c-con:    #0055ff;
+  --c-dealer: #EA8000;
+  --c-amb:    #EA8000;
+  --c-con:    #EA8000;
   --c-admin:  #9000ff;
   --error:    #e00;
   --success:  #009944;
 }
 
-html, body { min-height: 100%; background: var(--white); color: var(--black); font-family: 'Barlow', sans-serif; }
+html, body { min-height: 100%; background: var(--white); color: var(--black); font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskText Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif; }
 #app { min-height: 100vh; display: flex; flex-direction: column; }
 
 /* ── TOPBAR ── */
@@ -45,14 +46,14 @@ html, body { min-height: 100%; background: var(--white); color: var(--black); fo
   background: transparent; border: none;
   border-right: 1px solid var(--gray-200);
   color: var(--gray-400);
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 14px; font-weight: 800;
   letter-spacing: 0.14em; text-transform: uppercase;
   cursor: pointer; transition: color 0.12s, background 0.12s; white-space: nowrap;
 }
 .tab-btn:first-child { border-left: 1px solid var(--gray-200); }
 .tab-btn:hover { color: var(--black); background: var(--gray-50); }
-.tab-btn.active[data-tab="dealer"]     { color: var(--black);  background: var(--c-dealer); border-color: transparent; }
+.tab-btn.active[data-tab="dealer"]     { color: var(--white);  background: var(--c-dealer); border-color: transparent; }
 .tab-btn.active[data-tab="ambassador"] { color: var(--white);  background: var(--c-amb);    border-color: transparent; }
 .tab-btn.active[data-tab="consumer"]   { color: var(--white);  background: var(--c-con);    border-color: transparent; }
 
@@ -83,38 +84,38 @@ html, body { min-height: 100%; background: var(--white); color: var(--black); fo
 #panel-consumer   .card-header { background: var(--c-con); }
 
 .card-eye {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.22em; text-transform: uppercase;
-  color: rgba(0,0,0,0.45); margin-bottom: 4px;
+  color: #fff; margin-bottom: 4px;
 }
-#panel-ambassador .card-eye, #panel-consumer .card-eye { color: rgba(255,255,255,0.55); }
+
 .card-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 40px; font-weight: 900;
   line-height: 1; text-transform: uppercase; letter-spacing: -0.01em; color: var(--black);
 }
-#panel-ambassador .card-title, #panel-consumer .card-title { color: var(--white); }
+
 .card-body { padding: 22px 24px 24px; }
 
 /* ── TOGGLE ── */
 .form-toggle { display: flex; border: 2px solid var(--black); margin-bottom: 22px; }
 .toggle-btn {
   flex: 1; padding: 10px 0;
-  background: transparent; border: none; color: var(--gray-400);
-  font-family: 'Barlow Condensed', sans-serif;
+  background: var(--white); border: none; color: var(--black);
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 12px; font-weight: 800;
   letter-spacing: 0.14em; text-transform: uppercase;
   cursor: pointer; transition: all 0.12s;
 }
 .toggle-btn:first-child { border-right: 2px solid var(--black); }
-.toggle-btn.active { background: var(--black); color: var(--white); }
-.toggle-btn:not(.active):hover { background: var(--gray-50); color: var(--black); }
+.toggle-btn.active { background: #EA8000; color: var(--white); border-color: transparent; }
+.toggle-btn:not(.active):hover { background: #EA8000; color: var(--white); }
 
 /* ── FIELDS ── */
 .field { margin-bottom: 14px; }
 label {
-  display: block; font-family: 'Barlow Condensed', sans-serif;
+  display: block; font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--gray-500); margin-bottom: 5px;
@@ -122,12 +123,13 @@ label {
 input[type=text], input[type=email], input[type=password] {
   width: 100%; padding: 11px 13px;
   background: var(--white); border: 2px solid var(--gray-200);
-  color: var(--black); font-family: 'Barlow', sans-serif;
+  color: var(--black); font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskText Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 14px; font-weight: 500;
   outline: none; border-radius: 0; -webkit-appearance: none;
   transition: border-color 0.12s;
 }
-input:focus { border-color: var(--black); }
+input:focus { border-color: #EA8000; }
+input:hover { border-color: #EA8000; }
 input::placeholder { color: var(--gray-300); }
 input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(--gray-50); border-style: dashed; }
 
@@ -147,14 +149,14 @@ input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(-
 
 .btn-submit {
   width: 100%; padding: 13px; margin-top: 6px;
-  background: var(--black); color: var(--white);
-  border: none; border-radius: 0;
-  font-family: 'Barlow Condensed', sans-serif;
+  background: var(--white); color: var(--black);
+  border: 2px solid var(--black); border-radius: 0;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 14px; font-weight: 900;
   letter-spacing: 0.16em; text-transform: uppercase;
-  cursor: pointer; transition: opacity 0.12s;
+  cursor: pointer; transition: all 0.15s;
 }
-.btn-submit:hover { opacity: 0.75; }
+.btn-submit:hover { background: #EA8000; color: var(--white); border-color: #EA8000; }
 .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .btn-link {
@@ -162,9 +164,9 @@ input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(-
   font-size: 12px; color: var(--gray-400);
   text-decoration: underline; padding: 0;
   margin-top: 10px; display: block; text-align: center;
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskText Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
 }
-.btn-link:hover { color: var(--black); }
+.btn-link:hover { color: #EA8000; }
 
 .msg { min-height: 18px; margin-top: 10px; font-size: 12px; font-weight: 600; text-align: center; }
 .msg.error   { color: var(--error); }
@@ -179,37 +181,35 @@ input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(-
   justify-content: space-between; padding: 0 28px;
   height: 64px; flex-shrink: 0;
 }
-.be-meta {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-400);
+.be-meta { display: none; }
+.be-topbar-tabs {
+  display: flex; gap: 0; flex: 1; justify-content: center;
 }
+.be-topbar-tab {
+  height: 64px; padding: 0 28px;
+  background: transparent; border: none; border-bottom: 3px solid transparent;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.15s;
+}
+.be-topbar-tab:hover { color: var(--white); }
+.be-topbar-tab.active { color: var(--white); border-bottom-color: transparent; }
 .btn-logout {
-  background: transparent; border: 2px solid var(--gray-600);
-  color: var(--gray-400); font-family: 'Barlow Condensed', sans-serif;
+  background: transparent; border: 2px solid var(--white);
+  color: var(--white); font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.12em; text-transform: uppercase;
   padding: 7px 16px; cursor: pointer; border-radius: 0; transition: all 0.12s;
 }
-.btn-logout:hover { color: var(--white); border-color: var(--white); }
+.btn-logout:hover { background: #EA8000; border-color: #EA8000; }
 
-.be-tabs {
-  display: flex; border-bottom: 3px solid var(--black);
-  background: var(--white); flex-wrap: wrap;
-}
-.be-tab {
-  height: 48px; padding: 0 24px;
-  background: transparent; border: none;
-  border-right: 1px solid var(--gray-200);
-  color: var(--gray-400); font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px; font-weight: 800;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  cursor: pointer; transition: all 0.12s;
-}
-.be-tab:hover { color: var(--black); background: var(--gray-50); }
-.be-tab.active { background: var(--black); color: var(--white); border-color: transparent; }
+.be-tabs { display: none; }
+.be-tab { display: none; }
 
-.be-content { flex: 1; padding: 28px; background: var(--gray-100); }
+.be-content { flex: 1; padding: 28px; background: var(--white); }
+.be-content-dealer { display: flex; flex-direction: row; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
 .be-panel { display: none; }
 .be-panel.active { display: block; animation: fadeUp 0.18s ease; }
 
@@ -222,19 +222,19 @@ input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(-
   padding: 16px 20px; border-bottom: 2px solid var(--black);
 }
 .profile-header .ph-eye {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--gray-500); margin-bottom: 2px;
 }
 .profile-header .ph-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 28px; font-weight: 900;
   text-transform: uppercase; color: var(--white);
 }
 .profile-header.dealer-hd  { background: var(--c-dealer); }
-.profile-header.dealer-hd .ph-eye { color: rgba(0,0,0,0.5); }
-.profile-header.dealer-hd .ph-title { color: var(--black); }
+.profile-header.dealer-hd .ph-eye { color: #fff; }
+.profile-header.dealer-hd .ph-title { color: var(--white); }
 .profile-header.amb-hd     { background: var(--c-amb); }
 .profile-header.con-hd     { background: var(--c-con); }
 .profile-header.admin-hd   { background: var(--c-admin); }
@@ -242,17 +242,18 @@ input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(-
 .profile-body { padding: 20px; }
 .profile-row {
   display: flex; justify-content: space-between; align-items: baseline;
-  padding: 10px 0; border-bottom: 1px solid var(--gray-100);
+  padding: 12px 0; border-bottom: 1px solid var(--gray-100);
+  gap: 24px;
 }
 .profile-row:last-child { border-bottom: none; }
 .pr-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-400);
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.02em; text-transform: uppercase; color: var(--black);
 }
-.pr-value { font-size: 14px; font-weight: 600; color: var(--black); }
+.pr-value { font-size: 13px; font-weight: 400; color: var(--gray-500); }
 .pr-id {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 20px; font-weight: 900; letter-spacing: 0.06em;
 }
 
@@ -262,7 +263,7 @@ table { width: 100%; border-collapse: collapse; font-size: 13px; }
 thead { background: var(--black); }
 th {
   padding: 11px 14px; text-align: left;
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--gray-400); white-space: nowrap;
@@ -273,7 +274,7 @@ tr:hover td { background: var(--gray-50); }
 
 .badge {
   display: inline-block; padding: 2px 7px;
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 10px; font-weight: 800;
   letter-spacing: 0.1em; text-transform: uppercase; border: 2px solid;
 }
@@ -287,7 +288,7 @@ tr:hover td { background: var(--gray-50); }
 .act-btns { display: flex; gap: 6px; }
 .btn-act {
   background: transparent; border: 2px solid var(--gray-200);
-  color: var(--gray-400); font-family: 'Barlow Condensed', sans-serif;
+  color: var(--gray-400); font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 4px 9px; cursor: pointer; border-radius: 0; transition: all 0.12s;
@@ -302,13 +303,13 @@ tr:hover td { background: var(--gray-50); }
 .upload-card { background: var(--white); border: 2px solid var(--black); }
 .upload-card-header { padding: 16px 20px; border-bottom: 2px solid var(--black); background: var(--black); }
 .upload-card-header .uc-eye {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--gray-500); margin-bottom: 2px;
 }
 .upload-card-header .uc-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 24px; font-weight: 900;
   text-transform: uppercase; letter-spacing: 0.02em; color: var(--white);
 }
@@ -318,10 +319,10 @@ tr:hover td { background: var(--gray-50); }
   padding: 32px 20px; text-align: center; cursor: pointer;
   transition: border-color 0.12s, background 0.12s;
 }
-.upload-drop:hover { border-color: var(--black); background: var(--gray-100); }
-.upload-drop.over  { border-color: var(--c-con); background: #eef2ff; }
+.upload-drop:hover { border-color: #EA8000; background: var(--gray-50); }
+.upload-drop.over  { border-color: #EA8000; background: #fff5eb; }
 .upload-icon { font-size: 22px; margin-bottom: 8px; opacity: 0.45; }
-.upload-label { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); display: block; }
+.upload-label { font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); display: block; }
 .upload-sub { font-size: 11px; color: var(--gray-400); margin-top: 3px; }
 .upload-preview { display: none; margin-top: 12px; padding: 10px 12px; background: var(--gray-50); border: 2px solid var(--gray-200); align-items: center; gap: 10px; }
 .upload-preview.show { display: flex; }
@@ -333,20 +334,20 @@ tr:hover td { background: var(--gray-50); }
 .upload-user-info span { color: var(--black); font-weight: 700; }
 .btn-upload {
   margin-top: 12px; width: 100%; padding: 13px;
-  background: var(--black); color: var(--white);
-  border: none; border-radius: 0;
-  font-family: 'Barlow Condensed', sans-serif;
+  background: var(--white); color: var(--black);
+  border: 2px solid var(--black); border-radius: 0;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 14px; font-weight: 900;
   letter-spacing: 0.16em; text-transform: uppercase;
-  cursor: pointer; transition: opacity 0.12s;
+  cursor: pointer; transition: all 0.15s;
 }
-.btn-upload:hover { opacity: 0.75; }
+.btn-upload:hover { background: #EA8000; color: var(--white); border-color: #EA8000; }
 .btn-upload:disabled { opacity: 0.28; cursor: not-allowed; }
 .upload-msg { min-height: 18px; margin-top: 10px; font-size: 12px; font-weight: 600; text-align: center; }
 .upload-msg.error   { color: var(--error); }
 .upload-msg.success { color: var(--success); }
 .receipts-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 12px; font-weight: 800;
   letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--gray-500); margin-bottom: 10px;
@@ -358,18 +359,18 @@ tr:hover td { background: var(--gray-50); }
   padding: 12px 14px; margin-bottom: 20px;
 }
 .invite-id-label {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-500);
 }
 .invite-id-value {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 22px; font-weight: 900; letter-spacing: 0.06em; color: var(--black);
 }
 
 /* ── SECTION HEADING ── */
 .section-hd {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 12px; font-weight: 800;
   letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--gray-500); margin-bottom: 12px;
@@ -391,7 +392,7 @@ tr:hover td { background: var(--gray-50); }
   padding: 14px 18px; background: var(--black); border-bottom: 3px solid var(--black);
 }
 .modal-hd-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 20px; font-weight: 900;
   text-transform: uppercase; letter-spacing: 0.04em; color: var(--white);
 }
@@ -401,14 +402,14 @@ tr:hover td { background: var(--gray-50); }
 .modal-actions { display: flex; gap: 10px; margin-top: 6px; }
 .btn-save {
   flex: 1; padding: 11px; background: var(--black); color: var(--white);
-  border: none; border-radius: 0; font-family: 'Barlow Condensed', sans-serif;
+  border: none; border-radius: 0; font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 12px; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase;
   cursor: pointer; transition: opacity 0.12s;
 }
 .btn-save:hover { opacity: 0.75; }
 .btn-cancel {
   flex: 1; padding: 11px; background: transparent; border: 2px solid var(--gray-200);
-  color: var(--gray-500); border-radius: 0; font-family: 'Barlow Condensed', sans-serif;
+  color: var(--gray-500); border-radius: 0; font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
   cursor: pointer; transition: all 0.12s;
 }
@@ -440,12 +441,12 @@ tr:hover td { background: var(--gray-50); }
   display: flex; align-items: center; justify-content: space-between;
 }
 .pc-eye {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 2px;
 }
 .pc-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Neue Haas Grotesk', 'NeueHaasGroteskDisplay Pro', 'Helvetica Neue', 'Archivo', Arial, sans-serif;
   font-size: 28px; font-weight: 900; text-transform: uppercase; flex: 1;
 }
 .pc-arrow { font-size: 20px; }
@@ -469,7 +470,7 @@ tr:hover td { background: var(--gray-50); }
   transition: border-color 0.12s, background 0.12s;
 }
 .consent-row input[type=checkbox]:checked + .consent-check {
-  background: #009944; border-color: #009944;
+  background: #EA8000; border-color: #EA8000;
 }
 .consent-row input[type=checkbox]:checked + .consent-check::after {
   content: '';
@@ -483,8 +484,8 @@ tr:hover td { background: var(--gray-50); }
   font-size: 10px; color: var(--gray-400);
   line-height: 1.45; cursor: pointer;
 }
-.consent-label a { color: var(--gray-600); text-decoration: underline; }
-.consent-label a:hover { color: var(--black); }
+.consent-label a { color: #EA8000; text-decoration: underline; }
+.consent-label a:hover { opacity: 0.75; }
 .consent-required { color: var(--error); margin-left: 1px; }
 </style>
 </head>
@@ -510,16 +511,16 @@ tr:hover td { background: var(--gray-50); }
 
     <!-- LANDING SELECTION — shown when no ?tab= in URL -->
     <div id="panel-landing" class="panel active" style="max-width:560px;width:100%;">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#888;margin-bottom:8px;">uvex Portal</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:28px;letter-spacing:-0.01em;">Willkommen.</div>
+      <div style="font-family:'Neue Haas Grotesk','Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#888;margin-bottom:8px;">uvex Portal</div>
+      <div style="font-family:'Neue Haas Grotesk','Helvetica Neue',Arial,sans-serif;font-size:40px;font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:28px;letter-spacing:-0.01em;">Willkommen.</div>
 
       <a href="?tab=dealer" class="portal-card" onclick="window.location.href='?tab=dealer';return false;">
         <div class="pc-header" style="background:var(--c-dealer);">
           <div class="pc-text">
-            <div class="pc-eye" style="color:rgba(0,0,0,0.5);">Ich bin ein</div>
-            <div class="pc-title" style="color:var(--black);">Händler</div>
+            <div class="pc-eye" style="color:#fff;">Ich bin ein</div>
+            <div class="pc-title" style="color:var(--white);">Händler</div>
           </div>
-          <div class="pc-arrow" style="color:var(--black);">→</div>
+          <div class="pc-arrow" style="color:var(--white);">→</div>
         </div>
         <div class="pc-body">Registriere dein Geschäft und lade Brand Ambassadors ein.</div>
       </a>
@@ -527,7 +528,7 @@ tr:hover td { background: var(--gray-50); }
       <a href="?tab=ambassador" class="portal-card" style="margin-top:12px;" onclick="window.location.href='?tab=ambassador';return false;">
         <div class="pc-header" style="background:var(--c-amb);">
           <div class="pc-text">
-            <div class="pc-eye" style="color:rgba(255,255,255,0.65);">Ich bin ein</div>
+            <div class="pc-eye" style="color:#fff;">Ich bin ein</div>
             <div class="pc-title" style="color:var(--white);">Brand Ambassador</div>
           </div>
           <div class="pc-arrow" style="color:var(--white);">→</div>
@@ -538,7 +539,7 @@ tr:hover td { background: var(--gray-50); }
       <a href="?tab=consumer" class="portal-card" style="margin-top:12px;" onclick="window.location.href='?tab=consumer';return false;">
         <div class="pc-header" style="background:var(--c-con);">
           <div class="pc-text">
-            <div class="pc-eye" style="color:rgba(255,255,255,0.65);">Ich bin ein</div>
+            <div class="pc-eye" style="color:#fff;">Ich bin ein</div>
             <div class="pc-title" style="color:var(--white);">Follower</div>
           </div>
           <div class="pc-arrow" style="color:var(--white);">→</div>
@@ -736,7 +737,8 @@ tr:hover td { background: var(--gray-50); }
 
     <div class="be-topbar">
       <img src="data:image/png;base64,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" alt="uvex" style="height:20px;width:auto;">
-      <div class="be-meta" id="be-meta"></div>
+      <div id="be-topbar-tabs" class="be-topbar-tabs"></div>
+      <div id="be-meta" class="be-meta"></div>
       <button class="btn-logout" onclick="doLogout()">Ausloggen</button>
     </div>
 
@@ -1087,15 +1089,17 @@ function showBackend(user) {
 
   var metaText = user.name + ' · ' + LABELS[user.type];
   if (user.type==='dealer' && user.dealerId) metaText += ' · ' + user.dealerId;
-  document.getElementById('be-meta').textContent = metaText;
+  var metaEl = document.getElementById('be-meta');
+  if (metaEl) metaEl.textContent = metaText;
 
   buildBackend(user);
   document.getElementById('backend').classList.add('active');
 }
 
 function buildBackend(user) {
-  var tabsEl    = document.getElementById('be-tabs');
+  var tabsEl    = document.getElementById('be-topbar-tabs');
   var contentEl = document.getElementById('be-content');
+  document.getElementById('be-tabs').innerHTML = '';
   tabsEl.innerHTML = ''; contentEl.innerHTML = '';
   if (user.isAdmin)                  buildAdminBackend(tabsEl, contentEl);
   else if (user.type === 'dealer')   buildDealerBackend(tabsEl, contentEl, user);
@@ -1105,7 +1109,7 @@ function buildBackend(user) {
 
 function addTab(tabsEl, id, label, active) {
   var btn = document.createElement('button');
-  btn.className = 'be-tab' + (active ? ' active' : '');
+  btn.className = 'be-topbar-tab' + (active ? ' active' : '');
   btn.textContent = label;
   btn.onclick = function() { switchBeTab(id, btn); };
   tabsEl.appendChild(btn);
@@ -1121,33 +1125,36 @@ function addPanel(contentEl, id, active) {
 // ── DEALER BACKEND ──
 function buildDealerBackend(tabsEl, contentEl, user) {
   addTab(tabsEl, 'profile', 'Mein Profil', true);
-  addTab(tabsEl, 'invite',  'BA Einladen', false);
 
   var profilePanel = addPanel(contentEl, 'profile', true);
   profilePanel.innerHTML =
-    '<div class="profile-card">' +
+    '<div class="be-content-dealer">' +
+    '<div class="profile-card" style="flex:1;min-width:260px;max-width:360px">' +
       '<div class="profile-header dealer-hd"><div class="ph-eye">Händler-Portal</div><div class="ph-title">' + esc(user.name) + '</div></div>' +
       '<div class="profile-body">' +
-        '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id">' + (user.dealerId||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Händler-ID</span><span class="pr-value pr-id" style="color:#EA8000">' + (user.dealerId||'—') + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
         '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
-      '</div></div>';
-
-  var invitePanel = addPanel(contentEl, 'invite', false);
-  invitePanel.innerHTML =
-    '<div style="max-width:480px;"><div class="profile-card" style="max-width:100%">' +
-      '<div class="profile-header dealer-hd"><div class="ph-eye">Händler-Funktion</div><div class="ph-title">BA Einladen</div></div>' +
-      '<div class="profile-body">' +
-        '<div class="invite-id-box"><div class="invite-id-label">Deine Händler-ID</div><div class="invite-id-value">' + (user.dealerId||'—') + '</div></div>' +
-        '<div class="field"><label>E-Mail des Brand Ambassadors</label><input type="email" id="invite-email" placeholder="name@email.de"></div>' +
-        '<div class="field"><label>Name (optional)</label><input type="text" id="invite-name" placeholder="Max Mustermann"></div>' +
-        '<button class="btn-submit" onclick="doInvite()">Einladung senden</button>' +
-        '<div class="msg" id="invite-msg" style="text-align:left;"></div>' +
       '</div></div>' +
+    '<div style="flex:1;min-width:260px;max-width:400px;">' +
+    '<button class="btn-submit" style="width:100%;margin-bottom:16px;" onclick="showInviteForm()">Brand Ambassador einladen</button>' +
+    '<div id="invite-form-inline" style="display:none;">' +
+      '<div class="profile-card" style="max-width:100%">' +
+        '<div class="profile-header dealer-hd"><div class="ph-eye">Händler-Funktion</div><div class="ph-title">BA Einladen</div></div>' +
+        '<div class="profile-body">' +
+          '<div class="invite-id-box"><div class="invite-id-label">Deine Händler-ID</div><div class="invite-id-value">' + (user.dealerId||'—') + '</div></div>' +
+          '<div class="field"><label>E-Mail des Brand Ambassadors</label><input type="email" id="invite-email" placeholder="name@email.de"></div>' +
+          '<div class="field"><label>Name (optional)</label><input type="text" id="invite-name" placeholder="Max Mustermann"></div>' +
+          '<button class="btn-submit" onclick="doInvite()">Einladung senden</button>' +
+          '<div class="msg" id="invite-msg" style="text-align:left;"></div>' +
+        '</div></div>' +
       '<div style="margin-top:24px;"><div class="section-hd">Gesendete Einladungen</div>' +
-      '<div class="tbl-wrap"><table><thead><tr><th>#</th><th>E-Mail</th><th>Name</th><th>Gesendet</th></tr></thead><tbody id="invites-body"></tbody></table></div></div></div>';
+      '<div class="tbl-wrap"><table><thead><tr><th>#</th><th>E-Mail</th><th>Name</th><th>Gesendet</th></tr></thead><tbody id="invites-body"></tbody></table></div></div>' +
+    '</div>' +
+    '</div>' +
+    '</div>';
   renderInvites();
 }
 
@@ -1169,22 +1176,68 @@ function buildAmbassadorBackend(tabsEl, contentEl, user) {
 
 // ── CONSUMER BACKEND ──
 function buildConsumerBackend(tabsEl, contentEl, user) {
-  addTab(tabsEl, 'profile',  'Mein Profil',  true);
-  addTab(tabsEl, 'receipts', 'Rechnung hochladen', false);
+  addTab(tabsEl, 'profile', 'Mein Profil', true);
 
-  var profilePanel = addPanel(contentEl, 'profile', true);
-  profilePanel.innerHTML =
-    '<div class="profile-card"><div class="profile-header con-hd"><div class="ph-eye">Follower</div><div class="ph-title">' + esc(user.name) + '</div></div>' +
-    '<div class="profile-body">' +
-      '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
-      '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
-      '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value">' + (user.baId||'—') + '</span></div>' +
-      '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
-      '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
-    '</div></div>';
+  var mainPanel = addPanel(contentEl, 'profile', true);
+  mainPanel.innerHTML =
+    '<div class="be-content-dealer">' +
 
-  var recPanel = addPanel(contentEl, 'receipts', false);
-  recPanel.innerHTML = buildReceiptsHTML(user);
+    // Links: Profil-Karte
+    '<div class="profile-card" style="flex:1;min-width:260px;max-width:360px">' +
+      '<div class="profile-header con-hd">' +
+        '<div class="ph-eye">Follower-Portal</div>' +
+        '<div class="ph-title">' + esc(user.name) + '</div>' +
+      '</div>' +
+      '<div class="profile-body">' +
+        '<div class="profile-row"><span class="pr-label">Name</span><span class="pr-value">' + esc(user.name) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">E-Mail</span><span class="pr-value">' + esc(user.email) + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">BA-ID</span><span class="pr-value" style="color:#EA8000;font-weight:700">' + (user.baId||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Registriert</span><span class="pr-value">' + (user.date||'—') + '</span></div>' +
+        '<div class="profile-row"><span class="pr-label">Rec-ID</span><span class="pr-value" style="font-size:12px;color:var(--gray-400)">' + user.recId + '</span></div>' +
+      '</div>' +
+    '</div>' +
+
+    // Rechts: Upload + Tabelle
+    '<div style="flex:2;min-width:300px;display:flex;flex-direction:column;gap:20px;">' +
+
+      // Upload-Karte
+      '<div class="upload-card">' +
+        '<div class="upload-card-header">' +
+          '<div class="uc-eye" style="color:#EA8000">Beleg einreichen</div>' +
+          '<div class="uc-title">Rechnung hochladen</div>' +
+        '</div>' +
+        '<div class="upload-card-body">' +
+          '<div class="upload-drop" id="drop-zone" onclick="document.getElementById('receipt-file').click()">' +
+            (isMobile()
+              ? '<input type="file" id="receipt-file" accept="image/*" capture="environment" onchange="onFileSelect(event)" style="display:none">'
+              : '<input type="file" id="receipt-file" accept="image/*,application/pdf" onchange="onFileSelect(event)" style="display:none">'
+            ) +
+          '<div class="upload-icon">' + (isMobile() ? '📷' : '📎') + '</div>' +
+          '<span class="upload-label">' + (isMobile() ? 'Foto aufnehmen' : 'Klicken oder Datei ablegen') + '</span>' +
+          '<span class="upload-sub">' + (isMobile() ? 'Kamera öffnet sich direkt' : 'JPG, PNG, PDF — max. 10 MB') + '</span>' +
+          '</div>' +
+          '<div class="upload-preview" id="upload-preview">' +
+            '<img class="preview-thumb" id="preview-thumb" src="" alt="">' +
+            '<span class="preview-name" id="preview-name"></span>' +
+            '<button class="preview-clear" onclick="clearFile()">✕</button>' +
+          '</div>' +
+          '<div class="upload-user-info">Für: <span id="upload-user-label">—</span></div>' +
+          '<button class="btn-upload" id="btn-upload" onclick="doUpload()" disabled>Rechnung einreichen</button>' +
+          '<div class="upload-msg" id="upload-msg"></div>' +
+        '</div>' +
+      '</div>' +
+
+      // Eingereichte Belege
+      '<div>' +
+        '<div class="section-hd">Eingereichte Belege</div>' +
+        '<div class="tbl-wrap"><table><thead><tr>' +
+          '<th>#</th><th>Dateiname</th><th>Bild</th><th>Datum</th><th></th>' +
+        '</tr></thead><tbody id="receipts-body"></tbody></table></div>' +
+      '</div>' +
+
+    '</div>' + // end rechts
+    '</div>'; // end be-content-dealer
+
   document.getElementById('upload-user-label').textContent = user.name + ' (' + user.email + ')';
   renderReceipts(user.recId);
   initDropZone();
@@ -1242,7 +1295,7 @@ function renderAdminTables() {
   if (dBody) dBody.innerHTML = !dealers.length
     ? '<tr class="empty-row"><td colspan="6">Keine Händler.</td></tr>'
     : dealers.map(function(r,i){
-        return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td><td style="font-family:\'Barlow Condensed\';font-weight:900;font-size:16px">'+(r.dealerId||'—')+'</td>' +
+        return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td><td style="font-family:\'Neue Haas Grotesk\',\'Helvetica Neue\',Arial,sans-serif;font-weight:900;font-size:16px">'+(r.dealerId||'—')+'</td>' +
           '<td style="color:var(--black);font-weight:600">'+esc(r.name)+'</td><td>'+esc(r.email)+'</td><td>'+r.date+'</td>' +
           '<td><div class="act-btns"><button class="btn-act" onclick="openEdit(\''+r.recId+'\')">Bearb.</button>' +
           '<button class="btn-act del" onclick="deleteRec(\''+r.recId+'\')">Löschen</button></div></td></tr>';
@@ -1269,8 +1322,17 @@ function renderAdminTables() {
       }).join('');
 }
 
+function showInviteForm() {
+  var form = document.getElementById('invite-form-inline');
+  if (!form) return;
+  var isVisible = form.style.display !== 'none';
+  form.style.display = isVisible ? 'none' : 'block';
+  var btn = form.previousElementSibling;
+  if (btn) btn.textContent = isVisible ? 'Brand Ambassador einladen' : 'Einladung abbrechen';
+}
+
 function switchBeTab(name, btn) {
-  document.querySelectorAll('.be-tab').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.be-topbar-tab').forEach(function(b){ b.classList.remove('active'); });
   document.querySelectorAll('.be-panel').forEach(function(p){ p.classList.remove('active'); });
   btn.classList.add('active');
   var panel = document.getElementById('be-panel-'+name);
@@ -1378,6 +1440,7 @@ function doLogout() {
   currentUser = null; selectedFile = null;
   document.getElementById('backend').classList.remove('active');
   document.getElementById('be-tabs').innerHTML = '';
+  document.getElementById('be-topbar-tabs').innerHTML = '';
   document.getElementById('be-content').innerHTML = '';
   document.getElementById('topbar').style.display     = '';
   document.getElementById('site-header').style.display = 'none';
