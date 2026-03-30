@@ -328,6 +328,17 @@ tr:hover td { background: var(--gray-50); }
 .upload-grid { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: start; }
 @media (max-width: 900px) { .upload-grid { grid-template-columns: 1fr; } .be-content { padding: 16px; } }
 @media (max-width: 480px) {
+  .upload-grid { gap: 16px; }
+  .upload-drop { padding: 40px 16px; }
+  .upload-icon { font-size: 32px; margin-bottom: 10px; opacity: 0.5; }
+  .upload-label { font-size: 14px; }
+  .upload-sub { font-size: 12px; margin-top: 5px; }
+  .upload-card-body { padding: 14px 14px 16px; }
+  .btn-upload { padding: 16px; font-size: 15px; }
+  .receipts-title { font-size: 11px; margin-top: 4px; }
+  .upload-user-info { font-size: 11px; }
+}
+@media (max-width: 480px) {
   #main-area { padding: 32px 16px 52px; }
   .card-title { font-size: 32px; }
   .be-content { padding: 12px; }
@@ -336,6 +347,10 @@ tr:hover td { background: var(--gray-50); }
   .profile-card { max-width: 100%; }
   .tbl-wrap { font-size: 12px; }
   td, th { padding: 10px 10px; }
+  /* Receipts table: hide less important columns on mobile */
+  table .col-num,
+  table .col-recid,
+  table .col-filename { display: none; }
 }
 
 .upload-card { background: var(--white); border: 2px solid var(--black); }
@@ -1354,7 +1369,7 @@ function buildReceiptsHTML(user) {
     '</div>' +
     '<div>' +
       '<div class="receipts-title">Eingereichte Belege</div>' +
-      '<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Rec-ID</th><th>Name</th><th>E-Mail</th><th>Dateiname</th><th>Bild</th><th>Datum</th><th></th></tr></thead><tbody id="receipts-body"></tbody></table></div>' +
+      '<div class="tbl-wrap"><table><thead><tr><th class="col-num">#</th><th class="col-recid">Rec-ID</th><th>Name</th><th>E-Mail</th><th class="col-filename">Dateiname</th><th>Bild</th><th>Datum</th><th></th></tr></thead><tbody id="receipts-body"></tbody></table></div>' +
     '</div>' +
   '</div>';
 }
@@ -1366,10 +1381,10 @@ function renderReceipts(filterRecId) {
   if (!list.length) { tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Noch keine Belege hochgeladen.</td></tr>'; return; }
   tbody.innerHTML = list.map(function(r,i){
     var img = r.imageUrl ? '<a href="'+r.imageUrl+'" target="_blank" style="color:var(--c-con);font-weight:600;font-size:11px">Anzeigen</a>' : '—';
-    return '<tr><td style="color:var(--gray-400)">'+(i+1)+'</td>' +
-      '<td style="font-family:monospace;font-size:11px">'+r.recId+'</td>' +
+    return '<tr><td class="col-num" style="color:var(--gray-400)">'+(i+1)+'</td>' +
+      '<td class="col-recid" style="font-family:monospace;font-size:11px">'+r.recId+'</td>' +
       '<td style="color:var(--black);font-weight:600">'+esc(r.name)+'</td>' +
-      '<td>'+esc(r.email)+'</td><td>'+esc(r.filename||'—')+'</td>' +
+      '<td>'+esc(r.email)+'</td><td class="col-filename">'+esc(r.filename||'—')+'</td>' +
       '<td>'+img+'</td><td>'+r.date+'</td>' +
       '<td><button class="btn-act del" onclick="deleteReceipt(\''+r.recId+'\','+i+')">Löschen</button></td></tr>';
   }).join('');
