@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>uvex Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -196,13 +196,18 @@ input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(-
 
 .be-topbar {
   background: var(--black); display: flex; align-items: center;
-  justify-content: space-between; padding: 0 28px;
-  height: 64px; flex-shrink: 0;
+  justify-content: space-between; padding: 0 20px;
+  height: 56px; flex-shrink: 0;
 }
 .be-meta {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-400);
+  font-size: 14px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--white);
+}
+@media (max-width: 480px) {
+  .be-topbar { padding: 0 14px; height: 52px; }
+  .be-meta { font-size: 13px; }
+  .btn-logout { font-size: 10px; padding: 6px 12px; }
 }
 .btn-logout {
   background: transparent; border: 2px solid var(--gray-600);
@@ -322,6 +327,16 @@ tr:hover td { background: var(--gray-50); }
 /* ── UPLOAD ── */
 .upload-grid { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: start; }
 @media (max-width: 900px) { .upload-grid { grid-template-columns: 1fr; } .be-content { padding: 16px; } }
+@media (max-width: 480px) {
+  #main-area { padding: 32px 16px 52px; }
+  .card-title { font-size: 32px; }
+  .be-content { padding: 12px; }
+  .be-tabs { overflow-x: auto; flex-wrap: nowrap; }
+  .be-tab { white-space: nowrap; flex-shrink: 0; }
+  .profile-card { max-width: 100%; }
+  .tbl-wrap { font-size: 12px; }
+  td, th { padding: 10px 10px; }
+}
 
 .upload-card { background: var(--white); border: 2px solid var(--black); }
 .upload-card-header { padding: 16px 20px; border-bottom: 2px solid var(--black); background: var(--black); }
@@ -1113,8 +1128,7 @@ function showBackend(user) {
   document.getElementById('site-header').style.display = 'none';
   document.getElementById('main-area').style.display   = 'none';
 
-  var metaText = user.name + ' · ' + LABELS[user.type];
-  if (user.type==='dealer' && user.dealerId) metaText += ' · ' + user.dealerId;
+  var metaText = LABELS[user.type] || 'Portal';
   document.getElementById('be-meta').textContent = metaText;
 
   buildBackend(user);
