@@ -293,6 +293,9 @@ input[readonly] { color: var(--gray-400); cursor: not-allowed; background: var(-
 
 /* ── TABLE ── */
 .tbl-wrap { background: var(--white); border: 2px solid var(--black); overflow-x: auto; }
+.tbl-wrap.tbl-orange { border-color: var(--black); }
+.tbl-wrap.tbl-orange thead { background: var(--c-dealer); }
+.tbl-wrap.tbl-orange th { color: var(--white); }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 thead { background: var(--black); }
 th {
@@ -363,12 +366,12 @@ tr:hover td { background: var(--gray-50); }
 }
 
 .upload-card { background: var(--white); border: 2px solid var(--black); }
-.upload-card-header { padding: 16px 20px; border-bottom: 2px solid var(--black); background: var(--black); }
+.upload-card-header { padding: 16px 20px; border-bottom: 2px solid var(--black); background: var(--c-dealer); }
 .upload-card-header .uc-eye {
   font-family: 'NHaasGrotesk', 'Barlow Condensed', sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--gray-500); margin-bottom: 2px;
+  color: rgba(255,255,255,0.65); margin-bottom: 2px;
 }
 .upload-card-header .uc-title {
   font-family: 'NHaasGrotesk', 'Barlow Condensed', sans-serif;
@@ -401,27 +404,12 @@ tr:hover td { background: var(--gray-50); }
   font-family: 'NHaasGrotesk', 'Barlow Condensed', sans-serif;
   font-size: 14px; font-weight: 900;
   letter-spacing: 0.16em; text-transform: uppercase;
-  cursor: pointer; transition: transform 0.15s, box-shadow 0.15s, opacity 0.12s;
+  cursor: pointer; transition: opacity 0.12s;
 }
-.btn-upload:not(:disabled) {
-  animation: uploadPulse 2s ease-in-out infinite;
-}
-.btn-upload:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(234,128,0,0.45);
-  animation: none;
-}
-.btn-upload:active:not(:disabled) {
-  transform: translateY(0);
-  box-shadow: none;
-}
-.btn-upload:disabled { opacity: 0.28; cursor: not-allowed; background: var(--black); }
-@keyframes uploadPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(234,128,0,0.5); }
-  50%       { box-shadow: 0 0 0 8px rgba(234,128,0,0); }
-}
+.btn-upload:hover:not(:disabled) { opacity: 0.85; }
+.btn-upload:disabled { opacity: 0.35; cursor: not-allowed; }
 
-/* ── CTA BUTTON (orange, pulsing) ── */
+/* ── CTA BUTTON (orange) ── */
 .btn-cta {
   width: 100%; padding: 14px; margin-top: 6px;
   background: var(--c-dealer); color: var(--white);
@@ -429,20 +417,10 @@ tr:hover td { background: var(--gray-50); }
   font-family: 'NHaasGrotesk', 'Barlow Condensed', sans-serif;
   font-size: 14px; font-weight: 900;
   letter-spacing: 0.16em; text-transform: uppercase;
-  cursor: pointer;
-  animation: ctaPulse 2.4s ease-in-out infinite;
-  transition: transform 0.15s, box-shadow 0.15s;
+  cursor: pointer; transition: opacity 0.12s;
 }
-.btn-cta:hover {
-  animation: none;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(234,128,0,0.5);
-}
-.btn-cta:active { transform: translateY(0); box-shadow: none; }
-@keyframes ctaPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(234,128,0,0.55); }
-  50%       { box-shadow: 0 0 0 10px rgba(234,128,0,0); }
-}
+.btn-cta:hover { opacity: 0.85; }
+.btn-cta:active { opacity: 1; }
 .upload-msg { min-height: 18px; margin-top: 10px; font-size: 12px; font-weight: 600; text-align: center; }
 .upload-msg.error   { color: var(--error); }
 .upload-msg.success { color: var(--success); }
@@ -1416,7 +1394,7 @@ function buildReceiptsHTML(user) {
     '</div>' +
     '<div>' +
       '<div class="receipts-title">Eingereichte Belege</div>' +
-      '<div class="tbl-wrap"><table><thead><tr><th class="col-num">#</th><th class="col-recid">Rec-ID</th><th>Name</th><th>E-Mail</th><th class="col-filename">Dateiname</th><th>Bild</th><th>Datum</th><th></th></tr></thead><tbody id="receipts-body"></tbody></table></div>' +
+      '<div class="tbl-wrap tbl-orange"><table><thead><tr><th class="col-num">#</th><th class="col-recid">Rec-ID</th><th>Name</th><th>E-Mail</th><th class="col-filename">Dateiname</th><th>Bild</th><th>Datum</th><th></th></tr></thead><tbody id="receipts-body"></tbody></table></div>' +
     '</div>' +
   '</div>';
 }
